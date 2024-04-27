@@ -17,34 +17,6 @@ import { Input } from "@/components/ui/input";
 import { addProduct } from "./_actions/action";
 import { productSchema } from "@/lib/formSchema";
 
-const formFieldData = [
-  {
-    name: "title",
-    label: "Title",
-    placeholder: "your product title",
-  },
-  {
-    name: "description",
-    label: "Description",
-    placeholder: "your product description",
-  },
-  {
-    name: "category",
-    label: "Category",
-    placeholder: "your product category",
-  },
-  {
-    name: "rating",
-    label: "Rating",
-    placeholder: "your product rating",
-  },
-  {
-    name: "price",
-    label: "Price",
-    placeholder: "your product price",
-  },
-];
-
 export default function AddProductPage() {
   // 1. Define your form.
   const form = useForm<z.infer<typeof productSchema>>({
