@@ -1,4 +1,4 @@
-export default async function Home() {
+export default function Home() {
   return (
     <main>
       <h1>Cloudinary Test</h1>

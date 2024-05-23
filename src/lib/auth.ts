@@ -1,16 +1,29 @@
-import { NextAuthOptions, getServerSession } from "next-auth";
+import { DefaultSession, NextAuthOptions, getServerSession } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { PrismaClient } from "@prisma/client";
-// import { PrismaAdapter } from "@next-auth/prisma-adapter";
+import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import { compare } from "bcrypt";
+import db from "./db";
 
 const prisma = new PrismaClient();
 
+// for session id fix
+declare module "next-auth" {
+  interface Session extends DefaultSession {
+    user: {
+      id: string;
+    } & DefaultSession["user"];
+  }
+}
+
 export const authConfig = {
-  // adapter: PrismaAdapter(prisma),
+  adapter: PrismaAdapter(prisma),
   pages: {
     signIn: "/signin",
+  },
+  session: {
+    strategy: "jwt",
   },
   providers: [
     GoogleProvider({
@@ -26,7 +39,7 @@ export const authConfig = {
       async authorize(credentials) {
         if (!credentials?.email || !credentials?.password) return null;
 
-        const user = await prisma.user.findUnique({
+        const user = await db.user.findUnique({
           where: {
             email: credentials.email,
           },
@@ -39,18 +52,43 @@ export const authConfig = {
           user.password as string
         );
 
-        console.log(user);
-
         if (!isPasswordMatch) return null;
 
         return user;
       },
     }),
-    // ...add more providers here
   ],
+  callbacks: {
+    //jwt callback will run first before session
+    async jwt({ token, user }) {
+      const dbUser = await db.user.findUnique({
+        where: {
+          email: token.email as string,
+        },
+      });
 
-  session: {
-    strategy: "jwt",
+      if (!dbUser) {
+        throw new Error("no user with email found");
+      }
+
+      //the return value here can be access in token object in session callback
+      return {
+        id: dbUser.id,
+        email: dbUser.email,
+        picture: dbUser.image,
+      };
+    },
+
+    async session({ token, session }) {
+      if (token) {
+        session.user = {
+          id: token.id as string,
+          email: token.email,
+          image: token.picture,
+        };
+      }
+      return session;
+    },
   },
   secret: process.env.NEXTAUTH_SECRET,
 } satisfies NextAuthOptions;

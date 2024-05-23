@@ -21,6 +21,7 @@ export default async function Header() {
         ) : (
           <Login />
         )}
+        <h1>USER ID: {session?.user.id}</h1>
         <DarkModeToggle />
       </div>
     </header>
