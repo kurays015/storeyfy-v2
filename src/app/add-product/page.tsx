@@ -13,43 +13,57 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { Input } from "@/components/ui/input";
 import { addProduct } from "./_actions/action";
 import { productSchema } from "@/lib/formSchema";
+import { useFormState } from "react-dom";
+import { useTransition } from "react";
 
 export default function AddProductPage() {
-  // 1. Define your form.
+  const [isPending, startTransition] = useTransition();
+
   const form = useForm<z.infer<typeof productSchema>>({
     resolver: zodResolver(productSchema),
     defaultValues: {
       title: "",
       description: "",
-      price: "",
-      rating: "",
       category: "",
+      price: "",
+      image: "",
     },
   });
 
+  // const [state, formAction] = useFormState(addProduct, { message: "" });
+
   // async function onSubmit(values: z.infer<typeof productSchema>) {
-  //   // Do something with the form values.
-  //   // ✅ This will be type-safe and validated.
   //   const formData = new FormData();
 
-  //   formData.append("title", values.title);
-  //   formData.append("description", values.description);
-  //   formData.append("category", values.category);
-  //   formData.append("rating", values.rating);
-  //   formData.append("price", values.price);
-  //   formData.append("image", values.image as File);
-
-  //   const product = await addProduct(formData);
-
-  //   console.log(product, "PRODUCT ADDED!");
+  //   for (const [key, value] of Object.entries(values)) {
+  //     formData.append(key, value);
+  //   }
+  //   // await addProduct(formData);
+  //   // startTransition(() => {
+  //   //   addProduct(formData);
+  //   // });
   // }
 
   return (
     <Form {...form}>
-      <form action={addProduct} className="space-y-8">
+      <form
+        action={async formData => {
+          const valid = await form.trigger();
+          if (!valid) return;
+          return addProduct(formData);
+        }}
+        className="space-y-8"
+      >
         <FormField
           control={form.control}
           name="title"
@@ -85,26 +99,21 @@ export default function AddProductPage() {
           name="category"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>category</FormLabel>
-              <FormControl>
-                <Input placeholder="your category" {...field} />
-              </FormControl>
-              <FormDescription>This is your category</FormDescription>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+              <FormLabel>Categories</FormLabel>
+              <Input placeholder="your gege" {...field} />
 
-        <FormField
-          control={form.control}
-          name="rating"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>rating</FormLabel>
-              <FormControl>
-                <Input placeholder="your rating" {...field} />
-              </FormControl>
-              <FormDescription>This is your rating</FormDescription>
+              {/* <Select onValueChange={field.onChange} defaultValue={field.value}>
+                <FormControl>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select category" />
+                  </SelectTrigger>
+                </FormControl>
+                <SelectContent>
+                  <SelectItem value="m@example.com">m@example.com</SelectItem>
+                  <SelectItem value="m@google.com">m@google.com</SelectItem>
+                  <SelectItem value="m@support.com">m@support.com</SelectItem>
+                </SelectContent>
+              </Select> */}
               <FormMessage />
             </FormItem>
           )}
@@ -145,7 +154,9 @@ export default function AddProductPage() {
           )}
         />
 
-        <Button type="submit">Submit</Button>
+        <Button type="submit" disabled={isPending}>
+          {isPending ? "Submitting" : "Add"}
+        </Button>
       </form>
     </Form>
   );

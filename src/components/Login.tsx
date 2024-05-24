@@ -7,8 +7,11 @@ export default function SignIn() {
   const pathname = usePathname();
   return (
     <div>
-      <Button asChild className={`${pathname === "/signin" && "hidden"}`}>
-        <Link href="/signin">SignIn</Link>
+      <Button
+        asChild
+        className={`${pathname === "/signin" && "hidden"} text-xs`}
+      >
+        <Link href="/signin">Sign In</Link>
       </Button>
     </div>
   );

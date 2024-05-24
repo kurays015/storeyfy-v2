@@ -18,25 +18,18 @@ export const loginSchema = z.object({
 export const productSchema = z.object({
   title: z
     .string()
-    .min(6, { message: "title must be at least 6 characters." })
+    .min(6, { message: "title must be at least 6 characters" })
     .max(50),
   description: z
     .string()
-    .min(6, { message: "description must be at least 6 characters." })
+    .min(6, { message: "description must be at least 6 characters" })
     .max(50),
-  rating: z
-    .string()
-    .min(1, { message: "product rating must be at least 1-5 range" })
-    .max(3),
-  category: z
-    .string()
-    .min(3, { message: "category must be at least 3 characters" }),
-  price: z.string().min(1, { message: "price must be at least 1 character." }),
-  image: z
-    .any()
-    .refine(file => file?.size <= MAX_FILE_SIZE, `Max image size is 5MB.`)
-    .refine(
-      file => ACCEPTED_IMAGE_TYPES.includes(file?.type),
-      "Only .jpg, .jpeg, .png and .webp formats are supported."
-    ),
+  category: z.string().min(3, { message: "category must not be empty" }),
+  price: z.string().min(1, { message: "price must be at least 1 character" }),
+  image: z.any(),
+  // .refine(file => file?.size <= MAX_FILE_SIZE, `Max image size is 5MB`)
+  // .refine(
+  //   file => ACCEPTED_IMAGE_TYPES.includes(file?.type),
+  //   "Only .jpg, .jpeg, .png and .webp formats are supported"
+  // ),
 });

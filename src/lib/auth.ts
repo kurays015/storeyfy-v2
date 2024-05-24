@@ -6,8 +6,6 @@ import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import { compare } from "bcrypt";
 import db from "./db";
 
-const prisma = new PrismaClient();
-
 // for session id fix
 declare module "next-auth" {
   interface Session extends DefaultSession {
@@ -18,7 +16,7 @@ declare module "next-auth" {
 }
 
 export const authConfig = {
-  adapter: PrismaAdapter(prisma),
+  adapter: PrismaAdapter(db),
   pages: {
     signIn: "/signin",
   },
