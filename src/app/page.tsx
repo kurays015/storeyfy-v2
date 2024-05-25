@@ -1,7 +1,9 @@
+import { BannerCarousel } from "@/components/BannerCarousel";
+
 export default function Home() {
   return (
     <main>
-      <h1>test</h1>
+      <BannerCarousel />
     </main>
   );
 }

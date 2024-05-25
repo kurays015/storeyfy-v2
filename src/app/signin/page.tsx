@@ -1,9 +1,7 @@
 "use client";
 import GoogleLoginButton from "@/components/GoogleLoginButton";
-import db from "@/lib/db";
 import { signIn } from "next-auth/react";
 import { FormEvent } from "react";
-// import register from "./register";
 
 export default function LoginPage() {
   function handleSubmit(e: FormEvent<HTMLFormElement>) {
