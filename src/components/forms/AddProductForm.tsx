@@ -3,7 +3,6 @@
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
@@ -23,6 +22,10 @@ import {
 import { Input } from "@/components/ui/input";
 import { productSchema } from "@/lib/formSchema";
 import { addProduct } from "@/app/add-product/_actions/action";
+import capitalFirstLetter from "@/lib/capitalFirstLetter";
+import AddProductSubmitBtn from "../AddProductSubmitBtn";
+
+export const categories = ["Women", "Men", "Furniture"];
 
 export default function AddProductForm() {
   const form = useForm<z.infer<typeof productSchema>>({
@@ -51,7 +54,7 @@ export default function AddProductForm() {
           name="title"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Title</FormLabel>
+              <FormLabel>{capitalFirstLetter(field.name)}</FormLabel>
               <FormControl>
                 <Input placeholder="your title" {...field} />
               </FormControl>
@@ -66,7 +69,7 @@ export default function AddProductForm() {
           name="description"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Description</FormLabel>
+              <FormLabel>{capitalFirstLetter(field.name)}</FormLabel>
               <FormControl>
                 <Input placeholder="your description" {...field} />
               </FormControl>
@@ -81,21 +84,25 @@ export default function AddProductForm() {
           name="category"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Categories</FormLabel>
-              <Input placeholder="your gege" {...field} />
-
-              {/* <Select onValueChange={field.onChange} defaultValue={field.value}>
+              <FormLabel>{capitalFirstLetter(field.name)}</FormLabel>
+              <Select
+                name={field.name}
+                onValueChange={field.onChange}
+                value={field.value}
+              >
                 <FormControl>
                   <SelectTrigger>
                     <SelectValue placeholder="Select category" />
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
-                  <SelectItem value="m@example.com">m@example.com</SelectItem>
-                  <SelectItem value="m@google.com">m@google.com</SelectItem>
-                  <SelectItem value="m@support.com">m@support.com</SelectItem>
+                  {categories.map(category => (
+                    <SelectItem value={category} key={category}>
+                      {category}
+                    </SelectItem>
+                  ))}
                 </SelectContent>
-              </Select> */}
+              </Select>
               <FormMessage />
             </FormItem>
           )}
@@ -106,7 +113,7 @@ export default function AddProductForm() {
           name="price"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>price</FormLabel>
+              <FormLabel>{capitalFirstLetter(field.name)}</FormLabel>
               <FormControl>
                 <Input placeholder="your price" {...field} />
               </FormControl>
@@ -121,7 +128,7 @@ export default function AddProductForm() {
           name="image"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>image</FormLabel>
+              <FormLabel>{capitalFirstLetter(field.name)}</FormLabel>
               <FormControl>
                 <Input
                   placeholder="your image"
@@ -135,7 +142,7 @@ export default function AddProductForm() {
             </FormItem>
           )}
         />
-        <Button type="submit">Submit</Button>
+        <AddProductSubmitBtn />
       </form>
     </Form>
   );
