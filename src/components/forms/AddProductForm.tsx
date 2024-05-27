@@ -137,7 +137,6 @@ export default function AddProductForm() {
                   placeholder="your image"
                   accept="image/*"
                   type="file"
-                  multiple
                   {...field}
                 />
               </FormControl>
