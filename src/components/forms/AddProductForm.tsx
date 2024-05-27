@@ -24,6 +24,7 @@ import { productSchema } from "@/lib/formSchema";
 import { addProduct } from "@/app/add-product/_actions/action";
 import capitalFirstLetter from "@/lib/capitalFirstLetter";
 import AddProductSubmitBtn from "../AddProductSubmitBtn";
+import { Textarea } from "../ui/textarea";
 
 export const categories = ["Women", "Men", "Furniture"];
 
@@ -71,7 +72,7 @@ export default function AddProductForm() {
             <FormItem>
               <FormLabel>{capitalFirstLetter(field.name)}</FormLabel>
               <FormControl>
-                <Input placeholder="your description" {...field} />
+                <Textarea placeholder="your description" {...field} />
               </FormControl>
               <FormDescription>This is your description</FormDescription>
               <FormMessage />
@@ -113,11 +114,13 @@ export default function AddProductForm() {
           name="price"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>{capitalFirstLetter(field.name)}</FormLabel>
+              <FormLabel>{capitalFirstLetter(field.name)}($) </FormLabel>
               <FormControl>
                 <Input placeholder="your price" {...field} />
               </FormControl>
-              <FormDescription>This is your price</FormDescription>
+              <FormDescription className="text-muted-foreground">
+                this is price
+              </FormDescription>
               <FormMessage />
             </FormItem>
           )}
@@ -134,6 +137,7 @@ export default function AddProductForm() {
                   placeholder="your image"
                   accept="image/*"
                   type="file"
+                  multiple
                   {...field}
                 />
               </FormControl>
