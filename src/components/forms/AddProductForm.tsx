@@ -25,10 +25,15 @@ import { addProduct } from "@/app/add-product/_actions/action";
 import capitalFirstLetter from "@/lib/capitalFirstLetter";
 import AddProductSubmitBtn from "../AddProductSubmitBtn";
 import { Textarea } from "../ui/textarea";
+import { useState } from "react";
+import Image from "next/image";
 
 export const categories = ["Women", "Men", "Furniture"];
 
 export default function AddProductForm() {
+  const [productImage, setProductImage] = useState<null | string | ArrayBuffer>(
+    ""
+  );
   const form = useForm<z.infer<typeof productSchema>>({
     resolver: zodResolver(productSchema),
     defaultValues: {
@@ -39,6 +44,22 @@ export default function AddProductForm() {
       image: "",
     },
   });
+
+  function handleImageOnChange(e: React.FormEvent<HTMLInputElement>) {
+    const target = e.target as HTMLInputElement & {
+      files: FileList;
+    };
+
+    const file = new FileReader();
+
+    file.onload = function () {
+      if (file.result) {
+        setProductImage(file.result);
+      }
+    };
+
+    file.readAsDataURL(target.files[0]);
+  }
 
   return (
     <Form {...form}>
@@ -138,9 +159,19 @@ export default function AddProductForm() {
                   accept="image/*"
                   type="file"
                   {...field}
+                  onChange={handleImageOnChange}
                 />
               </FormControl>
-              <FormDescription>This is your image</FormDescription>
+              {productImage ? (
+                <Image
+                  height={500}
+                  width={500}
+                  src={typeof productImage === "string" ? productImage : ""}
+                  alt="preview"
+                />
+              ) : (
+                <FormDescription>Drag image here</FormDescription>
+              )}
               <FormMessage />
             </FormItem>
           )}
