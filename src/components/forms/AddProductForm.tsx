@@ -159,7 +159,7 @@ export default function AddProductForm() {
                   accept="image/*"
                   type="file"
                   {...field}
-                  onChange={handleImageOnChange}
+                  onChangeCapture={handleImageOnChange}
                 />
               </FormControl>
               {productImage ? (
