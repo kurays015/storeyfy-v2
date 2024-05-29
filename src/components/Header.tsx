@@ -1,14 +1,13 @@
 import { DarkModeToggle } from "./DarkModeToggle";
 import ProfileAvatar from "./ProfileAvatar";
-import Login from "./Login";
-import AccountDropdown from "./AccountDropdown";
+import LoginButton from "./LoginButton";
 import { getSession } from "@/lib/auth";
 import { FaFacebook, FaTwitter, FaInstagram } from "react-icons/fa";
 import { Input } from "./ui/input";
 import Link from "next/link";
-import { CgProfile } from "react-icons/cg";
 import { FaRegHeart } from "react-icons/fa";
 import { IoBagHandleOutline } from "react-icons/io5";
+import AccountDropdown from "./AccountDropdown";
 
 export default async function Header() {
   const session = await getSession();
@@ -25,14 +24,7 @@ export default async function Header() {
             FREE SHIPPING THIS WEEK ORDER OVER - $55
           </p>
           <div className="flex items-center gap-5">
-            {session ? (
-              <>
-                {session.user?.email && <ProfileAvatar />}
-                <AccountDropdown />
-              </>
-            ) : (
-              <Login />
-            )}
+            {session ? <ProfileAvatar /> : <LoginButton />}
             <DarkModeToggle />
           </div>
         </div>
@@ -47,7 +39,7 @@ export default async function Header() {
           className="w-3/4"
         />
         <ul className="flex items-center gap-5 text-3xl text-gray-600">
-          <CgProfile />
+          <AccountDropdown />
           <FaRegHeart />
           <IoBagHandleOutline />
         </ul>
