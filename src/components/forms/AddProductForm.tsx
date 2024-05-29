@@ -27,6 +27,7 @@ import AddProductSubmitBtn from "../AddProductSubmitBtn";
 import { Textarea } from "../ui/textarea";
 import { useState } from "react";
 import Image from "next/image";
+import { useToast } from "../ui/use-toast";
 
 export const categories = ["Women", "Men", "Furniture"];
 
@@ -34,6 +35,9 @@ export default function AddProductForm() {
   const [productImage, setProductImage] = useState<null | string | ArrayBuffer>(
     ""
   );
+
+  const { toast } = useToast();
+
   const form = useForm<z.infer<typeof productSchema>>({
     resolver: zodResolver(productSchema),
     defaultValues: {
@@ -67,7 +71,10 @@ export default function AddProductForm() {
         action={async formData => {
           const valid = await form.trigger();
           if (!valid) return;
-          return addProduct(formData);
+          await addProduct(formData);
+          toast({
+            title: "Successfully added new product!",
+          });
         }}
         className="space-y-8"
       >

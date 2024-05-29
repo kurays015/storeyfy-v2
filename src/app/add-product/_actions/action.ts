@@ -3,6 +3,7 @@
 import { v2 as cloudinary } from "cloudinary";
 import db from "@/lib/db";
 import { productSchema } from "@/lib/formSchema";
+import { redirect } from "next/navigation";
 
 cloudinary.config({
   cloud_name: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME,
@@ -46,5 +47,5 @@ export async function addProduct(formData: FormData) {
     },
   });
 
-  return { message: "Product successfully added!" };
+  redirect("/catalog");
 }
