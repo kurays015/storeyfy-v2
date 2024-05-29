@@ -29,7 +29,15 @@ import { useState } from "react";
 import Image from "next/image";
 import { useToast } from "../ui/use-toast";
 
-export const categories = ["Women", "Men", "Furniture"];
+export const categories = [
+  "Clothes",
+  "Footwear",
+  "Jewelry",
+  "Perfume",
+  "Cosmetics",
+  "Glasses",
+  "Bags",
+];
 
 export default function AddProductForm() {
   const [productImage, setProductImage] = useState<null | string | ArrayBuffer>(
