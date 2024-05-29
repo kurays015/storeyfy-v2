@@ -22,8 +22,7 @@ export const productSchema = z.object({
     .max(50),
   description: z
     .string()
-    .min(6, { message: "description must be at least 6 characters" })
-    .max(50),
+    .min(6, { message: "description must be at least 6 characters" }),
   category: z.string().min(3, { message: "category must not be empty" }),
   price: z.string().refine(
     value => {

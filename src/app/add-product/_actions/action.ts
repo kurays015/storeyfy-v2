@@ -47,5 +47,5 @@ export async function addProduct(formData: FormData) {
     },
   });
 
-  redirect("/catalog");
+  redirect("/my-products");
 }
