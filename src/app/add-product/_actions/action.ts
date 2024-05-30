@@ -42,7 +42,7 @@ export async function addProduct(previousState: any, formData: FormData) {
 
   const parsedData = productSchema.safeParse({
     ...data,
-    userId: "hardcoded id",
+    userId: session?.user.id,
   });
 
   if (!parsedData.success) {
