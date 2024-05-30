@@ -70,14 +70,14 @@ export default function AddProductForm() {
       <form
         ref={formRef}
         action={formAction}
-        onSubmit={async e => {
-          await form.trigger();
-          if (form.formState.isValid) {
-            formRef.current?.requestSubmit();
-          } else {
-            e.preventDefault();
-          }
-        }}
+        // onSubmit={async e => {
+        //   await form.trigger();
+        //   if (form.formState.isValid) {
+        //     formRef.current?.requestSubmit();
+        //   } else {
+        //     e.preventDefault();
+        //   }
+        // }}
         className="space-y-8"
       >
         <FormField
