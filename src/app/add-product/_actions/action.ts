@@ -30,22 +30,19 @@ export async function addProduct(previousState: any, formData: FormData) {
   const buffer = new Uint8Array(arrayBuffer);
   const uploadResponse: any = await new Promise((resolve, reject) => {
     cloudinary.uploader
-      .upload_stream(
-        { folder: `${session && session.user.email?.split("@")[0]} products` },
-        function (err, result) {
-          if (err) {
-            reject(err);
-            return;
-          }
-          resolve(result);
+      .upload_stream({ folder: `productsss` }, function (err, result) {
+        if (err) {
+          reject(err);
+          return;
         }
-      )
+        resolve(result);
+      })
       .end(buffer);
   });
 
   const parsedData = productSchema.safeParse({
     ...data,
-    userId: session?.user.id,
+    userId: "hardcoded id",
   });
 
   if (!parsedData.success) {
