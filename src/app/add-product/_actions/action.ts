@@ -16,22 +16,22 @@ export async function addProduct(previousState: any, formData: FormData) {
   const data = Object.fromEntries(formData);
   const session = await getSession();
 
-  if (!session) {
-    throw new Error("User is not Authenticated.");
-  }
+  // if (!session) {
+  //   throw new Error("User is not Authenticated.");
+  // }
 
   const image = formData.get("image") as File;
 
-  if (!image) {
-    throw new Error("Image file is required.");
-  }
+  // if (!image) {
+  //   throw new Error("Image file is required.");
+  // }
   //cloudinary upload
   const arrayBuffer = await image.arrayBuffer();
   const buffer = new Uint8Array(arrayBuffer);
   const uploadResponse: any = await new Promise((resolve, reject) => {
     cloudinary.uploader
       .upload_stream(
-        { folder: `${session.user.email?.split("@")[0]} products` },
+        { folder: `${session && session.user.email?.split("@")[0]} products` },
         function (err, result) {
           if (err) {
             reject(err);
@@ -45,7 +45,7 @@ export async function addProduct(previousState: any, formData: FormData) {
 
   const parsedData = productSchema.safeParse({
     ...data,
-    userId: session.user.id,
+    userId: session?.user.id,
   });
 
   if (!parsedData.success) {
