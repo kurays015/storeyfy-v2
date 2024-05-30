@@ -25,26 +25,18 @@ import { addProduct } from "@/app/add-product/_actions/action";
 import capitalFirstLetter from "@/lib/capitalFirstLetter";
 import AddProductSubmitBtn from "../AddProductSubmitBtn";
 import { Textarea } from "../ui/textarea";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import Image from "next/image";
-import { useToast } from "../ui/use-toast";
-
-export const categories = [
-  "Clothes",
-  "Footwear",
-  "Jewelry",
-  "Perfume",
-  "Cosmetics",
-  "Glasses",
-  "Bags",
-];
+import { useFormState } from "react-dom";
+import { categories } from "@/lib/categories";
 
 export default function AddProductForm() {
   const [productImage, setProductImage] = useState<null | string | ArrayBuffer>(
     ""
   );
+  const formRef = useRef<HTMLFormElement>(null);
 
-  const { toast } = useToast();
+  const [state, formAction] = useFormState(addProduct, null);
 
   const form = useForm<z.infer<typeof productSchema>>({
     resolver: zodResolver(productSchema),
@@ -76,13 +68,15 @@ export default function AddProductForm() {
   return (
     <Form {...form}>
       <form
-        action={async formData => {
-          const valid = await form.trigger();
-          if (!valid) return;
-          await addProduct(formData);
-          toast({
-            title: "Successfully added new product!",
-          });
+        ref={formRef}
+        action={formAction}
+        onSubmit={async e => {
+          await form.trigger();
+          if (form.formState.isValid) {
+            formRef.current?.requestSubmit();
+          } else {
+            e.preventDefault();
+          }
         }}
         className="space-y-8"
       >

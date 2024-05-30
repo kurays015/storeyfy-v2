@@ -12,63 +12,79 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
-
+ 
 model User {
-  id                    String     @id @default(uuid())
-  password              String?
-  email                 String?    @unique
-  emailVerified         DateTime?   @map("email_verified")
-  image                 String?
-  createdAt             DateTime   @default(now())
-  updatedAt             DateTime   @updatedAt
-  accounts              Account[]
-  sessions              Session[]
-  orders                Order[]
-  cartItem              CartItems[]
-  @@map("users")
+  id            String          @id @default(cuid())
+  name          String?
+  email         String          @unique
+  password      String?
+  emailVerified DateTime?
+  image         String?
+  accounts      Account[]
+  sessions      Session[]
+  order         Order[]
+  product       Product[]
+  cartItems     CartItems[]
+  // Optional for WebAuthn support
+  Authenticator Authenticator[]
+ 
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
+ 
 model Account {
-  id                 String    @id @default(cuid())
-  userId             String    @map("user_id")
-  type               String?
-  provider           String
-  providerAccountId  String    @map("provider_account_id")
-  token_type         String?
-  refresh_token      String?   @db.Text
-  access_token       String?   @db.Text
-  expires_at         Int?
-  scope              String?
-  id_token           String? @db.Text
-  createdAt          DateTime  @default(now())
-  updatedAt          DateTime  @updatedAt
-  user               User      @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  @@unique([provider, providerAccountId])
-  @@map("accounts")
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+ 
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+ 
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+ 
+  @@id([provider, providerAccountId])
 }
-
+ 
 model Session {
-  id           String   @id @default(cuid())
-  userId       String?  @map("user_id")
-  sessionToken String   @db.Text @map("session_token") @unique
-  accessToken  String?  @db.Text @map("access_token")
+  sessionToken String   @unique
+  userId       String
   expires      DateTime
-  user         User?     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
-
-  @@map("sessions")
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+ 
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
-
-model VerificationRequest {
-  id         String   @id @default(cuid())
+ 
+model VerificationToken {
   identifier String
-  token      String   @unique
+  token      String
   expires    DateTime
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
-
-  @@unique([identifier, token])
+ 
+  @@id([identifier, token])
+}
+ 
+// Optional for WebAuthn support
+model Authenticator {
+  credentialID         String  @unique
+  userId               String
+  providerAccountId    String
+  credentialPublicKey  String
+  counter              Int
+  credentialDeviceType String
+  credentialBackedUp   Boolean
+  transports           String?
+ 
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+ 
+  @@id([userId, credentialID])
 }
 
 model Order {
@@ -78,11 +94,12 @@ model Order {
   price     Int
   userId    String
   productId String
-  user      User     @relation(fields: [userId], references: [id])
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   product   Product  @relation(fields: [productId], references: [id], onDelete: Restrict)
 }
 
 model Product {
+  userId      String
   id          String      @id @default(uuid())
   title       String
   description String
@@ -93,14 +110,17 @@ model Product {
   updatedAt   DateTime    @updatedAt
   orders      Order[]
   cartItems   CartItems[]
+  user        User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  
 }
 
 model CartItems {
+  userId    String
   id        String  @id @default(uuid())
   title     String
   image     String
   productId String
   product   Product @relation(fields: [productId], references: [id])
-  userId    String
-  user      User    @relation(fields: [userId], references: [id])
+  user      User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 }

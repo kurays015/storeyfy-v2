@@ -11,9 +11,10 @@ import AccountDropdown from "./AccountDropdown";
 
 export default async function Header() {
   const session = await getSession();
+
   return (
-    <header className="border border-b-gray-200">
-      <div className="border border-b-gray-200 py-2">
+    <header className="border-b">
+      <div className="border-b py-2">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           <ul className="flex items-center gap-2 text-gray-500">
             <FaFacebook />
