@@ -12,7 +12,7 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
-export async function addProduct(previousState: any, formData: FormData) {
+export async function addProduct(formData: FormData) {
   const data = Object.fromEntries(formData);
   const session = await getSession();
 

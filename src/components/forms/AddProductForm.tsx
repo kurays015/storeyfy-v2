@@ -34,9 +34,9 @@ export default function AddProductForm() {
   const [productImage, setProductImage] = useState<null | string | ArrayBuffer>(
     ""
   );
-  const formRef = useRef<HTMLFormElement>(null);
+  // const formRef = useRef<HTMLFormElement>(null);
 
-  const [state, formAction] = useFormState(addProduct, null);
+  // const [state, formAction] = useFormState(addProduct, null);
 
   const form = useForm<z.infer<typeof productSchema>>({
     resolver: zodResolver(productSchema),
@@ -68,8 +68,8 @@ export default function AddProductForm() {
   return (
     <Form {...form}>
       <form
-        ref={formRef}
-        action={formAction}
+        // ref={formRef}
+        action={addProduct}
         // onSubmit={async e => {
         //   await form.trigger();
         //   if (form.formState.isValid) {
