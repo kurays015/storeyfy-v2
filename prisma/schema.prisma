@@ -23,7 +23,7 @@ model User {
   accounts      Account[]
   sessions      Session[]
   order         Order[]
-  product       Product[]
+  // product       Product[]
   cartItems     CartItems[]
   // Optional for WebAuthn support
   Authenticator Authenticator[]
@@ -99,7 +99,7 @@ model Order {
 }
 
 model Product {
-  userId      String
+  // userId      String
   id          String      @id @default(uuid())
   title       String
   description String
@@ -110,7 +110,7 @@ model Product {
   updatedAt   DateTime    @updatedAt
   orders      Order[]
   cartItems   CartItems[]
-  user        User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  // user        User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   
 }

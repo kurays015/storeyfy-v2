@@ -4,7 +4,6 @@ import { v2 as cloudinary } from "cloudinary";
 import db from "@/lib/db";
 import { productSchema } from "@/lib/formSchema";
 import { redirect } from "next/navigation";
-import { getSession } from "@/lib/auth";
 
 cloudinary.config({
   cloud_name: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME,
@@ -14,23 +13,15 @@ cloudinary.config({
 
 export async function addProduct(formData: FormData) {
   const data = Object.fromEntries(formData);
-  const session = await getSession();
-
-  // if (!session) {
-  //   throw new Error("User is not Authenticated.");
-  // }
 
   const image = formData.get("image") as File;
 
-  // if (!image) {
-  //   throw new Error("Image file is required.");
-  // }
   //cloudinary upload
   const arrayBuffer = await image.arrayBuffer();
   const buffer = new Uint8Array(arrayBuffer);
   const uploadResponse: any = await new Promise((resolve, reject) => {
     cloudinary.uploader
-      .upload_stream({ folder: `productsss` }, function (err, result) {
+      .upload_stream({}, function (err, result) {
         if (err) {
           reject(err);
           return;
@@ -40,10 +31,7 @@ export async function addProduct(formData: FormData) {
       .end(buffer);
   });
 
-  const parsedData = productSchema.safeParse({
-    ...data,
-    userId: session?.user.id,
-  });
+  const parsedData = productSchema.safeParse(data);
 
   if (!parsedData.success) {
     console.log(parsedData.error);
@@ -56,7 +44,7 @@ export async function addProduct(formData: FormData) {
   // Save product data to database
   await db.product.create({
     data: {
-      userId: parsedData.data.userId,
+      // userId: parsedData.data.userId,
       title: parsedData.data.title,
       category: parsedData.data.category,
       price: parsedData.data.price,

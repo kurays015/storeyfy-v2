@@ -3,7 +3,11 @@ import GoogleProvider from "next-auth/providers/google";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import { compare } from "bcrypt";
+import { PrismaClient } from "@prisma/client";
+import { Adapter } from "next-auth/adapters";
 import db from "./db";
+
+const prisma = new PrismaClient();
 
 // for session id fix
 declare module "next-auth" {
@@ -15,7 +19,7 @@ declare module "next-auth" {
 }
 
 export const authConfig = {
-  adapter: PrismaAdapter(db),
+  adapter: PrismaAdapter(prisma) as Adapter,
   pages: {
     signIn: "/signin",
   },
