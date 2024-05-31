@@ -17,18 +17,23 @@ export async function addProduct(formData: FormData) {
   const session = await getSession();
   const image = formData.get("image") as File;
 
+  if (!session) return;
+
   //cloudinary upload
   const arrayBuffer = await image.arrayBuffer();
   const buffer = new Uint8Array(arrayBuffer);
   const uploadResponse: any = await new Promise((resolve, reject) => {
     cloudinary.uploader
-      .upload_stream({}, function (err, result) {
-        if (err) {
-          reject(err);
-          return;
+      .upload_stream(
+        { folder: `${session.user.email?.split("@")[0]}` },
+        function (err, result) {
+          if (err) {
+            reject(err);
+            return;
+          }
+          resolve(result);
         }
-        resolve(result);
-      })
+      )
       .end(buffer);
   });
 
