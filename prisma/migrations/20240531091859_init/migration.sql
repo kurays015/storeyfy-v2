@@ -1,36 +1,3 @@
-/*
-  Warnings:
-
-  - You are about to drop the `VerificationRequest` table. If the table is not empty, all the data it contains will be lost.
-  - You are about to drop the `accounts` table. If the table is not empty, all the data it contains will be lost.
-  - You are about to drop the `sessions` table. If the table is not empty, all the data it contains will be lost.
-  - You are about to drop the `users` table. If the table is not empty, all the data it contains will be lost.
-
-*/
--- DropForeignKey
-ALTER TABLE "CartItems" DROP CONSTRAINT "CartItems_userId_fkey";
-
--- DropForeignKey
-ALTER TABLE "Order" DROP CONSTRAINT "Order_userId_fkey";
-
--- DropForeignKey
-ALTER TABLE "accounts" DROP CONSTRAINT "accounts_user_id_fkey";
-
--- DropForeignKey
-ALTER TABLE "sessions" DROP CONSTRAINT "sessions_user_id_fkey";
-
--- DropTable
-DROP TABLE "VerificationRequest";
-
--- DropTable
-DROP TABLE "accounts";
-
--- DropTable
-DROP TABLE "sessions";
-
--- DropTable
-DROP TABLE "users";
-
 -- CreateTable
 CREATE TABLE "User" (
     "id" TEXT NOT NULL,
@@ -96,6 +63,44 @@ CREATE TABLE "Authenticator" (
     CONSTRAINT "Authenticator_pkey" PRIMARY KEY ("userId","credentialID")
 );
 
+-- CreateTable
+CREATE TABLE "Order" (
+    "id" TEXT NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+    "price" INTEGER NOT NULL,
+    "userId" TEXT NOT NULL,
+    "productId" TEXT NOT NULL,
+
+    CONSTRAINT "Order_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "Product" (
+    "userId" TEXT NOT NULL,
+    "id" TEXT NOT NULL,
+    "title" TEXT NOT NULL,
+    "description" TEXT NOT NULL,
+    "image" TEXT NOT NULL,
+    "category" TEXT NOT NULL,
+    "price" TEXT NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "Product_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "CartItems" (
+    "userId" TEXT NOT NULL,
+    "id" TEXT NOT NULL,
+    "title" TEXT NOT NULL,
+    "image" TEXT NOT NULL,
+    "productId" TEXT NOT NULL,
+
+    CONSTRAINT "CartItems_pkey" PRIMARY KEY ("id")
+);
+
 -- CreateIndex
 CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
 
@@ -115,7 +120,16 @@ ALTER TABLE "Session" ADD CONSTRAINT "Session_userId_fkey" FOREIGN KEY ("userId"
 ALTER TABLE "Authenticator" ADD CONSTRAINT "Authenticator_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
+ALTER TABLE "Order" ADD CONSTRAINT "Order_productId_fkey" FOREIGN KEY ("productId") REFERENCES "Product"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
 ALTER TABLE "Order" ADD CONSTRAINT "Order_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Product" ADD CONSTRAINT "Product_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "CartItems" ADD CONSTRAINT "CartItems_productId_fkey" FOREIGN KEY ("productId") REFERENCES "Product"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "CartItems" ADD CONSTRAINT "CartItems_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;

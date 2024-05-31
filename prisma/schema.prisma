@@ -1,9 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -12,7 +6,7 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
- 
+
 model User {
   id            String          @id @default(cuid())
   name          String?
@@ -20,18 +14,16 @@ model User {
   password      String?
   emailVerified DateTime?
   image         String?
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
   accounts      Account[]
-  sessions      Session[]
+  Authenticator Authenticator[]
+  cartItems     CartItems[]
   order         Order[]
   product       Product[]
-  cartItems     CartItems[]
-  // Optional for WebAuthn support
-  Authenticator Authenticator[]
- 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  sessions      Session[]
 }
- 
+
 model Account {
   userId            String
   type              String
@@ -44,34 +36,30 @@ model Account {
   scope             String?
   id_token          String?
   session_state     String?
- 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
- 
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
- 
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+  user              User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
   @@id([provider, providerAccountId])
 }
- 
+
 model Session {
   sessionToken String   @unique
   userId       String
   expires      DateTime
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
- 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
 }
- 
+
 model VerificationToken {
   identifier String
   token      String
   expires    DateTime
- 
+
   @@id([identifier, token])
 }
- 
-// Optional for WebAuthn support
+
 model Authenticator {
   credentialID         String  @unique
   userId               String
@@ -81,9 +69,8 @@ model Authenticator {
   credentialDeviceType String
   credentialBackedUp   Boolean
   transports           String?
- 
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
- 
+  user                 User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
   @@id([userId, credentialID])
 }
 
@@ -94,8 +81,8 @@ model Order {
   price     Int
   userId    String
   productId String
+  product   Product  @relation(fields: [productId], references: [id])
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  product   Product  @relation(fields: [productId], references: [id], onDelete: Restrict)
 }
 
 model Product {
@@ -108,11 +95,9 @@ model Product {
   price       String
   createdAt   DateTime    @updatedAt
   updatedAt   DateTime    @updatedAt
-  orders      Order[]
   cartItems   CartItems[]
-  user        User @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  
+  orders      Order[]
+  user        User        @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model CartItems {
