@@ -16,7 +16,7 @@ export const loginSchema = z.object({
 });
 
 export const productSchema = z.object({
-  // userId: z.string(),
+  userId: z.string(),
   title: z
     .string()
     .min(6, { message: "Title must be at least 6 characters" })
