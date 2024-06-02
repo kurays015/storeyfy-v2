@@ -19,13 +19,15 @@ export async function addProduct(formData: FormData) {
 
   if (!session) return;
 
+  const userName = session.user.email?.split("@")[0];
+
   //cloudinary upload
   const arrayBuffer = await image.arrayBuffer();
   const buffer = new Uint8Array(arrayBuffer);
   const uploadResponse: any = await new Promise((resolve, reject) => {
     cloudinary.uploader
       .upload_stream(
-        { folder: `${session.user.email?.split("@")[0]}` },
+        { folder: `${userName} Products` },
         function (err, result) {
           if (err) {
             reject(err);
@@ -40,6 +42,7 @@ export async function addProduct(formData: FormData) {
   const parsedData = productSchema.safeParse({
     ...data,
     userId: session.user.id,
+    sellerName: userName,
   });
 
   if (!parsedData.success) {
@@ -53,11 +56,13 @@ export async function addProduct(formData: FormData) {
   // Save product data to database
   await db.product.create({
     data: {
+      sellerName: parsedData.data.sellerName,
       userId: parsedData.data.userId,
       title: parsedData.data.title,
       category: parsedData.data.category,
       price: parsedData.data.price,
       description: parsedData.data.description,
+      discount: parsedData.data.discount ? parsedData.data.discount : "0",
       image: uploadResponse.secure_url,
     },
   });

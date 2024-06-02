@@ -43,6 +43,9 @@ export default function AddProductForm() {
       category: "",
       price: "",
       image: "",
+      discount: "",
+      sellerName: "",
+      userId: "",
     },
   });
 
@@ -86,7 +89,7 @@ export default function AddProductForm() {
               <FormControl>
                 <Input placeholder="your title" {...field} />
               </FormControl>
-              <FormDescription>This is your Title</FormDescription>
+              <FormDescription>Product Title</FormDescription>
               <FormMessage />
             </FormItem>
           )}
@@ -101,7 +104,7 @@ export default function AddProductForm() {
               <FormControl>
                 <Textarea placeholder="your description" {...field} />
               </FormControl>
-              <FormDescription>This is your description</FormDescription>
+              <FormDescription>Product Description</FormDescription>
               <FormMessage />
             </FormItem>
           )}
@@ -131,27 +134,51 @@ export default function AddProductForm() {
                   ))}
                 </SelectContent>
               </Select>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
-        <FormField
-          control={form.control}
-          name="price"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>{capitalFirstLetter(field.name)}($) </FormLabel>
-              <FormControl>
-                <Input placeholder="your price" {...field} />
-              </FormControl>
               <FormDescription className="text-muted-foreground">
-                this is price
+                Product Category
               </FormDescription>
               <FormMessage />
             </FormItem>
           )}
         />
+
+        <div className="flex gap-12">
+          <FormField
+            control={form.control}
+            name="price"
+            render={({ field }) => (
+              <FormItem className="flex-1">
+                <FormLabel>{capitalFirstLetter(field.name)} ($) </FormLabel>
+                <FormControl>
+                  <Input placeholder="your price" {...field} />
+                </FormControl>
+                <FormDescription className="text-muted-foreground">
+                  Buy it now price
+                </FormDescription>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="discount"
+            render={({ field }) => (
+              <FormItem className="flex-1">
+                <FormLabel>
+                  {capitalFirstLetter(field.name)} e.g. 5% (optional)
+                </FormLabel>
+                <FormControl>
+                  <Input placeholder="your discount" {...field} />
+                </FormControl>
+                <FormDescription className="text-muted-foreground">
+                  Add your discount
+                </FormDescription>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </div>
 
         <FormField
           control={form.control}
@@ -170,13 +197,13 @@ export default function AddProductForm() {
               </FormControl>
               {productImage ? (
                 <Image
-                  height={500}
-                  width={500}
+                  height={150}
+                  width={150}
                   src={typeof productImage === "string" ? productImage : ""}
                   alt="preview"
                 />
               ) : (
-                <FormDescription>Drag image here</FormDescription>
+                <FormDescription>Drag your product image here</FormDescription>
               )}
               <FormMessage />
             </FormItem>

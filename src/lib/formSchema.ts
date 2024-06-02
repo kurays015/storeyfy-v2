@@ -1,4 +1,5 @@
 import { z } from "zod";
+import isValidNumber from "./isValidNumber";
 
 const MAX_FILE_SIZE = 1024 * 1024 * 5;
 const ACCEPTED_IMAGE_TYPES = [
@@ -16,7 +17,6 @@ export const loginSchema = z.object({
 });
 
 export const productSchema = z.object({
-  userId: z.string(),
   title: z
     .string()
     .min(6, { message: "Title must be at least 6 characters" })
@@ -25,16 +25,19 @@ export const productSchema = z.object({
     .string()
     .min(6, { message: "Description must be at least 6 characters" }),
   category: z.string().min(3, { message: "Category must not be empty" }),
-  price: z.string().refine(
-    value => {
-      const regex = /^\d+(\.\d{1,2})?$/;
-      return regex.test(value);
-    },
-    {
-      message: "Price must be a valid number",
-    }
-  ),
+  price: z.string().refine(value => isValidNumber(value), {
+    message: "Price must be a valid number",
+  }),
   image: z.any(),
+  userId: z.string(),
+  sellerName: z.string(),
+  discount: z
+    .string()
+    .refine(value => isValidNumber(value), {
+      message: "Discount must be a valid number",
+    })
+    .optional()
+    .or(z.literal("")),
 });
 
 // .refine(files => files?.[0]?.size <= MAX_FILE_SIZE, `Max file size is 5MB.`)

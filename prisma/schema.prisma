@@ -93,6 +93,8 @@ model Product {
   image       String
   category    String
   price       String
+  sellerName  String  
+  discount    String?
   createdAt   DateTime    @updatedAt
   updatedAt   DateTime    @updatedAt
   cartItems   CartItems[]
