@@ -73,7 +73,6 @@ export default function AddProductForm() {
             formRef.current?.requestSubmit();
           } else {
             e.preventDefault();
-            alert("test??@");
           }
         }}
         className="space-y-8"
