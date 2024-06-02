@@ -9,10 +9,10 @@ export default function AddProductSubmitBtn() {
       {pending ? (
         <>
           <LoaderIcon className="animate-spin mr-1" />
-          Adding...
+          Listing...
         </>
       ) : (
-        "Add product"
+        "List product"
       )}
     </Button>
   );

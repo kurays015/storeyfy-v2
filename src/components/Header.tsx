@@ -31,16 +31,16 @@ export default async function Header() {
         </div>
       </div>
       <div className="py-7 flex items-center justify-between max-w-7xl mx-auto">
-        <h1 className="font-semibold text-2xl">
-          <Link href="/">Storeyfy - v2</Link>
-        </h1>
+        <Link href="/">
+          <h1 className="font-semibold text-2xl">Storeyfy - v2</h1>
+        </Link>
         <Input
           type="search"
           placeholder="Search a product..."
           className="w-3/4"
         />
         <ul className="flex items-center gap-5 text-3xl text-gray-600">
-          <AccountDropdown />
+          {session?.user && <AccountDropdown />}
           <FaRegHeart />
           <IoBagHandleOutline />
         </ul>
