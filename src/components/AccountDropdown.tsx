@@ -30,7 +30,7 @@ export default function AccountDropdown() {
           <Link href="my-products">
             <DropdownMenuItem className="cursor-pointer">
               <ShoppingBasket className="mr-2 h-4 w-4" />
-              <span>My products</span>
+              <span>My Products</span>
             </DropdownMenuItem>
           </Link>
         </DropdownMenuGroup>
