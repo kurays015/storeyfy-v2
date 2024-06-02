@@ -27,16 +27,13 @@ import AddProductSubmitBtn from "../AddProductSubmitBtn";
 import { Textarea } from "../ui/textarea";
 import { useRef, useState } from "react";
 import Image from "next/image";
-import { useFormState } from "react-dom";
 import { categories } from "@/lib/categories";
 
 export default function AddProductForm() {
   const [productImage, setProductImage] = useState<null | string | ArrayBuffer>(
     ""
   );
-  // const formRef = useRef<HTMLFormElement>(null);
-
-  // const [state, formAction] = useFormState(addProduct, null);
+  const formRef = useRef<HTMLFormElement>(null);
 
   const form = useForm<z.infer<typeof productSchema>>({
     resolver: zodResolver(productSchema),
@@ -68,16 +65,16 @@ export default function AddProductForm() {
   return (
     <Form {...form}>
       <form
-        // ref={formRef}
+        ref={formRef}
         action={addProduct}
-        // onSubmit={async e => {
-        //   await form.trigger();
-        //   if (form.formState.isValid) {
-        //     formRef.current?.requestSubmit();
-        //   } else {
-        //     e.preventDefault();
-        //   }
-        // }}
+        onSubmit={async e => {
+          await form.trigger();
+          if (form.formState.isValid) {
+            formRef.current?.requestSubmit();
+          } else {
+            e.preventDefault();
+          }
+        }}
         className="space-y-8"
       >
         <FormField
