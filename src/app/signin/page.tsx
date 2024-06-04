@@ -1,4 +1,4 @@
-import SignInForm from "../../components/forms/SignInForm";
+// import SignInForm from "../../components/forms/SignInForm";
 
 export default function LoginPage() {
   return (
@@ -7,7 +7,7 @@ export default function LoginPage() {
         <h1 className="text-center text-2xl font-semibold mb-8">
           Welcome to Storeyfy!
         </h1>
-        <SignInForm />
+        {/* <SignInForm /> */}
       </div>
     </div>
   );
