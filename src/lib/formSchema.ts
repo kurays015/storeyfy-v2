@@ -16,6 +16,21 @@ export const loginSchema = z.object({
     .min(6, { message: "Password must be at least 6 characters long." }),
 });
 
+export const signUpSchema = z
+  .object({
+    email: z.string().email().min(1, { message: "Invalid Email" }),
+    password: z
+      .string()
+      .min(6, { message: "Password must be at least 6 characters long." }),
+    confirmPassword: z.string(),
+  })
+  .refine(
+    values => {
+      return values.password === values.confirmPassword;
+    },
+    { message: "Passwords must match!", path: ["confirmPassword"] }
+  );
+
 export const productSchema = z.object({
   title: z
     .string()

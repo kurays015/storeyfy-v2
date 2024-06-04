@@ -12,47 +12,43 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { signIn } from "next-auth/react";
-import { loginSchema } from "@/lib/formSchema";
 import { Button } from "../ui/button";
-import GoogleLoginButton from "../credentials-login-button/GoogleLoginButton";
-import GithubLoginButton from "../credentials-login-button/GithubLoginButton";
 import Link from "next/link";
-import CustomFormSeparator from "@/components/forms/CustomFormSeparator";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { signUp } from "@/app/signup/_actions/action";
+import CustomFormSeparator from "@/components/forms/CustomFormSeparator";
+import { signUpSchema } from "@/lib/formSchema";
 import { LoaderIcon } from "lucide-react";
 
-export default function SignInForm() {
-  const [error, setError] = useState<string | null>();
+export default function SignUpForm() {
   const router = useRouter();
-  const form = useForm<z.infer<typeof loginSchema>>({
-    resolver: zodResolver(loginSchema),
+
+  const form = useForm<z.infer<typeof signUpSchema>>({
+    resolver: zodResolver(signUpSchema),
     defaultValues: {
       email: "",
       password: "",
+      confirmPassword: "",
     },
   });
 
-  async function login(values: z.infer<typeof loginSchema>) {
-    const res = await signIn("credentials", {
-      email: values.email,
-      password: values.password,
-      redirect: false,
-    });
+  async function handleSignUp(values: z.infer<typeof signUpSchema>) {
+    const formData = new FormData();
+    formData.append("email", values.email);
+    formData.append("password", values.password);
+    formData.append("confirmPassword", values.confirmPassword);
 
-    if (res?.status === 200) {
-      router.push("/");
-      router.refresh();
-    } else {
-      setError(res?.error);
+    const res = await signUp(formData);
+
+    if (res?.success) {
+      router.push("/signin", { scroll: false });
     }
   }
 
   return (
     <Form {...form}>
       <form
-        onSubmit={form.handleSubmit(login)}
+        onSubmit={form.handleSubmit(handleSignUp)}
         className="flex flex-col gap-5 w-[450px]"
       >
         <FormField
@@ -64,6 +60,7 @@ export default function SignInForm() {
               <FormControl>
                 <Input placeholder="your email" {...field} />
               </FormControl>
+
               <FormMessage />
             </FormItem>
           )}
@@ -83,7 +80,23 @@ export default function SignInForm() {
           )}
         />
 
-        <p className="text-sm font-medium text-destructive">{error}</p>
+        <FormField
+          control={form.control}
+          name="confirmPassword"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Confirm Password</FormLabel>
+              <FormControl>
+                <Input
+                  placeholder="confirm password"
+                  type="password"
+                  {...field}
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
 
         <Button
           type="submit"
@@ -93,27 +106,16 @@ export default function SignInForm() {
           {form.formState.isSubmitting ? (
             <>
               <LoaderIcon className="animate-spin mr-1" />
-              Loggin in...
+              Signing up...
             </>
           ) : (
-            "Login"
+            "Sign up"
           )}
         </Button>
       </form>
 
       <CustomFormSeparator
-        text="or"
-        className="flex items-center justify-center gap-2 my-6 text-sm"
-        width="w-[210px]"
-      />
-
-      <div className="flex flex-col gap-3">
-        <GoogleLoginButton />
-        <GithubLoginButton />
-      </div>
-
-      <CustomFormSeparator
-        text="Don't have an account?"
+        text="Already have an account?"
         className="flex items-center justify-center gap-4 mt-14 mb-10 text-sm"
         width="w-1/5"
       />
@@ -123,8 +125,8 @@ export default function SignInForm() {
           asChild
           className="w-1/2 bg-transparent border-2 border-green-700 text-green-700 rounded-xl  hover:bg-gray-100 dark:text-slate-300 dark:hover:bg-green-700 dark:hover:border-none dark:hover:text-gray-300 font-semibold"
         >
-          <Link href="/signup" scroll={false}>
-            Sign up
+          <Link href="/signin" scroll={false}>
+            Sign in
           </Link>
         </Button>
       </div>

@@ -7,7 +7,9 @@ export default async function LoginButton() {
   return (
     <div>
       <Button asChild className={`${session?.user && "hidden"} text-xs`}>
-        <Link href="/signin">Sign In</Link>
+        <Link href="/signin" scroll={false}>
+          Sign In
+        </Link>
       </Button>
     </div>
   );

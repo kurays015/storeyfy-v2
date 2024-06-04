@@ -1,10 +1,12 @@
 import { DefaultSession, NextAuthOptions, getServerSession } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
+import GithubProvider from "next-auth/providers/github";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import { compare } from "bcrypt";
 import { PrismaClient } from "@prisma/client";
 import db from "./db";
+import { loginSchema } from "./formSchema";
 
 const prisma = new PrismaClient();
 
@@ -30,6 +32,10 @@ export const authConfig = {
       clientId: process.env.GOOGLE_CLIENT_ID as string,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
     }),
+    GithubProvider({
+      clientId: process.env.GITHUB_CLIENT_ID as string,
+      clientSecret: process.env.GITHUB_CLIENT_SECRET as string,
+    }),
     CredentialsProvider({
       name: "credentials",
       credentials: {
@@ -39,9 +45,16 @@ export const authConfig = {
       async authorize(credentials) {
         if (!credentials?.email || !credentials?.password) return null;
 
+        const parsedData = loginSchema.safeParse({
+          email: credentials.email,
+          password: credentials.password,
+        });
+
+        if (!parsedData.success) return null;
+
         const user = await db.user.findUnique({
           where: {
-            email: credentials.email,
+            email: parsedData.data.email,
           },
         });
 
@@ -52,7 +65,9 @@ export const authConfig = {
           user.password as string
         );
 
-        if (!isPasswordMatch) return null;
+        if (!isPasswordMatch) {
+          throw new Error("Invalid Credentials");
+        }
 
         return user;
       },

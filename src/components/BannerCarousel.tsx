@@ -19,6 +19,7 @@ export function BannerCarousel() {
                 alt="bannerImages"
                 height={500}
                 width={500}
+                priority
                 className="full w-full rounded-md cursor-pointer"
               />
             </CarouselItem>

@@ -27,7 +27,7 @@ export default function AccountDropdown() {
         <DropdownMenuLabel>My Account</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
-          <Link href="my-products">
+          <Link href="/my-products">
             <DropdownMenuItem className="cursor-pointer">
               <ShoppingBasket className="mr-2 h-4 w-4" />
               <span>My Products</span>
