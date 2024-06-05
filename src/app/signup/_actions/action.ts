@@ -3,8 +3,9 @@
 import db from "@/lib/db";
 import { signUpSchema } from "@/lib/formSchema";
 import { hash } from "bcrypt";
+import { redirect } from "next/navigation";
 
-export async function signUp(formData: FormData) {
+export async function signUp(prevState: any, formData: FormData) {
   try {
     const data = Object.fromEntries(formData);
 
@@ -15,7 +16,7 @@ export async function signUp(formData: FormData) {
     if (!parsedData.success) {
       console.log(parsedData.error);
       return {
-        message: "Error signing up",
+        message: "Invalid form data",
         issue: parsedData.error.issues.map(issue => issue.message),
       };
     }
@@ -31,7 +32,6 @@ export async function signUp(formData: FormData) {
     }
 
     if (parsedData.data.confirmPassword !== parsedData.data.password) {
-      console.log("not match");
       return { message: "Password doesn't match!" };
     }
 
@@ -44,9 +44,9 @@ export async function signUp(formData: FormData) {
         confirmPassword: hashedPassword,
       },
     });
-
-    return { message: "Successfully signed up!", success: true };
   } catch (error) {
     return { message: "An unexpected error occured", success: false, error };
   }
+
+  redirect("/signin");
 }

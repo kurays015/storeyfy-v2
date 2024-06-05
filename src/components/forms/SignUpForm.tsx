@@ -14,14 +14,16 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "../ui/button";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { signUp } from "@/app/signup/_actions/action";
 import CustomFormSeparator from "@/components/forms/CustomFormSeparator";
 import { signUpSchema } from "@/lib/formSchema";
-import { LoaderIcon } from "lucide-react";
+import { useFormState } from "react-dom";
+import { useRef } from "react";
+import SignUpFormSubmitBtn from "../SignUpFormSubmitBtn";
 
 export default function SignUpForm() {
-  const router = useRouter();
+  const formRef = useRef<HTMLFormElement>(null);
+  const [state, formAction] = useFormState(signUp, null);
 
   const form = useForm<z.infer<typeof signUpSchema>>({
     resolver: zodResolver(signUpSchema),
@@ -32,23 +34,19 @@ export default function SignUpForm() {
     },
   });
 
-  async function handleSignUp(values: z.infer<typeof signUpSchema>) {
-    const formData = new FormData();
-    formData.append("email", values.email);
-    formData.append("password", values.password);
-    formData.append("confirmPassword", values.confirmPassword);
-
-    const res = await signUp(formData);
-
-    if (res?.success) {
-      router.push("/signin", { scroll: false });
-    }
-  }
-
   return (
     <Form {...form}>
       <form
-        onSubmit={form.handleSubmit(handleSignUp)}
+        ref={formRef}
+        action={formAction}
+        onSubmit={async e => {
+          await form.trigger();
+          if (form.formState.isValid) {
+            formRef.current?.requestSubmit();
+          } else {
+            e.preventDefault();
+          }
+        }}
         className="flex flex-col gap-5 w-[450px]"
       >
         <FormField
@@ -98,20 +96,13 @@ export default function SignUpForm() {
           )}
         />
 
-        <Button
-          type="submit"
-          disabled={form.formState.isSubmitting}
-          className="bg-green-700 hover:bg-green-600 dark:text-slate-300 font-bold"
-        >
-          {form.formState.isSubmitting ? (
-            <>
-              <LoaderIcon className="animate-spin mr-1" />
-              Signing up...
-            </>
-          ) : (
-            "Sign up"
-          )}
-        </Button>
+        {state?.message && (
+          <div className="text-sm font-medium text-red-500">
+            {state.message}
+          </div>
+        )}
+
+        <SignUpFormSubmitBtn />
       </form>
 
       <CustomFormSeparator
