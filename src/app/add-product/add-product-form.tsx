@@ -3,6 +3,9 @@
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import { useRef, useState } from "react";
+import Image from "next/image";
+
 import {
   Form,
   FormControl,
@@ -19,15 +22,13 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import AddProductSubmitBtn from "@/components/AddProductSubmitBtn";
+import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
 import { productSchema } from "@/lib/formSchema";
-import { addProduct } from "@/app/add-product/_actions/action";
-import capitalFirstLetter from "@/lib/capitalFirstLetter";
-import AddProductSubmitBtn from "../AddProductSubmitBtn";
-import { Textarea } from "../ui/textarea";
-import { useRef, useState } from "react";
-import Image from "next/image";
 import { categories } from "@/lib/categories";
+import capitalFirstLetter from "@/lib/capitalFirstLetter";
+import { addProduct } from "@/app/add-product/_actions/action";
 
 export default function AddProductForm() {
   const [productImage, setProductImage] = useState<null | string | ArrayBuffer>(

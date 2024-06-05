@@ -1,4 +1,4 @@
-import SignUpForm from "@/components/forms/SignUpForm";
+import SignUpForm from "./sign-up-form";
 
 export default function SignUpPage() {
   return (
