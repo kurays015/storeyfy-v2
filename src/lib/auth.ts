@@ -58,7 +58,9 @@ export const authConfig = {
           },
         });
 
-        if (!user) return null;
+        if (!user) {
+          throw new Error("User doesn't exist!");
+        }
 
         const isPasswordMatch = await compare(
           credentials.password,

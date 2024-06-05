@@ -84,7 +84,7 @@ export default function SignInForm() {
           )}
         />
 
-        <p className="text-sm font-medium text-destructive">{error}</p>
+        <p className="text-sm font-medium text-red-500">{error}</p>
 
         <Button
           type="submit"
