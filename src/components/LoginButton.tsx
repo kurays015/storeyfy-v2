@@ -1,16 +1,15 @@
 import Link from "next/link";
-import { Button } from "./ui/button";
-import { getSession } from "@/lib/auth";
 
-export default async function LoginButton() {
-  const session = await getSession();
+export default function LoginButton() {
   return (
     <div>
-      <Button asChild className={`${session?.user && "hidden"} text-xs`}>
-        <Link href="/signin" scroll={false}>
-          Sign In
-        </Link>
-      </Button>
+      <Link
+        href="/signin"
+        scroll={false}
+        className="dark:text-slate-300 text-sm"
+      >
+        Login
+      </Link>
     </div>
   );
 }
