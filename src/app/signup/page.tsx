@@ -1,5 +1,4 @@
-import SignInForm from "@/components/forms/SignInForm";
-import SignUpForm from "@/components/forms/SignUpForm";
+// import SignUpForm from "@/components/forms/SignUpForm";
 
 export default function SignUpPage() {
   return (
@@ -8,7 +7,7 @@ export default function SignUpPage() {
         <h1 className="text-center text-2xl font-semibold mb-8">
           Sign up now!
         </h1>
-        <SignUpForm />
+        {/* <SignUpForm /> */}
       </div>
     </div>
   );
