@@ -24,110 +24,111 @@ import { useState } from "react";
 import { LoaderIcon } from "lucide-react";
 
 export default function SignInForm() {
-  const [error, setError] = useState<string | null>();
-  const router = useRouter();
-  const form = useForm<z.infer<typeof loginSchema>>({
-    resolver: zodResolver(loginSchema),
-    defaultValues: {
-      email: "",
-      password: "",
-    },
-  });
+  // const [error, setError] = useState<string | null>();
+  // const router = useRouter();
+  // const form = useForm<z.infer<typeof loginSchema>>({
+  //   resolver: zodResolver(loginSchema),
+  //   defaultValues: {
+  //     email: "",
+  //     password: "",
+  //   },
+  // });
 
-  async function login(values: z.infer<typeof loginSchema>) {
-    const res = await signIn("credentials", {
-      email: values.email,
-      password: values.password,
-      redirect: false,
-    });
+  // async function login(values: z.infer<typeof loginSchema>) {
+  //   const res = await signIn("credentials", {
+  //     email: values.email,
+  //     password: values.password,
+  //     redirect: false,
+  //   });
 
-    if (res?.status === 200) {
-      router.push("/");
-      router.refresh();
-    } else {
-      setError(res?.error);
-    }
-  }
+  //   if (res?.status === 200) {
+  //     router.push("/");
+  //     router.refresh();
+  //   } else {
+  //     setError(res?.error);
+  //   }
+  // }
 
   return (
-    <Form {...form}>
-      <form
-        onSubmit={form.handleSubmit(login)}
-        className="flex flex-col gap-5 w-[450px]"
-      >
-        <FormField
-          control={form.control}
-          name="email"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Email</FormLabel>
-              <FormControl>
-                <Input placeholder="your email" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+    <div>test1...</div>
+    // <Form {...form}>
+    //   <form
+    //     onSubmit={form.handleSubmit(login)}
+    //     className="flex flex-col gap-5 w-[450px]"
+    //   >
+    //     <FormField
+    //       control={form.control}
+    //       name="email"
+    //       render={({ field }) => (
+    //         <FormItem>
+    //           <FormLabel>Email</FormLabel>
+    //           <FormControl>
+    //             <Input placeholder="your email" {...field} />
+    //           </FormControl>
+    //           <FormMessage />
+    //         </FormItem>
+    //       )}
+    //     />
 
-        <FormField
-          control={form.control}
-          name="password"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Password</FormLabel>
-              <FormControl>
-                <Input placeholder="your password" type="password" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+    //     <FormField
+    //       control={form.control}
+    //       name="password"
+    //       render={({ field }) => (
+    //         <FormItem>
+    //           <FormLabel>Password</FormLabel>
+    //           <FormControl>
+    //             <Input placeholder="your password" type="password" {...field} />
+    //           </FormControl>
+    //           <FormMessage />
+    //         </FormItem>
+    //       )}
+    //     />
 
-        <p className="text-sm font-medium text-destructive">{error}</p>
+    //     <p className="text-sm font-medium text-destructive">{error}</p>
 
-        <Button
-          type="submit"
-          disabled={form.formState.isSubmitting}
-          className="bg-green-700 hover:bg-green-600 dark:text-slate-300 font-bold"
-        >
-          {form.formState.isSubmitting ? (
-            <>
-              <LoaderIcon className="animate-spin mr-1" />
-              Loggin in...
-            </>
-          ) : (
-            "Login"
-          )}
-        </Button>
-      </form>
+    //     <Button
+    //       type="submit"
+    //       disabled={form.formState.isSubmitting}
+    //       className="bg-green-700 hover:bg-green-600 dark:text-slate-300 font-bold"
+    //     >
+    //       {form.formState.isSubmitting ? (
+    //         <>
+    //           <LoaderIcon className="animate-spin mr-1" />
+    //           Loggin in...
+    //         </>
+    //       ) : (
+    //         "Login"
+    //       )}
+    //     </Button>
+    //   </form>
 
-      <CustomFormSeparator
-        text="or"
-        className="flex items-center justify-center gap-2 my-6 text-sm"
-        width="w-[210px]"
-      />
+    //   <CustomFormSeparator
+    //     text="or"
+    //     className="flex items-center justify-center gap-2 my-6 text-sm"
+    //     width="w-[210px]"
+    //   />
 
-      <div className="flex flex-col gap-3">
-        <GoogleLoginButton />
-        <GithubLoginButton />
-      </div>
+    //   <div className="flex flex-col gap-3">
+    //     <GoogleLoginButton />
+    //     <GithubLoginButton />
+    //   </div>
 
-      <CustomFormSeparator
-        text="Don't have an account?"
-        className="flex items-center justify-center gap-4 mt-14 mb-10 text-sm"
-        width="w-1/5"
-      />
+    //   <CustomFormSeparator
+    //     text="Don't have an account?"
+    //     className="flex items-center justify-center gap-4 mt-14 mb-10 text-sm"
+    //     width="w-1/5"
+    //   />
 
-      <div className="text-center">
-        <Button
-          asChild
-          className="w-1/2 bg-transparent border-2 border-green-700 text-green-700 rounded-xl  hover:bg-gray-100 dark:text-slate-300 dark:hover:bg-green-700 dark:hover:border-none dark:hover:text-gray-300 font-semibold"
-        >
-          <Link href="/signup" scroll={false}>
-            Sign up
-          </Link>
-        </Button>
-      </div>
-    </Form>
+    //   <div className="text-center">
+    //     <Button
+    //       asChild
+    //       className="w-1/2 bg-transparent border-2 border-green-700 text-green-700 rounded-xl  hover:bg-gray-100 dark:text-slate-300 dark:hover:bg-green-700 dark:hover:border-none dark:hover:text-gray-300 font-semibold"
+    //     >
+    //       <Link href="/signup" scroll={false}>
+    //         Sign up
+    //       </Link>
+    //     </Button>
+    //   </div>
+    // </Form>
   );
 }
