@@ -39,7 +39,8 @@ export default function SignInForm() {
     await signIn("credentials", {
       email: values.email,
       password: values.password,
-      callbackUrl: "/",
+      callbackUrl: "/test",
+      redirect: false,
     });
 
     // if (res?.status === 200) {
