@@ -39,8 +39,7 @@ export default function SignInForm() {
     await signIn("credentials", {
       email: values.email,
       password: values.password,
-      callbackUrl: "/test",
-      redirect: false,
+      // callbackUrl: "/test",
     });
 
     // if (res?.status === 200) {
@@ -64,7 +63,11 @@ export default function SignInForm() {
             <FormItem>
               <FormLabel>Email</FormLabel>
               <FormControl>
-                <Input placeholder="your email" {...field} />
+                <Input
+                  disabled={form.formState.isSubmitting}
+                  placeholder="your email"
+                  {...field}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -78,7 +81,12 @@ export default function SignInForm() {
             <FormItem>
               <FormLabel>Password</FormLabel>
               <FormControl>
-                <Input placeholder="your password" type="password" {...field} />
+                <Input
+                  disabled={form.formState.isSubmitting}
+                  placeholder="your password"
+                  type="password"
+                  {...field}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
