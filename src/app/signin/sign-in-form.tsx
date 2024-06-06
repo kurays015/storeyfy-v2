@@ -36,18 +36,18 @@ export default function SignInForm() {
   });
 
   async function login(values: z.infer<typeof loginSchema>) {
-    const res = await signIn("credentials", {
+    await signIn("credentials", {
       email: values.email,
       password: values.password,
-      redirect: false,
+      callbackUrl: "/",
     });
 
-    if (res?.status === 200) {
-      router.push("/");
-      router.refresh();
-    } else {
-      setError(res?.error);
-    }
+    // if (res?.status === 200) {
+    //   router.push("/");
+    //   router.refresh();
+    // } else {
+    //   setError(res?.error);
+    // }
   }
 
   return (
