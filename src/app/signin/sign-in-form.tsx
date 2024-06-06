@@ -36,19 +36,18 @@ export default function SignInForm() {
   });
 
   async function login(values: z.infer<typeof loginSchema>) {
-    await signIn("credentials", {
+    const res = await signIn("credentials", {
       email: values.email,
       password: values.password,
       redirect: false,
-      callbackUrl: "/",
     });
 
-    // if (res?.status === 200) {
-    //   router.push("/");
-    //   router.refresh();
-    // } else {
-    //   setError(res?.error);
-    // }
+    if (res?.status === 200) {
+      router.push("/");
+      router.refresh();
+    } else {
+      setError(res?.error);
+    }
   }
 
   return (
@@ -94,7 +93,6 @@ export default function SignInForm() {
           )}
         />
 
-        <p>error: {JSON.stringify(form.formState.errors)}</p>
         <p className="text-sm font-medium text-red-500">{error}</p>
 
         <Button
