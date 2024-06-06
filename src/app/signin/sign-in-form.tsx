@@ -39,7 +39,8 @@ export default function SignInForm() {
     await signIn("credentials", {
       email: values.email,
       password: values.password,
-      // callbackUrl: "/test",
+      redirect: false,
+      callbackUrl: "/",
     });
 
     // if (res?.status === 200) {
@@ -93,6 +94,7 @@ export default function SignInForm() {
           )}
         />
 
+        <p>error: {JSON.stringify(form.formState.errors)}</p>
         <p className="text-sm font-medium text-red-500">{error}</p>
 
         <Button
