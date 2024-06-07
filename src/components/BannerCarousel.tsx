@@ -9,7 +9,7 @@ import Image from "next/image";
 
 export function BannerCarousel() {
   return (
-    <div className="max-w-7xl mx-auto mt-2">
+    <div className="max-w-7xl mx-auto my-8">
       <Carousel opts={{ loop: true }}>
         <CarouselContent>
           {bannerImgs.map((img, index) => (

@@ -128,7 +128,7 @@ export default function AddProductForm() {
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
-                  {categories.map(category => (
+                  {categories.map(({ category }) => (
                     <SelectItem value={category} key={category}>
                       {category}
                     </SelectItem>
