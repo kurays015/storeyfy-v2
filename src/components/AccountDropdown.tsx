@@ -1,6 +1,9 @@
 "use client";
-
+import { signOut } from "next-auth/react";
+import Link from "next/link";
+import { CgProfile } from "react-icons/cg";
 import { LogOut, ShoppingBasket } from "lucide-react";
+
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -11,9 +14,6 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { signOut } from "next-auth/react";
-import Link from "next/link";
-import { CgProfile } from "react-icons/cg";
 
 export default function AccountDropdown() {
   return (

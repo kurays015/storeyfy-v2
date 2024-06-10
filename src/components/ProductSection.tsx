@@ -1,6 +1,6 @@
-import CategoryAccordion from "./CategoryAccordion";
 import * as React from "react";
-import ProductsScrollContainer from "./ProductsScrollContainer";
+import CategoryAccordion from "@/components/CategoryAccordion";
+import ProductsScrollContainer from "@/components/ProductsScrollContainer";
 
 export default function ProductSection() {
   return (

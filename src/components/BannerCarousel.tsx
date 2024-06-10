@@ -1,11 +1,12 @@
 import * as React from "react";
+import Image from "next/image";
+
 import {
   Carousel,
   CarouselContent,
   CarouselItem,
 } from "@/components/ui/carousel";
 import { bannerImgs } from "@/lib/bannerImgs";
-import Image from "next/image";
 
 export function BannerCarousel() {
   return (

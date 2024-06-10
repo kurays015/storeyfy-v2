@@ -11,3 +11,9 @@ export type ProductProps = {
   createdAt: Date;
   updatedAt: Date;
 };
+
+export type CustomFormSeparatorProps = {
+  className: string;
+  width: string;
+  text: string;
+};

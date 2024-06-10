@@ -1,13 +1,13 @@
-import { DarkModeToggle } from "./DarkModeToggle";
-import ProfileAvatar from "./ProfileAvatar";
-import LoginButton from "./LoginButton";
-import { getSession } from "@/lib/auth";
-import { FaFacebook, FaTwitter, FaInstagram } from "react-icons/fa";
-import { Input } from "./ui/input";
-import Link from "next/link";
 import { FaRegHeart } from "react-icons/fa";
+import Link from "next/link";
 import { IoBagHandleOutline } from "react-icons/io5";
-import AccountDropdown from "./AccountDropdown";
+import { FaFacebook, FaTwitter, FaInstagram } from "react-icons/fa";
+import { Input } from "@/components/ui/input";
+import { getSession } from "@/lib/auth";
+import AccountDropdown from "@/components/AccountDropdown";
+import { DarkModeToggle } from "@/components/DarkModeToggle";
+import ProfileAvatar from "@/components/ProfileAvatar";
+import LoginButton from "@/components/LoginButton";
 
 export default async function Header() {
   const session = await getSession();

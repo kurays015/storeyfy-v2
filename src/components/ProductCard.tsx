@@ -1,6 +1,6 @@
 import { formatCurrency } from "@/lib/currencyFormatter";
 import getDiscountValue from "@/lib/getDiscountValue";
-import { ProductProps } from "@/types/product";
+import { ProductProps } from "@/types";
 import Image from "next/image";
 
 export default function ProductCard({

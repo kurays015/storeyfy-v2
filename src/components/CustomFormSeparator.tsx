@@ -1,10 +1,5 @@
-import { Separator } from "./ui/separator";
-
-type CustomFormSeparatorProps = {
-  className: string;
-  width: string;
-  text: string;
-};
+import { Separator } from "@/components/ui/separator";
+import { CustomFormSeparatorProps } from "@/types";
 
 export default function CustomFormSeperator({
   className,

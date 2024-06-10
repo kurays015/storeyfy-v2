@@ -1,6 +1,6 @@
 import { useFormStatus } from "react-dom";
-import { Button } from "./ui/button";
 import { LoaderIcon } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 export default function AddProductSubmitBtn() {
   const { pending } = useFormStatus();
