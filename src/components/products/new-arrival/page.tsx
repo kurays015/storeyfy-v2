@@ -20,7 +20,7 @@ export default async function NewArrivals() {
       <h1 className="font-semibold text-slate-700 mb-6 text-lg border-b border-b-gray-300 tracking-wide">
         New Arrivals
       </h1>
-      <div className="grid grid-cols-2 gap-2">
+      <div className="grid grid-cols-2 gap-5">
         {products.slice(0, 8).map(product => (
           <ProductCard key={product.id} {...product} />
         ))}

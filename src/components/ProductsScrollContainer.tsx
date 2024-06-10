@@ -5,7 +5,7 @@ import TopRated from "@/components/products/top-rated/page";
 
 export default function ProductsScrollContainer() {
   return (
-    <ScrollArea className="whitespace-nowrap border p-4">
+    <ScrollArea className="whitespace-nowrap rounded-xl border p-4">
       <div className="flex gap-10 w-max">
         <NewArrivals />
         <Trending />
