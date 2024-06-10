@@ -46,7 +46,11 @@ export const productSchema = z.object({
   image: z.any(),
   userId: z.string(),
   sellerName: z.string(),
-  discount: z.coerce.number().int().optional().or(z.literal("")),
+  discount: z.coerce
+    .number()
+    .int()
+    .max(2, { message: "Maximum of 2 characters only" })
+    .optional(),
 });
 
 // .refine(files => files?.[0]?.size <= MAX_FILE_SIZE, `Max file size is 5MB.`)
