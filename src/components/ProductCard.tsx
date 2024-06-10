@@ -1,37 +1,39 @@
 import { formatCurrency } from "@/lib/currencyFormatter";
 import getDiscountValue from "@/lib/getDiscountValue";
+import { ProductProps } from "@/types/product";
 import Image from "next/image";
 
-type ProductCardProps = {
-  title: string;
-  image: string;
-  category: string;
-  price: string;
-  discount: string | null;
-};
-
 export default function ProductCard({
+  id,
   title,
   image,
   category,
   price,
   discount,
-}: ProductCardProps) {
+}: ProductProps) {
   return (
-    <div className="h-[100px] w-full flex items-center gap-5 border border-gray-300 p-5 rounded-xl">
-      <Image src={image} width={80} height={80} alt={title} />
-      <div>
-        <h1 className="text-sm text-ellipsis overflow-hidden whitespace-nowrap w-[150px]">
+    <div className="flex w-full gap-2 border border-gray-300 rounded-xl overflow-hidden">
+      <Image src={image} width={100} height={100} alt={title} />
+      <div className="self-center space-y-1">
+        <h1 className="text-sm text-ellipsis overflow-hidden whitespace-nowrap w-[160px] font-bold">
           {title}
         </h1>
-        <p>{category}</p>
-        <div className="flex items-center gap-5 text-sm">
+        <p className="text-slate-500 text-sm">{category}</p>
+        <div className="flex items-center gap-3 text-sm">
           {discount ? (
-            <div>{formatCurrency(getDiscountValue(discount, price))}</div>
+            <div className="font-bold text-base">
+              {formatCurrency(getDiscountValue(discount, price))}
+            </div>
           ) : (
-            <div>{formatCurrency(parseFloat(price))}</div>
+            <div className="font-bold text-base">
+              {formatCurrency(parseFloat(price))}
+            </div>
           )}
-          {discount && <del>{formatCurrency(parseFloat(price))}</del>}
+          {discount && (
+            <del className="text-slate-400">
+              {formatCurrency(parseFloat(price))}
+            </del>
+          )}
         </div>
       </div>
     </div>

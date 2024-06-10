@@ -8,7 +8,7 @@ import { categories } from "@/lib/categories";
 
 export default function CategoryAccordion() {
   return (
-    <div className="max-h-screen">
+    <div className="sticky top-7">
       <Accordion
         type="single"
         collapsible
