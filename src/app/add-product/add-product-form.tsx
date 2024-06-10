@@ -44,7 +44,7 @@ export default function AddProductForm() {
       category: "",
       price: "",
       image: "",
-      discount: "",
+      discount: 0,
       sellerName: "",
       userId: "",
     },
