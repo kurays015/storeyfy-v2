@@ -2,7 +2,13 @@ import ProductCard from "@/components/ProductCard";
 import db from "@/lib/db";
 
 export default async function TopRated() {
-  const products = await db.product.findMany();
+  const products = await db.product.findMany({
+    where: {
+      discount: {
+        lte: 20,
+      },
+    },
+  });
 
   return (
     <div>

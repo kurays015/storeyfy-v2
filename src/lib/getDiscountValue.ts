@@ -1,11 +1,13 @@
 export default function getDiscountValue(
-  discount: string | null,
-  price: string
+  discount: number | null,
+  price: number
 ) {
-  const productPrice = parseFloat(price);
-  const discountPrice = parseFloat(discount || "");
+  const validDiscount = discount && discount > 0 ? Math.min(discount, 100) : 0;
 
-  const discountAmount = productPrice * (discountPrice / 100);
-  const discountedPrice = productPrice - discountAmount;
-  return discountedPrice;
+  // Calculate the discount amount
+  const discountAmount = price * (validDiscount / 100);
+
+  const discountedPrice = price - discountAmount;
+
+  return Math.max(discountedPrice, 0);
 }

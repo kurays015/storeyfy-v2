@@ -63,7 +63,7 @@ export async function addProduct(formData: FormData) {
         category: parsedData.data.category,
         price: parsedData.data.price,
         description: parsedData.data.description,
-        discount: parsedData.data.discount ? parsedData.data.discount : "0",
+        discount: parsedData.data.discount ? parsedData.data.discount : 0,
         image: uploadResponse.secure_url,
       },
     });

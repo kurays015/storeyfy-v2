@@ -95,7 +95,7 @@ model Product {
   category    String
   price       String
   sellerName  String  
-  discount    String?
+  discount    Int?
   createdAt   DateTime    @updatedAt
   updatedAt   DateTime    @updatedAt
   cartItems   CartItems[]

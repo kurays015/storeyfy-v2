@@ -1,7 +1,7 @@
 import ProductCard from "@/components/ProductCard";
 import db from "@/lib/db";
 
-export default async function NewArrival() {
+export default async function NewArrivals() {
   const now = new Date();
 
   const oneWeekAgo = new Date(now);

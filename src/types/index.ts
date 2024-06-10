@@ -7,7 +7,7 @@ export type ProductProps = {
   category: string;
   price: string;
   sellerName: string;
-  discount: string | null;
+  discount: number | null;
   createdAt: Date;
   updatedAt: Date;
 };

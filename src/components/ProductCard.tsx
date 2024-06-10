@@ -22,7 +22,7 @@ export default function ProductCard({
         <div className="flex items-center gap-3 text-sm">
           {discount ? (
             <div className="font-bold text-base">
-              {formatCurrency(getDiscountValue(discount, price))}
+              {formatCurrency(getDiscountValue(discount, parseFloat(price)))}
             </div>
           ) : (
             <div className="font-bold text-base">
