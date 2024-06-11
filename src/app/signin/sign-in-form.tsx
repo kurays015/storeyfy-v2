@@ -23,6 +23,7 @@ import GoogleLoginButton from "@/components/credentials-login-button/GoogleLogin
 import GithubLoginButton from "@/components/credentials-login-button/GithubLoginButton";
 import CustomFormSeparator from "@/components/CustomFormSeparator";
 import { loginSchema } from "@/lib/formSchema";
+import { SubmitButton } from "@/components/SubmitButton";
 
 export default function SignInForm() {
   const [error, setError] = useState<string | null>();
@@ -95,20 +96,13 @@ export default function SignInForm() {
 
         <p className="text-sm font-medium text-red-500">{error}</p>
 
-        <Button
-          type="submit"
-          disabled={form.formState.isSubmitting}
+        <SubmitButton
           className="bg-green-700 hover:bg-green-600 dark:text-slate-300 font-bold"
+          isLoading={form.formState.isSubmitting}
+          loadingText="Loggin in..."
         >
-          {form.formState.isSubmitting ? (
-            <>
-              <LoaderIcon className="animate-spin mr-1" />
-              Loggin in...
-            </>
-          ) : (
-            "Login"
-          )}
-        </Button>
+          Login
+        </SubmitButton>
       </form>
 
       <CustomFormSeparator
