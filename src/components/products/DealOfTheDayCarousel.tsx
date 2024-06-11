@@ -10,7 +10,7 @@ import {
 import { formatCurrency } from "@/lib/currencyFormatter";
 import getDiscountValue from "@/lib/getDiscountValue";
 import { Button } from "@/components/ui/button";
-import SaleCountDown from "@/components/products/SaleCountDown";
+// import SaleCountDown from "@/components/products/SaleCountDown";
 
 export async function DealOfTheDayCarousel() {
   const highestDiscountProducts = await db.product.findMany({
@@ -66,7 +66,7 @@ export async function DealOfTheDayCarousel() {
                     <div className="text-black text-sm font-semibold">
                       HURRY UP! OFFER ENDS IN:
                     </div>
-                    <SaleCountDown />
+                    {/* <SaleCountDown /> */}
                   </div>
                 </div>
               </CarouselItem>
