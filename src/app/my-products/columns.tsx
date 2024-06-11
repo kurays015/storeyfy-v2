@@ -10,8 +10,8 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { formatCurrency } from "@/lib/currencyFormatter";
-import { Product } from "./product-table";
-import { format, parse } from "date-fns";
+import { Product } from "@/app/my-products/product-table";
+import { format } from "date-fns";
 
 export const columns: ColumnDef<Product>[] = [
   {

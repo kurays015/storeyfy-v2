@@ -40,14 +40,6 @@ export type Product = {
   price: string;
 };
 
-type ProductProps = {
-  id: string;
-  title: string;
-  description: string;
-  category: string;
-  price: string;
-};
-
 export default function ProductTable({ data }: any) {
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(

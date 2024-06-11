@@ -1,5 +1,6 @@
 import ProductCard from "@/components/products/ProductCard";
 import db from "@/lib/db";
+
 export default async function Trending() {
   const products = await db.product.findMany({
     where: {

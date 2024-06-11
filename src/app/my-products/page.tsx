@@ -1,8 +1,9 @@
-import db from "@/lib/db";
-import ProductTable from "./product-table";
-import { getSession } from "@/lib/auth";
-import { Button } from "@/components/ui/button";
 import Link from "next/link";
+
+import db from "@/lib/db";
+import { getSession } from "@/lib/auth";
+import ProductTable from "@/app/my-products/product-table";
+import { Button } from "@/components/ui/button";
 
 export default async function MyProductPage() {
   const session = await getSession();

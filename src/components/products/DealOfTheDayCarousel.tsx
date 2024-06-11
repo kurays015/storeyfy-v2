@@ -2,13 +2,13 @@ import * as React from "react";
 import Image from "next/image";
 
 import db from "@/lib/db";
+import { formatCurrency } from "@/lib/currencyFormatter";
+import getDiscountValue from "@/lib/getDiscountValue";
 import {
   Carousel,
   CarouselContent,
   CarouselItem,
 } from "@/components/ui/carousel";
-import { formatCurrency } from "@/lib/currencyFormatter";
-import getDiscountValue from "@/lib/getDiscountValue";
 import { Button } from "@/components/ui/button";
 import SaleCountDown from "@/components/products/SaleCountDown";
 

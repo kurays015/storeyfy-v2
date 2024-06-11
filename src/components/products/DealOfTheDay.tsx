@@ -1,4 +1,4 @@
-import { DealOfTheDayCarousel } from "./DealOfTheDayCarousel";
+import { DealOfTheDayCarousel } from "@/components/products/DealOfTheDayCarousel";
 
 export default function DealOfTheDay() {
   return (
