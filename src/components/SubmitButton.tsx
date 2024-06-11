@@ -12,7 +12,7 @@ export function SubmitButton({
   isLoading: boolean;
   children: ReactNode;
   loadingText: string;
-  className: string;
+  className?: string;
   onClick?: (e: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>) => void;
 }) {
   return (
