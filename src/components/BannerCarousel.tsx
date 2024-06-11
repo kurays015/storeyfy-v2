@@ -6,17 +6,19 @@ import {
   CarouselContent,
   CarouselItem,
 } from "@/components/ui/carousel";
-import { bannerImgs } from "@/lib/bannerImgs";
+import { banners } from "@/lib/banners";
+import BannerContent from "@/components/BannerContent";
 
 export function BannerCarousel() {
   return (
     <div className="max-w-7xl mx-auto my-8">
       <Carousel opts={{ loop: true }}>
         <CarouselContent>
-          {bannerImgs.map((img, index) => (
-            <CarouselItem key={index}>
+          {banners.map((banner, index) => (
+            <CarouselItem key={index} className="relative">
+              <BannerContent {...banner} />
               <Image
-                src={img}
+                src={banner.img}
                 alt="bannerImages"
                 height={500}
                 width={500}

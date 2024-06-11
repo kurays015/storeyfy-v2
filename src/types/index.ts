@@ -17,3 +17,9 @@ export type CustomFormSeparatorProps = {
   width: string;
   text: string;
 };
+
+export type BannerContentProps = {
+  headline: string;
+  description: string;
+  price: number;
+};
