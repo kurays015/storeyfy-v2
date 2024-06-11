@@ -13,7 +13,13 @@ export default function ProductCard({
 }: ProductProps) {
   return (
     <div className="flex w-full gap-2 border border-gray-300 rounded-xl overflow-hidden">
-      <Image src={image} width={100} height={100} alt={title} />
+      <Image
+        src={image}
+        width={100}
+        height={100}
+        alt={title}
+        style={{ width: 100, height: 100 }}
+      />
       <div className="self-center space-y-1 pr-4  py-2">
         <h1 className="text-sm text-ellipsis overflow-hidden whitespace-nowrap w-[160px] font-bold">
           {title}
