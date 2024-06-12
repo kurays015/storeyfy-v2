@@ -2,6 +2,7 @@ import Image from "next/image";
 import { formatCurrency } from "@/lib/currencyFormatter";
 import getDiscountValue from "@/lib/getDiscountValue";
 import { ProductProps } from "@/types";
+import Rating from "@/components/Rating";
 
 export default function ProductCard({
   id,
@@ -10,6 +11,8 @@ export default function ProductCard({
   category,
   price,
   discount,
+  rating,
+  stock,
 }: ProductProps) {
   return (
     <div className="flex w-full gap-2 border border-gray-300 rounded-xl overflow-hidden">
@@ -25,6 +28,7 @@ export default function ProductCard({
           {title}
         </h1>
         <p className="text-slate-500 text-sm">{category}</p>
+        <Rating rating={rating} />
         <div className="flex items-center gap-3 text-sm">
           {discount ? (
             <div className="font-bold text-base">

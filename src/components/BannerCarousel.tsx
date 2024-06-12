@@ -11,7 +11,7 @@ import BannerContent from "@/components/BannerContent";
 
 export function BannerCarousel() {
   return (
-    <div className="max-w-7xl mx-auto my-8">
+    <div className="my-8">
       <Carousel opts={{ loop: true }}>
         <CarouselContent>
           {banners.map((banner, index) => (
