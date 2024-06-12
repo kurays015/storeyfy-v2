@@ -95,7 +95,9 @@ model Product {
   category    String
   price       String
   sellerName  String  
+  stock       Int
   discount    Int?
+  rating      Float?
   createdAt   DateTime    @updatedAt
   updatedAt   DateTime    @updatedAt
   cartItems   CartItems[]

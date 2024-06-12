@@ -4,11 +4,11 @@ import GithubProvider from "next-auth/providers/github";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import { compare } from "bcrypt";
-import { PrismaClient } from "@prisma/client";
+// import { PrismaClient } from "@prisma/client";
 import db from "./db";
 import { loginSchema } from "./formSchema";
 
-const prisma = new PrismaClient();
+// const prisma = new PrismaClient();
 
 // for session id fix
 declare module "next-auth" {
@@ -20,7 +20,7 @@ declare module "next-auth" {
 }
 
 export const authConfig = {
-  adapter: PrismaAdapter(prisma),
+  adapter: PrismaAdapter(db),
   pages: {
     signIn: "/signin",
   },

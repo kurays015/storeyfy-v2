@@ -15,7 +15,7 @@ export default async function Header() {
   return (
     <header className="border-b">
       <div className="border-b py-2">
-        <div className="max-w-7xl mx-auto flex items-center justify-between">
+        <div className="container flex items-center justify-between">
           <ul className="flex items-center gap-2 text-gray-500">
             <FaFacebook />
             <FaTwitter />
@@ -30,7 +30,7 @@ export default async function Header() {
           </div>
         </div>
       </div>
-      <div className="py-7 flex items-center justify-between max-w-7xl mx-auto">
+      <div className="container py-7 flex items-center justify-between">
         <Link href="/">
           <h1 className="font-semibold text-2xl">Storeyfy - v2</h1>
         </Link>

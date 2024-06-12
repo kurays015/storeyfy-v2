@@ -64,6 +64,7 @@ export async function addProduct(formData: FormData) {
         price: parsedData.data.price,
         description: parsedData.data.description,
         discount: parsedData.data.discount ? parsedData.data.discount : 0,
+        stock: parsedData.data.stock,
         image: uploadResponse.secure_url,
       },
     });

@@ -44,7 +44,6 @@ export default function AddProductForm() {
       category: "",
       price: "",
       image: "",
-      discount: 0,
       sellerName: "",
       userId: "",
     },
@@ -155,6 +154,23 @@ export default function AddProductForm() {
                 </FormControl>
                 <FormDescription className="text-muted-foreground">
                   Buy it now price
+                </FormDescription>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="stock"
+            render={({ field }) => (
+              <FormItem className="flex-1">
+                <FormLabel>{capitalFirstLetter(field.name)}</FormLabel>
+                <FormControl>
+                  <Input placeholder="your stock" {...field} />
+                </FormControl>
+                <FormDescription className="text-muted-foreground">
+                  Product Availability
                 </FormDescription>
                 <FormMessage />
               </FormItem>
