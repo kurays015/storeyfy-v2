@@ -62,7 +62,7 @@ export async function DealOfTheDayCarousel() {
                     <p>Already sold: 20</p>
                     <p>Available: 40</p>
                   </div>
-                  <div className="">
+                  <div>
                     <div className="text-black text-sm font-semibold">
                       HURRY UP! OFFER ENDS IN:
                     </div>

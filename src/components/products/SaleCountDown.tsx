@@ -15,12 +15,18 @@ export default function SaleCountDown() {
   if (!seconds || !minutes || !hours) return <p>Loading...</p>;
 
   return (
-    <div>
-      <div className="text-3xl font-bold">
-        <span>{hours < 10 ? `0${hours}` : hours}</span> :{" "}
-        <span>{minutes < 10 ? `0${minutes}` : minutes}</span> :{" "}
-        <span>{seconds < 10 ? `0${seconds}` : seconds}</span>
-      </div>
+    <div className="text-3xl font-bold mt-4">
+      <span className="bg-red-400 text-white p-2 rounded-xl">
+        {hours < 10 ? `0${hours}` : hours}
+      </span>{" "}
+      :{" "}
+      <span className="bg-red-400 text-white p-2 rounded-xl">
+        {minutes < 10 ? `0${minutes}` : minutes}
+      </span>{" "}
+      :{" "}
+      <span className="bg-red-400 text-white p-2 rounded-xl">
+        {seconds < 10 ? `0${seconds}` : seconds}
+      </span>
     </div>
   );
 }
