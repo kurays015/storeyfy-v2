@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import HolyLoader from "holy-loader";
 import "./globals.css";
 import ThemeProvider from "@/components/theme-provider";
 import NextAuthProvider from "./providers/NextAuthProvider";
@@ -20,6 +21,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <HolyLoader
+        color="#6FA8FF"
+        height=".2rem"
+        speed={250}
+        easing="linear"
+        showSpinner
+      />
       <body className={inter.className} suppressHydrationWarning>
         <NextAuthProvider>
           <ThemeProvider
