@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/carousel";
 import { Button } from "@/components/ui/button";
 import SaleCountDown from "@/components/products/SaleCountDown";
+import Rating from "../Rating";
 
 export async function DealOfTheDayCarousel() {
   const highestDiscountProducts = await db.product.findMany({
@@ -22,11 +23,21 @@ export async function DealOfTheDayCarousel() {
   });
 
   return (
-    <div className=" rounded-xl border py-5 px-8">
+    <div className="rounded-xl border py-5 px-8">
       <Carousel opts={{ loop: false }}>
         <CarouselContent className="">
           {highestDiscountProducts.map(
-            ({ id, title, description, price, discount, image, category }) => (
+            ({
+              id,
+              title,
+              description,
+              price,
+              discount,
+              image,
+              category,
+              rating,
+              stock,
+            }) => (
               <CarouselItem key={id} className="flex gap-8 pl-0">
                 <Image
                   src={image}
@@ -36,15 +47,14 @@ export async function DealOfTheDayCarousel() {
                   style={{ width: 450, height: 450 }}
                 />
                 <div className="flex flex-col justify-evenly">
-                  <div>Rating*****</div>
+                  <Rating rating={rating} />
                   <h3 className="text-lg text-ellipsis overflow-hidden whitespace-nowrap w-[420px] font-bold">
                     {title}
                   </h3>
-                  <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Deleniti impedit sit dicta harum quae doloremque itaque nam
-                    atque!
+                  <p className="uppercase text-red-500 font-medium">
+                    {category}
                   </p>
+                  <p>{description}</p>
                   <div className="flex items-center gap-3">
                     <p className="font-bold text-2xl">
                       {formatCurrency(
@@ -60,7 +70,7 @@ export async function DealOfTheDayCarousel() {
                   </Button>
                   <div className="flex items-cente justify-between  uppercase text-sm font-medium">
                     <p>Already sold: 20</p>
-                    <p>Available: 40</p>
+                    <p>Available: {stock}</p>
                   </div>
                   <div>
                     <div className="text-black text-sm font-semibold">

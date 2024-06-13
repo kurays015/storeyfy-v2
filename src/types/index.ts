@@ -14,6 +14,10 @@ export type ProductProps = {
   updatedAt: Date;
 };
 
+export type ProductMiniCardProps = ProductProps & {
+  hasBorder?: boolean;
+};
+
 export type CustomFormSeparatorProps = {
   className: string;
   width: string;

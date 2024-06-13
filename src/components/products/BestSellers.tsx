@@ -1,5 +1,6 @@
 import db from "@/lib/db";
-import ProductCard from "@/components/products/ProductCard";
+import ProductMiniCard from "@/components/products/ProductMiniCard";
+import ProductHeaderTitle from "@/components/products/ProductHeaderTitle";
 
 export default async function BestSellers() {
   const products = await db.product.findMany({
@@ -8,16 +9,17 @@ export default async function BestSellers() {
         gte: 25,
       },
     },
+    take: 4,
   });
 
   return (
     <div>
-      <h1 className="uppercase text-slate-700 font-semibold text-base mb-3">
+      <ProductHeaderTitle className="uppercase text-slate-700 font-semibold text-base mb-3">
         Best Sellers
-      </h1>
+      </ProductHeaderTitle>
       <div className="flex flex-col gap-2">
-        {products.slice(0, 4).map(product => (
-          <ProductCard key={product.id} {...product} />
+        {products.map(product => (
+          <ProductMiniCard key={product.id} {...product} hasBorder={false} />
         ))}
       </div>
     </div>

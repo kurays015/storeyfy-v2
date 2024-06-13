@@ -7,7 +7,7 @@ export default function SaleCountDown() {
 
   time.setSeconds(time.getSeconds() + 86400); // 24 hrs
 
-  const { seconds, minutes, hours, restart } = useTimer({
+  const { seconds, minutes, hours } = useTimer({
     expiryTimestamp: time,
     onExpire: () => console.warn("onExpire called"),
   });
