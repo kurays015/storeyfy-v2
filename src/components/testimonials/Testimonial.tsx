@@ -23,7 +23,7 @@ export default function Testimonial() {
         <div className="flex justify-center">
           <ImQuotesLeft className="text-4xl text-red-500" />
         </div>
-        <p className="max-w-[70%]">
+        <p className="max-w-[70%] text-slate-600">
           Lorem ipsum dolor sit amet consectetur Lorem ipsum dolor sit amet.
         </p>
       </div>
