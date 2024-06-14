@@ -5,7 +5,7 @@ import Blogs from "@/components/Blogs";
 
 export default function Home() {
   return (
-    <main className="container pb-96">
+    <main className="container mb-12">
       <BannerCarousel />
       <ProductSection />
       <Testimonials />

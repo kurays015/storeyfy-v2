@@ -6,6 +6,7 @@ import ThemeProvider from "@/components/theme-provider";
 import NextAuthProvider from "./providers/NextAuthProvider";
 import Header from "@/components/Header";
 import { Toaster } from "@/components/ui/toaster";
+import Footer from "@/components/Footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -39,6 +40,7 @@ export default function RootLayout({
             <div>
               <Header />
               {children}
+              <Footer />
             </div>
             <Toaster />
           </ThemeProvider>
