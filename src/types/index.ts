@@ -1,3 +1,5 @@
+import { StaticImageData } from "next/image";
+
 export type ProductProps = {
   userId: string;
   id: string;
@@ -32,4 +34,12 @@ export type BannerContentProps = {
 
 export type RatingProps = {
   rating: number | null | undefined;
+};
+
+export type BlogCardProps = {
+  title: string;
+  image: StaticImageData;
+  category: string;
+  author: string;
+  date: string;
 };
