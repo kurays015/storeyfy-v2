@@ -1,5 +1,5 @@
 import db from "@/lib/db";
-import ProductHeaderTitle from "./ProductHeaderTitle";
+import HeaderTitle from "@/components/HeaderTitle";
 import ProductCard from "@/components/products/ProductCard";
 
 export async function MostSoldProducts() {
@@ -9,9 +9,9 @@ export async function MostSoldProducts() {
 
   return (
     <div>
-      <ProductHeaderTitle className="font-semibold text-slate-700 mt-8 mb-6 text-lg border-b border-b-gray-300 tracking-wide">
+      <HeaderTitle className="font-semibold text-slate-700 mt-8 mb-6 text-lg border-b border-b-gray-300 tracking-wide">
         Most Sold Products
-      </ProductHeaderTitle>
+      </HeaderTitle>
       <div className="grid grid-cols-4 gap-5">
         {products.map(product => (
           <ProductCard key={product.id} {...product} />

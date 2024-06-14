@@ -1,12 +1,12 @@
 import ProductMiniCard from "@/components/products/ProductMiniCard";
 import db from "@/lib/db";
-import ProductHeaderTitle from "@/components/products/ProductHeaderTitle";
+import HeaderTitle from "@/components/HeaderTitle";
 
 export default async function NewArrivals() {
   const now = new Date();
 
   const oneWeekAgo = new Date(now);
-  oneWeekAgo.setDate(now.getDate() - 7);
+  oneWeekAgo.setDate(now.getDate() - 8);
 
   const products = await db.product.findMany({
     where: {
@@ -19,9 +19,9 @@ export default async function NewArrivals() {
 
   return (
     <div>
-      <ProductHeaderTitle className="font-semibold text-slate-700 mb-6 text-lg border-b border-b-gray-300 tracking-wide">
+      <HeaderTitle className="font-semibold text-slate-700 mb-6 text-lg border-b border-b-gray-300 tracking-wide">
         New Arrivals
-      </ProductHeaderTitle>
+      </HeaderTitle>
       <div className="grid grid-cols-2 gap-5">
         {products.map(product => (
           <ProductMiniCard key={product.id} {...product} hasBorder={true} />

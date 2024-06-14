@@ -1,11 +1,11 @@
 import { ReactNode } from "react";
 
-export default function ProductHeaderTitle({
+export default function HeaderTitle({
   children,
   className,
 }: {
   children: ReactNode;
   className: string;
 }) {
-  return <div className={className}>{children}</div>;
+  return <h1 className={className}>{children}</h1>;
 }

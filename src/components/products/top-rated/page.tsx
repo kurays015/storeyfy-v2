@@ -1,6 +1,6 @@
 import ProductMiniCard from "@/components/products/ProductMiniCard";
 import db from "@/lib/db";
-import ProductHeaderTitle from "@/components/products/ProductHeaderTitle";
+import HeaderTitle from "@/components/HeaderTitle";
 
 export default async function TopRated() {
   const products = await db.product.findMany({
@@ -14,9 +14,9 @@ export default async function TopRated() {
 
   return (
     <div>
-      <ProductHeaderTitle className="font-semibold text-slate-700 mb-6 text-lg border-b border-b-gray-300 tracking-wide">
+      <HeaderTitle className="font-semibold text-slate-700 mb-6 text-lg border-b border-b-gray-300 tracking-wide">
         Top Rated
-      </ProductHeaderTitle>
+      </HeaderTitle>
       <div className="grid grid-cols-2 gap-5">
         {products.map(product => (
           <ProductMiniCard key={product.id} {...product} hasBorder={true} />

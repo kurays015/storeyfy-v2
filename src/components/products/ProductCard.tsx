@@ -12,7 +12,7 @@ export default function ProductCard({
   discount,
 }: ProductProps) {
   return (
-    <div className="flex flex-col justify-evenly gap-2  rounded-xl border overflow-hidden p-4">
+    <div className="flex flex-col justify-evenly gap-2 rounded-xl border overflow-hidden p-4">
       <Image
         src={image}
         height={500}
@@ -20,7 +20,7 @@ export default function ProductCard({
         alt={title}
         className="dark:text-white text-black"
       />
-      <p className="text-red-400 uppercase text-sm">{category}</p>
+      <p className="text-red-400 uppercase text-sm font-medium">{category}</p>
       <h3 className="text-slate-500 text-lg">{title}</h3>
       <Rating rating={rating} />
       <Price price={price} discount={discount} />
