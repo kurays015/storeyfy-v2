@@ -3,7 +3,7 @@ import Rating from "../Rating";
 import Price from "./Price";
 import { ProductProps } from "@/types";
 import Link from "next/link";
-import getImage from "@/lib/blurDataURL";
+import { getRemoteImageBlurDataURL } from "@/lib/blurDataURL";
 
 export default async function ProductCard({
   id,
@@ -14,7 +14,7 @@ export default async function ProductCard({
   price,
   discount,
 }: ProductProps) {
-  const { base64, img } = await getImage(image);
+  const { base64, img } = await getRemoteImageBlurDataURL(image);
 
   return (
     <Link href={`/product/${title}/${category}/${id}`}>

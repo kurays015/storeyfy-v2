@@ -3,7 +3,7 @@ import { ProductMiniCardProps } from "@/types";
 import Rating from "@/components/Rating";
 import Price from "@/components/products/Price";
 import Link from "next/link";
-import getImage from "@/lib/blurDataURL";
+import { getRemoteImageBlurDataURL } from "@/lib/blurDataURL";
 
 export default async function ProductMiniCard({
   id,
@@ -16,7 +16,7 @@ export default async function ProductMiniCard({
   stock,
   hasBorder,
 }: ProductMiniCardProps) {
-  const { base64, img } = await getImage(image);
+  const { base64, img } = await getRemoteImageBlurDataURL(image);
 
   return (
     <Link href={`/product/${title}/${category}/${id}`}>
