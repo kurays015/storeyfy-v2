@@ -1,3 +1,4 @@
+import "server-only";
 import { getPlaiceholder } from "plaiceholder";
 
 export default async function getImage(src: string) {
