@@ -3,8 +3,9 @@ import { ProductMiniCardProps } from "@/types";
 import Rating from "@/components/Rating";
 import Price from "@/components/products/Price";
 import Link from "next/link";
+import getImage from "@/lib/blurDataURL";
 
-export default function ProductMiniCard({
+export default async function ProductMiniCard({
   id,
   title,
   image,
@@ -15,6 +16,8 @@ export default function ProductMiniCard({
   stock,
   hasBorder,
 }: ProductMiniCardProps) {
+  const { base64, img } = await getImage(image);
+
   return (
     <Link href={`/product/${title}/${category}/${id}`}>
       <div
@@ -23,10 +26,10 @@ export default function ProductMiniCard({
         }`}
       >
         <Image
-          src={image}
-          width={80}
-          height={80}
+          {...img}
           alt={title}
+          placeholder="blur"
+          blurDataURL={base64}
           style={{ width: 80, height: 80 }}
         />
         <div className="self-center">
