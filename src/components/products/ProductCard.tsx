@@ -21,8 +21,6 @@ export default async function ProductCard({
       <div className="flex flex-col justify-evenly gap-2 rounded-xl border overflow-hidden p-4">
         <Image
           {...img}
-          // height={500}
-          // width={500}
           alt={title}
           placeholder="blur"
           blurDataURL={base64}
