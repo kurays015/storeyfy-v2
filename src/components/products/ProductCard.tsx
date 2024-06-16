@@ -27,7 +27,7 @@ export default async function ProductCard({
           className="dark:text-white text-black rounded-xl"
         />
         <p className="text-red-400 uppercase text-xs font-medium">{category}</p>
-        <h3 className="text-slate-500 text-lg">{title}</h3>
+        <h3 className="text-slate-500 text-lg dark:text-white">{title}</h3>
         <Rating rating={rating} />
         <Price price={price} discount={discount} />
       </div>

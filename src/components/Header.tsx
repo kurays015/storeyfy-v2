@@ -16,7 +16,7 @@ export default async function Header() {
     <header className="border-b">
       <div className="border-b py-2">
         <div className="container flex items-center justify-between">
-          <ul className="flex items-center gap-2 text-gray-500">
+          <ul className="flex items-center gap-2 text-gray-500 dark:text-white">
             <FaFacebook />
             <FaTwitter />
             <FaInstagram />
@@ -39,7 +39,7 @@ export default async function Header() {
           placeholder="Search a product..."
           className="w-3/4"
         />
-        <ul className="flex items-center gap-5 text-3xl text-gray-600">
+        <ul className="flex items-center gap-5 text-3xl text-gray-600 dark:text-white">
           {session?.user && <AccountDropdown />}
           <FaRegHeart />
           <IoBagHandleOutline />

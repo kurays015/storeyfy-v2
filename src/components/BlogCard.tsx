@@ -19,8 +19,8 @@ export default function BlogCard({
       />
       <div className="my-4 space-y-1">
         <p className="text-red-400">{category}</p>
-        <h1 className="font-bold text-lg">{title}</h1>
-        <p className="text-slate-700">
+        <h1 className="font-bold text-lg dark:text-slate-200">{title}</h1>
+        <p className="text-slate-700 dark:text-slate-400">
           {author} / {date}
         </p>
       </div>

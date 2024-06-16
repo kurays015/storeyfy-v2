@@ -23,7 +23,7 @@ export default async function ProductMiniCard({
     <Link href={`/product/${title}/${category}/${id}`}>
       <div
         className={`flex w-full gap-4 p-2 overflow-hidden ${
-          hasBorder && "border border-gray-300 rounded-xl"
+          hasBorder && "border rounded-xl"
         }`}
       >
         <Image
@@ -38,7 +38,7 @@ export default async function ProductMiniCard({
           <h1 className="text-sm text-ellipsis overflow-hidden whitespace-nowrap w-[160px] font-bold">
             {title}
           </h1>
-          <p className="text-slate-500 text-sm">{category}</p>
+          <p className="text-slate-500 text-sm dark:text-white">{category}</p>
           {hideRating ? null : <Rating rating={rating} />}
           <Price price={price} discount={discount} />
         </div>

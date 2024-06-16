@@ -18,13 +18,7 @@ export default function CategoryAccordion() {
         <AccordionItem value={category} key={category} className="p-0">
           <AccordionTrigger className="py-3">
             <div className="flex items-center gap-4">
-              <Image
-                src={logo}
-                height={20}
-                width={20}
-                alt={category}
-                // className="w-16"
-              />
+              <Image src={logo} height={20} width={20} alt={category} />
               <div>{category}</div>
             </div>
           </AccordionTrigger>

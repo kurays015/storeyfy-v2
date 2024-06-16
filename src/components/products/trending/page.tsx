@@ -14,7 +14,7 @@ export default async function Trending() {
 
   return (
     <div>
-      <HeaderTitle className="font-semibold text-slate-700 mb-6 text-lg border-b border-b-gray-300 tracking-wide">
+      <HeaderTitle className="font-semibold text-slate-700 mb-6 text-lg border-b border-b-gray-300 tracking-wide dark:text-white dark:border-b-muted">
         Trending
       </HeaderTitle>
       <div className="grid grid-cols-2 gap-5">

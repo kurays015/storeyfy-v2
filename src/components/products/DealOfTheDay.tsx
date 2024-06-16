@@ -6,7 +6,7 @@ import { DealOfTheDaySkeleton } from "../skeletons/DealOfTheDaySkeleton";
 export default function DealOfTheDay() {
   return (
     <div>
-      <HeaderTitle className="font-semibold text-slate-700 mb-6 text-lg border-b border-b-gray-300 tracking-wide mt-8">
+      <HeaderTitle className="font-semibold text-slate-700 mb-6 text-lg border-b tracking-wide mt-8 dark:text-white">
         Deal Of The Day
       </HeaderTitle>
       <Suspense fallback={<DealOfTheDaySkeleton />}>

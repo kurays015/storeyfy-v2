@@ -36,17 +36,21 @@ const deliveryInfo = [
 
 export default function OurServices() {
   return (
-    <div className="w-[300px] flex flex-col">
-      <HeaderTitle className="font-semibold text-slate-700 mb-6 text-lg border-b border-b-gray-300 tracking-wide">
+    <div className="w-[300px] flex flex-col ">
+      <HeaderTitle className="font-semibold text-slate-700 mb-6 text-lg border-b tracking-wide dark:text-white">
         Our Services
       </HeaderTitle>
       <div className="rounded-xl border overflow-hidden p-8 flex flex-col justify-center gap-6 flex-1">
         {deliveryInfo.map(({ icon, title, description }) => (
-          <div key={title} className="flex items-center gap-4">
+          <div key={title} className="flex items-center gap-4 ">
             <div className="text-red-500 text-3xl">{icon}</div>
             <div>
-              <h1 className="font-bold text-gray-500">{title}</h1>
-              <p className="text-sm text-slate-600">{description}</p>
+              <h1 className="font-bold text-gray-500 dark:text-gray-100">
+                {title}
+              </h1>
+              <p className="text-sm text-slate-600 dark:text-slate-400">
+                {description}
+              </p>
             </div>
           </div>
         ))}

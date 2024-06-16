@@ -14,7 +14,7 @@ export default async function BestSellers() {
 
   return (
     <div>
-      <HeaderTitle className="uppercase text-slate-700 font-semibold text-base mb-3">
+      <HeaderTitle className="uppercase text-slate-700 font-semibold text-base mb-3 dark:text-white">
         Best Sellers
       </HeaderTitle>
       <div className="flex flex-col gap-2">

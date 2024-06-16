@@ -9,7 +9,7 @@ import { ProductTrendsSkeleton } from "@/components/skeletons/ProductTrendsSkele
 export default function TrendingProducts() {
   return (
     <>
-      <HeaderTitle className="font-semibold text-slate-700 mb-6 text-lg border-b border-b-gray-300 tracking-wide">
+      <HeaderTitle className="font-semibold text-slate-700 mb-6 text-lg border-b tracking-wide dark:text-white">
         Product Trends
       </HeaderTitle>
       <ScrollArea className="whitespace-nowrap rounded-xl border p-4">

@@ -29,7 +29,7 @@ export default async function DealOfTheDayCarouselContent({
         placeholder="blur"
         blurDataURL={base64}
         style={{ width: 450, height: 450 }}
-        className="dark:text-white text-black rounded-md"
+        className="dark:text-white text-black rounded-xl"
       />
       <div className="flex flex-col justify-evenly">
         <Rating rating={rating} />
@@ -46,7 +46,7 @@ export default async function DealOfTheDayCarouselContent({
             {formatCurrency(parseFloat(price))}
           </del>
         </div>
-        <Button className="bg-red-700 hover:bg-red-500 font-semibold text-lg p-6">
+        <Button className="bg-red-700 hover:bg-red-500 font-semibold text-lg p-6 dark:text-white">
           Add to Cart
         </Button>
         <div className="flex items-cente justify-between  uppercase text-sm font-medium">
@@ -54,7 +54,7 @@ export default async function DealOfTheDayCarouselContent({
           <p>Available: {stock}</p>
         </div>
         <div className="text-center">
-          <div className="text-black text-sm font-semibold">
+          <div className="text-black text-sm font-semibold dark:text-white">
             HURRY UP! OFFER ENDS IN:
           </div>
           <SaleCountDown />
