@@ -29,6 +29,7 @@ export default async function DealOfTheDayCarouselContent({
         placeholder="blur"
         blurDataURL={base64}
         style={{ width: 450, height: 450 }}
+        className="dark:text-white text-black rounded-md"
       />
       <div className="flex flex-col justify-evenly">
         <Rating rating={rating} />

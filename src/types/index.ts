@@ -17,7 +17,8 @@ export type ProductProps = {
 };
 
 export type ProductMiniCardProps = ProductProps & {
-  hasBorder?: boolean;
+  hasBorder: boolean;
+  hideRating?: boolean;
 };
 
 export type CustomFormSeparatorProps = {

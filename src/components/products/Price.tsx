@@ -11,11 +11,11 @@ export default function Price({
   return (
     <div className="flex items-center gap-3 text-sm">
       {discount ? (
-        <div className="font-bold text-base">
+        <div className="font-bold text-base text-red-500">
           {formatCurrency(getDiscountValue(discount, parseFloat(price)))}
         </div>
       ) : (
-        <div className="font-bold text-base">
+        <div className="font-bold text-base text-red-500">
           {formatCurrency(parseFloat(price))}
         </div>
       )}

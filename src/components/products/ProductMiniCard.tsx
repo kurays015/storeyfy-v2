@@ -15,13 +15,14 @@ export default async function ProductMiniCard({
   rating,
   stock,
   hasBorder,
+  hideRating,
 }: ProductMiniCardProps) {
   const { base64, img } = await getRemoteImageBlurDataURL(image);
 
   return (
     <Link href={`/product/${title}/${category}/${id}`}>
       <div
-        className={`flex w-full gap-2 overflow-hidden ${
+        className={`flex w-full gap-4 p-2 overflow-hidden ${
           hasBorder && "border border-gray-300 rounded-xl"
         }`}
       >
@@ -31,13 +32,14 @@ export default async function ProductMiniCard({
           placeholder="blur"
           blurDataURL={base64}
           style={{ width: 80, height: 80 }}
+          className="dark:text-white text-black rounded-xl"
         />
         <div className="self-center">
           <h1 className="text-sm text-ellipsis overflow-hidden whitespace-nowrap w-[160px] font-bold">
             {title}
           </h1>
           <p className="text-slate-500 text-sm">{category}</p>
-          <Rating rating={rating} />
+          {hideRating ? null : <Rating rating={rating} />}
           <Price price={price} discount={discount} />
         </div>
       </div>

@@ -1,8 +1,8 @@
 import Image from "next/image";
-import Rating from "../Rating";
-import Price from "./Price";
-import { ProductProps } from "@/types";
 import Link from "next/link";
+import Rating from "@/components/Rating";
+import Price from "@/components/products/Price";
+import { ProductProps } from "@/types";
 import { getRemoteImageBlurDataURL } from "@/lib/blurDataURL";
 
 export default async function ProductCard({
@@ -24,9 +24,9 @@ export default async function ProductCard({
           alt={title}
           placeholder="blur"
           blurDataURL={base64}
-          className="dark:text-white text-black"
+          className="dark:text-white text-black rounded-xl"
         />
-        <p className="text-red-400 uppercase text-sm font-medium">{category}</p>
+        <p className="text-red-400 uppercase text-xs font-medium">{category}</p>
         <h3 className="text-slate-500 text-lg">{title}</h3>
         <Rating rating={rating} />
         <Price price={price} discount={discount} />

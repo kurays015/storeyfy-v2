@@ -19,7 +19,12 @@ export default async function Trending() {
       </HeaderTitle>
       <div className="grid grid-cols-2 gap-5">
         {products.map(product => (
-          <ProductMiniCard key={product.id} {...product} hasBorder={true} />
+          <ProductMiniCard
+            key={product.id}
+            {...product}
+            hasBorder={true}
+            hideRating={true}
+          />
         ))}
       </div>
     </div>

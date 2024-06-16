@@ -5,7 +5,7 @@ import { BestSellersSkeleton } from "@/components/skeletons/BestSellersSkeleton"
 
 export default function SideBar() {
   return (
-    <div className="flex flex-col gap-10 sticky top-8 h-screen">
+    <div className="flex flex-col gap-5 sticky top-8 h-screen">
       <CategoryAccordion />
       <Suspense fallback={<BestSellersSkeleton />}>
         <BestSellers />
