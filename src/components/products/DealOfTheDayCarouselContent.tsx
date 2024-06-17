@@ -22,7 +22,7 @@ export default async function DealOfTheDayCarouselContent({
   const { base64, img } = await getRemoteImageBlurDataURL(image);
 
   return (
-    <CarouselItem key={id} className="flex gap-8 pl-0">
+    <CarouselItem key={id} className="flex gap-8 ">
       <Image
         {...img}
         alt={title}

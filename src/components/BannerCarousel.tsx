@@ -23,7 +23,7 @@ export function BannerCarousel() {
                 height={500}
                 width={500}
                 priority
-                className="full w-full rounded-md cursor-pointer"
+                className="full w-full rounded-md cursor-pointer customSm:h-[300px] object-cover object-right"
               />
             </CarouselItem>
           ))}

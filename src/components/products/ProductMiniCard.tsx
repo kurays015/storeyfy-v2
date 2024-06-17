@@ -3,7 +3,7 @@ import { ProductMiniCardProps } from "@/types";
 import Rating from "@/components/Rating";
 import Price from "@/components/products/Price";
 import Link from "next/link";
-import { getRemoteImageBlurDataURL } from "@/lib/blurDataURL";
+// import { getRemoteImageBlurDataURL } from "@/lib/blurDataURL";
 
 export default async function ProductMiniCard({
   id,
@@ -17,7 +17,7 @@ export default async function ProductMiniCard({
   hasBorder,
   hideRating,
 }: ProductMiniCardProps) {
-  const { base64, img } = await getRemoteImageBlurDataURL(image);
+  // const { base64, img } = await getRemoteImageBlurDataURL(image);
 
   return (
     <Link href={`/product/${title}/${category}/${id}`}>
@@ -27,10 +27,14 @@ export default async function ProductMiniCard({
         }`}
       >
         <Image
-          {...img}
+          src={image}
+          width={100}
+          height={100}
           alt={title}
-          placeholder="blur"
-          blurDataURL={base64}
+          // {...img}
+          // alt={title}
+          // placeholder="blur"
+          // blurDataURL={base64}
           style={{ width: 80, height: 80 }}
           className="dark:text-white text-black rounded-xl"
         />

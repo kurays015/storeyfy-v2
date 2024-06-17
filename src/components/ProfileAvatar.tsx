@@ -11,7 +11,9 @@ export default async function ProfileAvatar() {
           {twoFirstLetterUpperCase(session?.user?.email || "")}
         </AvatarFallback>
       </Avatar>
-      <div>{session?.user.email?.split("@")[0]}</div>
+      <div className="customSm:hidden lg:block">
+        {session?.user.email?.split("@")[0]}
+      </div>
     </div>
   );
 }
