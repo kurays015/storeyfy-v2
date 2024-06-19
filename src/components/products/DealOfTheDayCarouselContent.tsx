@@ -1,12 +1,11 @@
-import Image from "next/image";
 import { ProductProps } from "@/types";
 import { formatCurrency } from "@/lib/currencyFormatter";
 import getDiscountValue from "@/lib/getDiscountValue";
-import { getRemoteImageBlurDataURL } from "@/lib/blurDataURL";
 import Rating from "@/components/Rating";
 import SaleCountDown from "@/components/products/SaleCountDown";
 import { CarouselItem } from "@/components/ui/carousel";
 import { Button } from "@/components/ui/button";
+import ProductBlurDataImage from "@/components/products/ProductBlurDataImage";
 
 export default async function DealOfTheDayCarouselContent({
   id,
@@ -19,29 +18,25 @@ export default async function DealOfTheDayCarouselContent({
   rating,
   stock,
 }: ProductProps) {
-  const { base64, img } = await getRemoteImageBlurDataURL(image);
-
   return (
-    <CarouselItem key={id} className="flex gap-8">
-      <Image
-        // src={image}
-        // width={500}
-        // height={500}
-        // alt={title}
-        {...img}
-        alt={title}
-        placeholder="blur"
-        blurDataURL={base64}
-        style={{ width: 450, height: 450 }}
-        className="dark:text-white text-black rounded-xl"
+    <CarouselItem
+      key={id}
+      className="flex w-full customSm:flex-col customSm:gap-4 md:flex-row md:gap-8"
+    >
+      <ProductBlurDataImage
+        image={image}
+        title={title}
+        size="customSm:w-full md:w-2/5"
       />
-      <div className="flex flex-col justify-evenly">
+      <div className="flex flex-col justify-evenly customSm:gap-2">
         <Rating rating={rating} />
-        <h3 className="text-lg text-ellipsis overflow-hidden whitespace-nowrap w-[420px] font-bold">
+        <h3 className="text-lg text-ellipsis overflow-hidden whitespace-nowrap font-bold  customSm:text-base">
           {title}
         </h3>
         <p className="uppercase text-red-500 font-medium">{category}</p>
-        <p>{description}</p>
+        <p className="text-ellipsis overflow-hidden whitespace-nowrap">
+          {description}
+        </p>
         <div className="flex items-center gap-3">
           <p className="font-bold text-2xl">
             {formatCurrency(getDiscountValue(discount, parseFloat(price)))}
@@ -50,14 +45,18 @@ export default async function DealOfTheDayCarouselContent({
             {formatCurrency(parseFloat(price))}
           </del>
         </div>
-        <Button className="bg-red-700 hover:bg-red-500 font-semibold text-lg p-6 dark:text-white">
+        <Button className="bg-red-700 hover:bg-red-500 font-semibold text-lg p-6 dark:text-white customSm:my-3 480px:w-36">
           Add to Cart
         </Button>
-        <div className="flex items-cente justify-between  uppercase text-sm font-medium">
-          <p>Already sold: 20</p>
-          <p>Available: {stock}</p>
+        <div className="flex items-cente justify-between  uppercase text-sm font-medium customSm:text-xs">
+          <p>
+            Already sold: <span className="customSm:font-bold">20</span>
+          </p>
+          <p>
+            Available: <span className="customSm:font-bold">{stock}</span>
+          </p>
         </div>
-        <div className="text-center">
+        <div className="customSm:text-start md:text-center">
           <div className="text-black text-sm font-semibold dark:text-white">
             HURRY UP! OFFER ENDS IN:
           </div>

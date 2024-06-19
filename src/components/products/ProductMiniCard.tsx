@@ -1,9 +1,8 @@
-import Image from "next/image";
 import { ProductMiniCardProps } from "@/types";
 import Rating from "@/components/Rating";
 import Price from "@/components/products/Price";
 import Link from "next/link";
-import { getRemoteImageBlurDataURL } from "@/lib/blurDataURL";
+import ProductBlurDataImage from "@/components/products/ProductBlurDataImage";
 
 export default async function ProductMiniCard({
   id,
@@ -13,36 +12,21 @@ export default async function ProductMiniCard({
   price,
   discount,
   rating,
-  stock,
-  hasBorder,
   hideRating,
 }: ProductMiniCardProps) {
-  const { base64, img } = await getRemoteImageBlurDataURL(image);
-
   return (
     <Link href={`/product/${title}/${category}/${id}`}>
       <div
-        className={`flex w-full gap-4 p-2 overflow-hidden ${
-          hasBorder && "border rounded-xl"
-        }`}
+        className={`flex gap-4 overflow-hidden rounded-md border p-2 customSm:gap-4 lg:max-w-[250px]`}
       >
-        <Image
-          // src={image}
-          // width={100}
-          // height={100}
-          // alt={title}
-          {...img}
-          alt={title}
-          placeholder="blur"
-          blurDataURL={base64}
-          style={{ width: 80, height: 80 }}
-          className="dark:text-white text-black rounded-xl"
-        />
-        <div className="self-center">
-          <h1 className="text-sm text-ellipsis overflow-hidden whitespace-nowrap w-[160px] font-bold">
+        <ProductBlurDataImage image={image} title={title} size="w-[80px]" />
+        <div className="w-[calc(100%-85px)] self-center">
+          <h1
+            className={`overflow-hidden text-ellipsis whitespace-nowrap pr-4 text-sm font-bold`}
+          >
             {title}
           </h1>
-          <p className="text-slate-500 text-sm dark:text-white">{category}</p>
+          <p className="text-sm text-slate-500 dark:text-white">{category}</p>
           {hideRating ? null : <Rating rating={rating} />}
           <Price price={price} discount={discount} />
         </div>

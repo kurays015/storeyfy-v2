@@ -14,9 +14,9 @@ export async function DealOfTheDayCarousel() {
   });
 
   return (
-    <div className="rounded-xl border py-5 px-8">
+    <div className="rounded-xl border overflow-auto customSm:p-4 md:p-6">
       <Carousel opts={{ loop: false }}>
-        <CarouselContent>
+        <CarouselContent className="">
           {highestDiscountProducts.map(product => (
             <DealOfTheDayCarouselContent key={product.id} {...product} />
           ))}

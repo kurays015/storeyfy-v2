@@ -4,7 +4,7 @@ import SummerCollection from "@/components/testimonials/SummerCollection";
 
 export default function Testimonials() {
   return (
-    <div className="flex gap-8 my-12 justify-center">
+    <div className="my-12 flex justify-center gap-8 customSm:flex-col lg:flex-row">
       <Testimonial />
       <SummerCollection />
       <OurServices />

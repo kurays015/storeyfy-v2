@@ -13,7 +13,7 @@ export function BannerCarousel() {
   return (
     <div className="my-8">
       <Carousel opts={{ loop: true }}>
-        <CarouselContent>
+        <CarouselContent className="">
           {banners.map((banner, index) => (
             <CarouselItem key={index} className="relative">
               <BannerContent {...banner} />
@@ -23,7 +23,7 @@ export function BannerCarousel() {
                 height={500}
                 width={500}
                 priority
-                className="rounded-md cursor-pointer customSm:h-[300px] customSm:object-cover customSm:object-right lg:w-full lg:h-full"
+                className="w-full cursor-pointer rounded-xl customSm:h-[300px] customSm:object-cover customSm:object-right md:h-full"
               />
             </CarouselItem>
           ))}

@@ -17,14 +17,9 @@ export default async function TopRated() {
       <HeaderTitle className="font-semibold text-slate-700 mb-6 text-lg border-b border-b-gray-300 tracking-wide dark:text-white dark:border-b-muted">
         Top Rated
       </HeaderTitle>
-      <div className="grid grid-cols-2 gap-5">
+      <div className="customSm:flex customSm:flex-col customSm:max-h-[500px] customSm:w-full customSm:gap-2 overflow-auto 600px:grid 600px:grid-cols-2 600px:gap-5">
         {products.map(product => (
-          <ProductMiniCard
-            key={product.id}
-            {...product}
-            hasBorder={true}
-            hideRating={true}
-          />
+          <ProductMiniCard key={product.id} {...product} hideRating={true} />
         ))}
       </div>
     </div>

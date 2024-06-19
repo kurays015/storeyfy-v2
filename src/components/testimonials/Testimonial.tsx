@@ -4,11 +4,11 @@ import { ImQuotesLeft } from "react-icons/im";
 
 export default function Testimonial() {
   return (
-    <div className="w-[300px] flex flex-col">
-      <HeaderTitle className="font-semibold text-slate-700 mb-6 text-lg border-b tracking-wide dark:text-white">
+    <div className="lg:w-[300px]">
+      <HeaderTitle className="mb-6 border-b text-lg font-semibold tracking-wide text-slate-700 dark:text-white">
         Testimonial
       </HeaderTitle>
-      <div className="rounded-xl border overflow-hidden p-8 flex flex-col items-center gap-4 text-center flex-1">
+      <div className="flex flex-col items-center overflow-hidden rounded-xl border p-3 text-center customSm:gap-4 lg:min-h-[380px] lg:gap-2">
         <div className="flex justify-center">
           <Image
             src="/no-profile.png"
@@ -18,7 +18,7 @@ export default function Testimonial() {
             className="rounded-full"
           />
         </div>
-        <h3 className="uppercase font-bold text-slate-500 dark:text-white">
+        <h3 className="font-bold uppercase text-slate-500 dark:text-white">
           Random User
         </h3>
         <p className="dark:text-slate-400">CEO & Founder Invision</p>

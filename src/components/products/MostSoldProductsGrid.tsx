@@ -7,7 +7,7 @@ export default async function MostSoldProductsGrid() {
   });
 
   return (
-    <div className="grid grid-cols-4 gap-5">
+    <div className="grid gap-6 customSm:grid-cols-1 480px:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
       {products.map(product => (
         <ProductCard key={product.id} {...product} />
       ))}

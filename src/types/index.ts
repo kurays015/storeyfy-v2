@@ -17,7 +17,6 @@ export type ProductProps = {
 };
 
 export type ProductMiniCardProps = ProductProps & {
-  hasBorder: boolean;
   hideRating?: boolean;
 };
 

@@ -4,7 +4,7 @@ import { MostSoldProducts } from "@/components/products/MostSoldProducts";
 
 export default function Products() {
   return (
-    <div className="overflow-auto">
+    <div className="overflow-hidden">
       <TrendingProducts />
       <DealOfTheDay />
       <MostSoldProducts />

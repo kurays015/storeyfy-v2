@@ -18,18 +18,13 @@ export default async function NewArrivals() {
   });
 
   return (
-    <div>
+    <div className="flex-grow-0 flex-shrink-0 basis-auto">
       <HeaderTitle className="font-semibold text-slate-700 mb-6 text-lg border-b border-b-gray-300 tracking-wide dark:text-white dark:border-b-muted">
         New Arrivals
       </HeaderTitle>
-      <div className="grid grid-cols-2 gap-5">
+      <div className="overflow-auto grid customSm:grid-cols-1 customSm:max-h-[500px] customSm:gap-2  600px:grid-cols-2 600px:gap-4 md:gap-6">
         {products.map(product => (
-          <ProductMiniCard
-            key={product.id}
-            {...product}
-            hasBorder={true}
-            hideRating={true}
-          />
+          <ProductMiniCard key={product.id} {...product} hideRating={true} />
         ))}
       </div>
     </div>

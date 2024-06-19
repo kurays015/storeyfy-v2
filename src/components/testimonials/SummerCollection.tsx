@@ -1,23 +1,31 @@
+import Image from "next/image";
 import Link from "next/link";
+import summerDiscount from "../../../public/cta-banner.jpg";
 
 export default function SummerCollection() {
   return (
-    <div
-      className="flex-1 rounded-xl bg-no-repeat bg-cover relative"
-      style={{ backgroundImage: "url(/cta-banner.jpg)" }}
-    >
-      <div
-        className="absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2 p-12 rounded-xl text-center space-y-2"
-        style={{ background: "hsla(0, 0%, 100%, 0.7)" }}
-      >
-        <div className="text-white font-semibold p-2 bg-slate-800 rounded-md">
+    <div className="relative overflow-auto">
+      <Image
+        src={summerDiscount}
+        height={500}
+        width={500}
+        alt="Summer discount"
+        className="h-full w-full rounded-xl text-gray-800 dark:text-white customSm:min-h-[350px] customSm:object-cover"
+      />
+
+      <div className="absolute left-1/2 top-1/2 flex -translate-x-1/2 -translate-y-1/2 flex-col rounded-md bg-lightBG text-center customSm:gap-1 customSm:p-4 480px:gap-2 480px:p-6">
+        <div className="rounded-sm bg-gray-800 font-semibold text-white customSm:text-xs 480px:p-1 480px:text-base">
           25% DISCOUNT
         </div>
-        <h1 className="text-2xl font-bold text-slate-700">Summer Collection</h1>
-        <p className="text-slate-500">Starting @ $10</p>
+        <h1 className="font-extrabold text-gray-700 customSm:text-base 480px:text-2xl">
+          Summer Collection
+        </h1>
+        <p className="text-gray-500 customSm:text-sm 480px:text-base">
+          Starting @ $10
+        </p>
         <Link
           href="/"
-          className="uppercase font-extrabold text-xl text-slate-600"
+          className="font-extrabold uppercase text-gray-500 customSm:text-xs 480px:text-base"
         >
           Shop Now
         </Link>

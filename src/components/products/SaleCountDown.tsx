@@ -12,10 +12,15 @@ export default function SaleCountDown() {
     onExpire: () => console.warn("onExpire called"),
   });
 
-  if (!seconds || !minutes || !hours) return <p>Loading...</p>;
+  if (!seconds || !minutes || !hours)
+    return (
+      <div className="h-[60px] customSm:text-start md:text-center">
+        Loading...
+      </div>
+    );
 
   return (
-    <div className="text-3xl font-bold mt-4">
+    <div className="text-3xl font-bold my-4">
       <span className="bg-red-400 text-white p-2 rounded-xl">
         {hours < 10 ? `0${hours}` : hours}
       </span>{" "}

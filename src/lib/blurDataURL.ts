@@ -2,7 +2,7 @@ import "server-only";
 import { getPlaiceholder } from "plaiceholder";
 
 export async function getRemoteImageBlurDataURL(src: string) {
-  const buffer = await fetch(src).then(async res =>
+  const buffer = await fetch(src, { cache: "no-store" }).then(async res =>
     Buffer.from(await res.arrayBuffer())
   );
 

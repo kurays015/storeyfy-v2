@@ -74,6 +74,11 @@ const config = {
       },
       screens: {
         customSm: "320px",
+        "480px": "480px",
+        "600px": "600px",
+      },
+      backgroundColor: {
+        lightBG: "hsla(0, 0%, 100%, 0.7)",
       },
     },
   },

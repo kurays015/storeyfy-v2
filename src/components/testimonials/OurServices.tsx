@@ -36,14 +36,14 @@ const deliveryInfo = [
 
 export default function OurServices() {
   return (
-    <div className="w-[300px] flex flex-col ">
-      <HeaderTitle className="font-semibold text-slate-700 mb-6 text-lg border-b tracking-wide dark:text-white">
+    <div className="lg:w-[300px]">
+      <HeaderTitle className="mb-6 border-b text-lg font-semibold tracking-wide text-slate-700 dark:text-white">
         Our Services
       </HeaderTitle>
-      <div className="rounded-xl border overflow-hidden p-8 flex flex-col justify-center gap-6 flex-1">
+      <div className="md flex flex-1 rounded-xl border p-8 customSm:flex-col customSm:gap-4 600px:flex-row 600px:flex-wrap 600px:gap-8 lg:max-h-[380px] lg:gap-6">
         {deliveryInfo.map(({ icon, title, description }) => (
-          <div key={title} className="flex items-center gap-4 ">
-            <div className="text-red-500 text-3xl">{icon}</div>
+          <div key={title} className="mx-auto flex min-w-52 items-center gap-4">
+            <div className="text-3xl text-red-500">{icon}</div>
             <div>
               <h1 className="font-bold text-gray-500 dark:text-gray-100">
                 {title}

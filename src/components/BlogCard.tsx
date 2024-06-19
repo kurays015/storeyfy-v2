@@ -9,7 +9,7 @@ export default function BlogCard({
   image,
 }: BlogCardProps) {
   return (
-    <div>
+    <div className="w-full">
       <Image
         className="w-full rounded-xl"
         src={image}
@@ -19,7 +19,9 @@ export default function BlogCard({
       />
       <div className="my-4 space-y-1">
         <p className="text-red-400">{category}</p>
-        <h1 className="font-bold text-lg dark:text-slate-200">{title}</h1>
+        <h1 className="overflow-hidden text-ellipsis whitespace-nowrap text-lg font-bold dark:text-slate-200">
+          {title}
+        </h1>
         <p className="text-slate-700 dark:text-slate-400">
           {author} / {date}
         </p>

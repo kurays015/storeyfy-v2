@@ -12,7 +12,7 @@ export default function CategoryAccordion() {
     <Accordion
       type="single"
       collapsible
-      className="w-[300px] p-5 rounded-xl border border-slate-300 dark:border-gray-700"
+      className="lg:w-[250px] xl:w-[300px] p-5 rounded-xl border border-slate-300 dark:border-gray-700"
     >
       {categories.map(({ category, subCategory, logo }) => (
         <AccordionItem value={category} key={category} className="p-0">
