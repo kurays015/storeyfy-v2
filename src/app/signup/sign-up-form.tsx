@@ -41,7 +41,7 @@ export default function SignUpForm() {
       <form
         ref={formRef}
         action={formAction}
-        onSubmit={async e => {
+        onSubmit={async (e) => {
           await form.trigger();
           if (form.formState.isValid) {
             formRef.current?.requestSubmit();
@@ -49,7 +49,7 @@ export default function SignUpForm() {
             e.preventDefault();
           }
         }}
-        className="flex flex-col gap-5 w-[450px]"
+        className="flex flex-col gap-5"
       >
         <FormField
           control={form.control}
@@ -107,16 +107,12 @@ export default function SignUpForm() {
         <SignUpFormSubmitBtn />
       </form>
 
-      <CustomFormSeperator
-        text="Already have an account?"
-        className="flex items-center justify-center gap-4 mt-14 mb-10 text-sm"
-        width="w-1/5"
-      />
+      <CustomFormSeperator text="Already have an account?" />
 
       <div className="text-center">
         <Button
           asChild
-          className="w-1/2 bg-transparent border-2 border-green-700 text-green-700 rounded-xl  hover:bg-gray-100 dark:text-slate-300 dark:hover:bg-green-700 dark:hover:border-none dark:hover:text-gray-300 font-semibold"
+          className="w-1/2 rounded-xl border-2 border-green-700 bg-transparent font-semibold text-green-700 hover:bg-gray-100 dark:text-slate-300 dark:hover:border-none dark:hover:bg-green-700 dark:hover:text-gray-300"
         >
           <Link href="/signin" scroll={false}>
             Sign in
