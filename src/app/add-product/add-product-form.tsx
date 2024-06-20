@@ -32,7 +32,7 @@ import { addProduct } from "@/app/add-product/_actions/action";
 
 export default function AddProductForm() {
   const [productImage, setProductImage] = useState<null | string | ArrayBuffer>(
-    ""
+    "",
   );
   const formRef = useRef<HTMLFormElement>(null);
 
@@ -70,7 +70,7 @@ export default function AddProductForm() {
       <form
         ref={formRef}
         action={addProduct}
-        onSubmit={async e => {
+        onSubmit={async (e) => {
           await form.trigger();
           if (form.formState.isValid) {
             formRef.current?.requestSubmit();
@@ -142,7 +142,7 @@ export default function AddProductForm() {
           )}
         />
 
-        <div className="flex gap-12">
+        <div className="flex gap-12 customSm:flex-col md:flex-row">
           <FormField
             control={form.control}
             name="price"
