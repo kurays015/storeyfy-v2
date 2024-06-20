@@ -22,7 +22,7 @@ export default async function ProductBlurDataImage({
       src={testImage}
       // placeholder="blur"
       // blurDataURL={base64}
-      className={`text-black rounded-md dark:text-white dark:rounded-none ${size}`}
+      className={`rounded-md text-black dark:rounded-none dark:text-white ${size}`}
     />
   );
 }
