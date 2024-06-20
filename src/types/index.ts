@@ -20,12 +20,6 @@ export type ProductMiniCardProps = ProductProps & {
   hideRating?: boolean;
 };
 
-export type CustomFormSeparatorProps = {
-  className: string;
-  width: string;
-  text: string;
-};
-
 export type BannerContentProps = {
   headline: string;
   description: string;

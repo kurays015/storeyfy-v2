@@ -52,10 +52,7 @@ export default function SignInForm() {
 
   return (
     <Form {...form}>
-      <form
-        onSubmit={form.handleSubmit(login)}
-        className="flex flex-col gap-5 w-[450px]"
-      >
+      <form onSubmit={form.handleSubmit(login)} className="flex flex-col gap-5">
         <FormField
           control={form.control}
           name="email"
@@ -96,7 +93,7 @@ export default function SignInForm() {
         <p className="text-sm font-medium text-red-500">{error}</p>
 
         <SubmitButton
-          className="bg-green-700 hover:bg-green-600 dark:text-slate-300 font-bold"
+          className="bg-green-700 font-bold hover:bg-green-600 dark:text-slate-300"
           isLoading={form.formState.isSubmitting}
           loadingText="Loggin in..."
         >
@@ -104,27 +101,19 @@ export default function SignInForm() {
         </SubmitButton>
       </form>
 
-      <CustomFormSeparator
-        text="or"
-        className="flex items-center justify-center gap-2 my-6 text-sm"
-        width="w-[210px]"
-      />
+      <CustomFormSeparator text="or" />
 
       <div className="flex flex-col gap-3">
         <GoogleLoginButton />
         <GithubLoginButton />
       </div>
 
-      <CustomFormSeparator
-        text="Don't have an account?"
-        className="flex items-center justify-center gap-4 mt-14 mb-10 text-sm"
-        width="w-1/5"
-      />
+      <CustomFormSeparator text="Don't have an account?" />
 
       <div className="text-center">
         <Button
           asChild
-          className="w-1/2 bg-transparent border-2 border-green-700 text-green-700 rounded-xl  hover:bg-gray-100 dark:text-slate-300 dark:hover:bg-green-700 dark:hover:border-none dark:hover:text-gray-300 font-semibold"
+          className="w-1/2 rounded-xl border-2 border-green-700 bg-transparent font-semibold text-green-700 hover:bg-gray-100 dark:text-slate-300 dark:hover:border-none dark:hover:bg-green-700 dark:hover:text-gray-300"
         >
           <Link href="/signup" scroll={false}>
             Sign up

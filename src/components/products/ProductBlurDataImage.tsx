@@ -17,9 +17,9 @@ export default async function ProductBlurDataImage({
 
   return (
     <Image
-      // {...img}
       alt={title}
       src={testImage}
+      // {...img}
       // placeholder="blur"
       // blurDataURL={base64}
       className={`rounded-md text-black dark:rounded-none dark:text-white ${size}`}

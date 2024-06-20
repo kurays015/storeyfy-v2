@@ -1,16 +1,9 @@
-import { Separator } from "@/components/ui/separator";
-import { CustomFormSeparatorProps } from "@/types";
-
-export default function CustomFormSeperator({
-  className,
-  width,
-  text,
-}: CustomFormSeparatorProps) {
+export default function CustomFormSeperator({ text }: { text: string }) {
   return (
-    <div className={className}>
-      <Separator className={width} />
-      <p>{text}</p>
-      <Separator className={width} />
+    <div className="my-6 flex w-full items-center justify-center">
+      <div className="flex-1 border"></div>
+      <span className="mx-4 text-sm text-slate-300">{text}</span>
+      <div className="flex-1 border"></div>
     </div>
   );
 }
