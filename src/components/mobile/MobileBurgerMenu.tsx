@@ -10,12 +10,14 @@ import {
 } from "@/components/ui/sheet";
 import CategoryAccordion from "@/components/CategoryAccordion";
 import MobileLogout from "@/components/mobile/MobileLogout";
+import { getSession } from "@/lib/auth";
 
-export default function MobileBurgerMenu() {
+export default async function MobileBurgerMenu() {
+  const session = await getSession();
   return (
     <Sheet>
       <SheetTrigger asChild>
-        <Button variant="outline" style={{ all: "unset", cursor: "pointer" }}>
+        <Button className="bg-transparent p-0 hover:bg-transparent">
           <RxHamburgerMenu className="text-2xl text-black" />
         </Button>
       </SheetTrigger>
@@ -25,7 +27,7 @@ export default function MobileBurgerMenu() {
         </SheetHeader>
         <div>
           <CategoryAccordion />
-          <MobileLogout />
+          {session?.user && <MobileLogout />}
         </div>
       </SheetContent>
     </Sheet>

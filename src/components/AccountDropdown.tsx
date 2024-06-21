@@ -11,8 +11,8 @@ export default function AccountDropdown() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="outline" style={{ all: "unset", cursor: "pointer" }}>
-          <CgProfile />
+        <Button className="border-none bg-transparent p-0 hover:bg-transparent">
+          <CgProfile className="text-3xl dark:text-white" />
         </Button>
       </DropdownMenuTrigger>
       <AccountDropdownContent />
