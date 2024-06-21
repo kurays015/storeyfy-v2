@@ -3,12 +3,11 @@ import { FaRegHeart } from "react-icons/fa";
 import { IoBagHandleOutline } from "react-icons/io5";
 import { FaFacebook, FaTwitter, FaInstagram } from "react-icons/fa";
 import { getSession } from "@/lib/auth";
-import { Input } from "@/components/ui/input";
 import AccountDropdown from "@/components/AccountDropdown";
 import { DarkModeToggle } from "@/components/DarkModeToggle";
 import ProfileAvatar from "@/components/ProfileAvatar";
 import LoginButton from "@/components/LoginButton";
-import MobileBurgerMenu from "@/components/MobileBurgerMenu";
+import SearchForm from "@/components/SearchForm";
 
 export default async function Header() {
   const session = await getSession();
@@ -37,16 +36,14 @@ export default async function Header() {
             StoreyfyV2
           </h1>
         </Link>
+
         <div className="flex items-center gap-4 customSm:w-full">
-          <Input type="search" placeholder="Search a product..." />
+          <SearchForm />
           <ul className="flex items-center gap-5 text-3xl text-gray-600 dark:text-white customSm:hidden lg:flex">
             {session?.user && <AccountDropdown />}
             <FaRegHeart />
             <IoBagHandleOutline />
           </ul>
-          <div className="customSm:block lg:hidden">
-            <MobileBurgerMenu />
-          </div>
         </div>
       </div>
     </header>
