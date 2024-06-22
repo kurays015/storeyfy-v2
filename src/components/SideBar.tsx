@@ -5,7 +5,7 @@ import { BestSellersSkeleton } from "@/components/skeletons/BestSellersSkeleton"
 
 export default function SideBar() {
   return (
-    <div className="customSm:hidden lg:sticky lg:top-8 lg:h-screen lg:flex lg:flex-col lg:gap-5">
+    <div className="customSm:hidden lg:sticky lg:top-8 lg:flex lg:h-screen lg:flex-col lg:gap-5">
       <CategoryAccordion />
       <Suspense fallback={<BestSellersSkeleton />}>
         <BestSellers />

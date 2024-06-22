@@ -6,11 +6,11 @@ import { MostSoldProductsSkeleton } from "@/components/skeletons/MostSoldProduct
 export function MostSoldProducts() {
   return (
     <div>
-      <HeaderTitle className="font-semibold text-slate-700 mt-8 mb-6 text-lg border-b tracking-wide dark:text-white">
+      <HeaderTitle className="mb-6 mt-8 border-b text-lg font-semibold tracking-wide text-slate-700 dark:text-white">
         Most Sold Products
       </HeaderTitle>
       <Suspense fallback={<MostSoldProductsSkeleton />}>
-        <MostSoldProductsGrid />
+        <MostSoldProductsSkeleton />
       </Suspense>
     </div>
   );

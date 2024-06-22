@@ -14,10 +14,10 @@ export async function DealOfTheDayCarousel() {
   });
 
   return (
-    <div className="rounded-xl border overflow-auto customSm:p-4 md:p-6">
+    <div className="overflow-auto rounded-xl border customSm:p-4 md:p-6">
       <Carousel opts={{ loop: false }}>
-        <CarouselContent className="">
-          {highestDiscountProducts.map(product => (
+        <CarouselContent>
+          {highestDiscountProducts.map((product) => (
             <DealOfTheDayCarouselContent key={product.id} {...product} />
           ))}
         </CarouselContent>

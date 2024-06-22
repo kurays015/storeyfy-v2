@@ -3,8 +3,8 @@ import { Skeleton } from "@/components/ui/skeleton";
 export function ProductTrendsSkeleton() {
   return (
     <div>
-      <Skeleton className="h-8 w-[280px] ml-1 mb-6" />
-      <div className="grid grid-cols-2 gap-5">
+      <Skeleton className="mb-6 ml-1 h-8 customSm:w-1/2 lg:w-[500px]" />
+      <div className="grid overflow-auto customSm:max-h-[500px] customSm:grid-cols-1 customSm:gap-2 600px:grid-cols-2 600px:gap-4 md:gap-6">
         {Array.from({ length: 8 }).map((_, index) => (
           <TrendingsSkeleton key={index} />
         ))}
@@ -16,12 +16,12 @@ export function ProductTrendsSkeleton() {
 function TrendingsSkeleton() {
   return (
     <div className="flex gap-2 overflow-hidden">
-      <Skeleton className="h-24 w-[80px]" />
-      <div className="flex flex-col justify-around">
-        <Skeleton className="h-2 w-[200px]" />
-        <Skeleton className="h-2 w-[200px]" />
-        <Skeleton className="h-2 w-[200px]" />
-        <Skeleton className="h-2 w-[200px]" />
+      <Skeleton className="customSm:h-16 customSm:w-[80px] lg:h-20 lg:w-[120px]" />
+      <div className="flex w-full flex-col justify-around">
+        <Skeleton className="h-2" />
+        <Skeleton className="h-2" />
+        <Skeleton className="h-2" />
+        <Skeleton className="h-2" />
       </div>
     </div>
   );
