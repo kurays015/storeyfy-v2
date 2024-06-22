@@ -10,7 +10,7 @@ export function MostSoldProducts() {
         Most Sold Products
       </HeaderTitle>
       <Suspense fallback={<MostSoldProductsSkeleton />}>
-        <MostSoldProductsSkeleton />
+        <MostSoldProductsGrid />
       </Suspense>
     </div>
   );
