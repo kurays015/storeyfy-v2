@@ -1,23 +1,24 @@
 import Link from "next/link";
 
-import db from "@/lib/db";
 import { getSession } from "@/lib/auth";
 import ProductTable from "@/app/my-products/product-table";
 import { Button } from "@/components/ui/button";
+import { Metadata } from "next";
+import { DL } from "@/data-layer";
+
+export const metadata: Metadata = {
+  title: "My Products",
+};
 
 export default async function MyProductPage() {
   const session = await getSession();
 
   if (!session) return;
 
-  const products = await db.product.findMany({
-    where: {
-      userId: session.user.id,
-    },
-  });
+  const products = await DL.query.findUserProduct(session.user.id);
 
   return (
-    <div className="max-w-7xl mx-auto mt-12">
+    <div className="mx-auto mt-12 max-w-7xl">
       {products.length ? (
         <>
           <div className="flex items-center justify-between">
@@ -31,8 +32,8 @@ export default async function MyProductPage() {
           <ProductTable data={products} />
         </>
       ) : (
-        <div className="text-center mt-48">
-          <p className="dark:text-muted-foreground mb-2">
+        <div className="mt-48 text-center">
+          <p className="mb-2 dark:text-muted-foreground">
             No product listed yet...
           </p>
           <Button asChild>

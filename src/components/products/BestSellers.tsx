@@ -1,16 +1,9 @@
-import db from "@/lib/db";
 import ProductMiniCard from "@/components/products/ProductMiniCard";
 import HeaderTitle from "@/components/HeaderTitle";
+import { DL } from "@/data-layer";
 
 export default async function BestSellers() {
-  const products = await db.product.findMany({
-    where: {
-      discount: {
-        gte: 25,
-      },
-    },
-    take: 4,
-  });
+  const products = await DL.query.getBestSellers();
 
   return (
     <div>

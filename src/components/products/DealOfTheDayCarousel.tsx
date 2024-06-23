@@ -1,17 +1,11 @@
 import * as React from "react";
 
-import db from "@/lib/db";
 import { Carousel, CarouselContent } from "@/components/ui/carousel";
 import DealOfTheDayCarouselContent from "./DealOfTheDayCarouselContent";
+import { DL } from "@/data-layer";
 
 export async function DealOfTheDayCarousel() {
-  const highestDiscountProducts = await db.product.findMany({
-    where: {
-      discount: {
-        gte: 50,
-      },
-    },
-  });
+  const highestDiscountProducts = await DL.query.getHighestDiscount();
 
   return (
     <div className="overflow-auto rounded-xl border customSm:p-4 md:p-6">

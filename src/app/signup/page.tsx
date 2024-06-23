@@ -1,5 +1,11 @@
 import SignUpForm from "@/app/signup/sign-up-form";
 
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Sign up",
+};
+
 export default function SignUpPage() {
   return (
     <div className="my-12 flex justify-center p-2">

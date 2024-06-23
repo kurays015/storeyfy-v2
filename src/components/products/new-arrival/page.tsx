@@ -1,29 +1,17 @@
-import db from "@/lib/db";
 import ProductMiniCard from "@/components/products/ProductMiniCard";
 import HeaderTitle from "@/components/HeaderTitle";
+import { DL } from "@/data-layer";
 
 export default async function NewArrivals() {
-  const now = new Date();
-
-  const oneWeekAgo = new Date(now);
-  oneWeekAgo.setDate(now.getDate() - 30);
-
-  const products = await db.product.findMany({
-    where: {
-      createdAt: {
-        gte: oneWeekAgo,
-      },
-    },
-    take: 8,
-  });
+  const products = await DL.query.getNewArrivals();
 
   return (
-    <div className="flex-grow-0 flex-shrink-0 basis-auto">
-      <HeaderTitle className="font-semibold text-slate-700 mb-6 text-lg border-b border-b-gray-300 tracking-wide dark:text-white dark:border-b-muted">
+    <div className="flex-shrink-0 flex-grow-0 basis-auto">
+      <HeaderTitle className="mb-6 border-b border-b-gray-300 text-lg font-semibold tracking-wide text-slate-700 dark:border-b-muted dark:text-white">
         New Arrivals
       </HeaderTitle>
-      <div className="overflow-auto grid customSm:grid-cols-1 customSm:max-h-[500px] customSm:gap-2  600px:grid-cols-2 600px:gap-4 md:gap-6">
-        {products.map(product => (
+      <div className="grid overflow-auto customSm:max-h-[500px] customSm:grid-cols-1 customSm:gap-2 600px:grid-cols-2 600px:gap-4 md:gap-6">
+        {products.map((product) => (
           <ProductMiniCard key={product.id} {...product} hideRating={true} />
         ))}
       </div>
