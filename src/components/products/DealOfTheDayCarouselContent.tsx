@@ -21,7 +21,7 @@ export default async function DealOfTheDayCarouselContent({
   return (
     <CarouselItem
       key={id}
-      className="flex w-full customSm:flex-col customSm:gap-4 md:flex-row md:gap-8"
+      className="flex customSm:flex-col customSm:gap-4 md:flex-row md:gap-8"
     >
       <ProductBlurDataImage
         image={image}
@@ -34,9 +34,7 @@ export default async function DealOfTheDayCarouselContent({
           {title}
         </h3>
         <p className="font-medium uppercase text-red-500">{category}</p>
-        <p className="overflow-hidden text-ellipsis whitespace-nowrap">
-          {description}
-        </p>
+        <p className="text-sm">{description}</p>
         <div className="flex items-center gap-3">
           <p className="text-2xl font-bold">
             {formatCurrency(getDiscountValue(discount, parseFloat(price)))}
@@ -48,7 +46,7 @@ export default async function DealOfTheDayCarouselContent({
         <Button className="bg-red-700 p-6 text-lg font-semibold hover:bg-red-500 dark:text-white customSm:my-3 480px:w-36">
           Add to Cart
         </Button>
-        <div className="items-cente flex justify-between text-sm font-medium uppercase customSm:text-xs">
+        <div className="flex items-center justify-between text-sm font-medium uppercase customSm:text-xs">
           <p>
             Already sold: <span className="customSm:font-bold">20</span>
           </p>
