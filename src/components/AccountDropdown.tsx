@@ -11,7 +11,7 @@ export default function AccountDropdown() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button style={{ all: "unset" }}>
+        <Button style={{ all: "unset", cursor: "pointer" }}>
           <CgProfile className="text-3xl text-gray-600 dark:text-white" />
         </Button>
       </DropdownMenuTrigger>
