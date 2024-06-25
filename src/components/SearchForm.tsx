@@ -10,7 +10,7 @@ export default function SearchForm() {
         placeholder="Search a product..."
         className="w-full"
       />
-      <Button type="submit" className="absolute right-0 bg-transparent">
+      <Button variant="ghost" type="submit" className="absolute right-0">
         <CiSearch className="text-lg text-black dark:text-white" />
       </Button>
     </form>

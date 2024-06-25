@@ -32,7 +32,7 @@ export default async function MyProductPage() {
           <ProductTable data={products} />
         </>
       ) : (
-        <div className="mt-48 text-center">
+        <div className="my-24 text-center">
           <p className="mb-2 dark:text-muted-foreground">
             No product listed yet...
           </p>

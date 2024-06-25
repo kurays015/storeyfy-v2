@@ -28,27 +28,27 @@ export default async function DealOfTheDayCarouselContent({
         title={title}
         size="customSm:w-full md:w-2/5"
       />
-      <div className="flex flex-col justify-evenly customSm:gap-2">
+      <div className="flex flex-1 flex-col justify-evenly customSm:gap-2">
         <Rating rating={rating} />
-        <h3 className="text-lg text-ellipsis overflow-hidden whitespace-nowrap font-bold  customSm:text-base">
+        <h3 className="overflow-hidden text-ellipsis whitespace-nowrap text-lg font-bold customSm:text-base">
           {title}
         </h3>
-        <p className="uppercase text-red-500 font-medium">{category}</p>
-        <p className="text-ellipsis overflow-hidden whitespace-nowrap">
+        <p className="font-medium uppercase text-red-500">{category}</p>
+        <p className="overflow-hidden text-ellipsis whitespace-nowrap">
           {description}
         </p>
         <div className="flex items-center gap-3">
-          <p className="font-bold text-2xl">
+          <p className="text-2xl font-bold">
             {formatCurrency(getDiscountValue(discount, parseFloat(price)))}
           </p>
-          <del className="text-slate-400 text-2xl">
+          <del className="text-2xl text-slate-400">
             {formatCurrency(parseFloat(price))}
           </del>
         </div>
-        <Button className="bg-red-700 hover:bg-red-500 font-semibold text-lg p-6 dark:text-white customSm:my-3 480px:w-36">
+        <Button className="bg-red-700 p-6 text-lg font-semibold hover:bg-red-500 dark:text-white customSm:my-3 480px:w-36">
           Add to Cart
         </Button>
-        <div className="flex items-cente justify-between  uppercase text-sm font-medium customSm:text-xs">
+        <div className="items-cente flex justify-between text-sm font-medium uppercase customSm:text-xs">
           <p>
             Already sold: <span className="customSm:font-bold">20</span>
           </p>
@@ -57,7 +57,7 @@ export default async function DealOfTheDayCarouselContent({
           </p>
         </div>
         <div className="customSm:text-start md:text-center">
-          <div className="text-black text-sm font-semibold dark:text-white">
+          <div className="text-sm font-semibold text-black dark:text-white">
             HURRY UP! OFFER ENDS IN:
           </div>
           <SaleCountDown />
