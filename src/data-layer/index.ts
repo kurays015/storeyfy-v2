@@ -14,7 +14,7 @@ export const DL = {
       });
     },
     getSingleProduct: async (id: string) => {
-      return await db.product.findMany({
+      return await db.product.findFirst({
         where: {
           id: id,
         },
