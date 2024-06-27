@@ -1,16 +1,22 @@
-import { Suspense } from "react";
 import HeaderTitle from "@/components/HeaderTitle";
+import RecommendedProductsContent from "@/components/products/RecommendedProductsContent";
 import ProductCardGridSkeleton from "@/components/skeletons/ProductCardGridSkeleton";
-import MostSoldProductsContent from "@/components/products/MostSoldProductsContent";
+import { Suspense } from "react";
 
-export function MostSoldProducts() {
+export default function RecommendedProducts({
+  category,
+  id,
+}: {
+  category: string;
+  id: string;
+}) {
   return (
     <div>
       <HeaderTitle className="mb-6 mt-8 border-b text-lg font-semibold tracking-wide text-slate-700 dark:text-white">
-        Most Sold Products
+        Recommended Products
       </HeaderTitle>
       <Suspense fallback={<ProductCardGridSkeleton />}>
-        <MostSoldProductsContent />
+        <RecommendedProductsContent category={category} id={id} />
       </Suspense>
     </div>
   );

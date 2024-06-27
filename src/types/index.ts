@@ -1,4 +1,5 @@
 import { StaticImageData } from "next/image";
+import { ReactNode } from "react";
 
 export type ProductProps = {
   userId: string;
@@ -36,4 +37,16 @@ export type BlogCardProps = {
   category: string;
   author: string;
   date: string;
+};
+
+export type SingleProductPageParamsProps = {
+  params: {
+    id: string;
+    title: string;
+    category: string;
+  };
+};
+
+export type SingleProductLayoutProps = SingleProductPageParamsProps & {
+  children: ReactNode;
 };

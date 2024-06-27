@@ -39,6 +39,9 @@ export const DL = {
     getMostSoldProducts: async () => {
       //need to change this
       return await db.product.findMany({
+        where: {
+          rating: 5,
+        },
         take: 12,
       });
     },
@@ -76,6 +79,17 @@ export const DL = {
           },
         },
         take: 8,
+      });
+    },
+    getRecommendedProducts: async (category: string, id: string) => {
+      return await db.product.findMany({
+        where: {
+          id: {
+            not: id,
+          },
+          category: category,
+        },
+        take: 12,
       });
     },
   },

@@ -15,12 +15,12 @@ export default async function ProductCard({
 }: ProductProps) {
   return (
     <Link href={`/product/${title}/${category}/${id}`}>
-      <div className="flex flex-col justify-evenly gap-2 rounded-xl border overflow-hidden p-4 h-full">
+      <div className="flex h-full flex-col justify-evenly gap-2 overflow-hidden rounded-xl border p-4">
         <ProductBlurDataImage image={image} title={title} size="w-full" />
-        <p className="text-red-400 uppercase font-medium customSm:text-xs lg:sm xl:text-base">
+        <p className="lg:sm font-medium uppercase text-red-400 customSm:text-xs xl:text-base">
           {category}
         </p>
-        <h3 className="text-slate-500  dark:text-white customSm:text-sm lg:text-base xl:text-lg">
+        <h3 className="text-slate-500 dark:text-white customSm:text-sm lg:text-base xl:text-lg">
           {title}
         </h3>
         <Rating rating={rating} />

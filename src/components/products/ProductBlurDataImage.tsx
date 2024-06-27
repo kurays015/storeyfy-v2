@@ -1,6 +1,6 @@
 // import { getRemoteImageBlurDataURL } from "@/lib/blurDataURL";
 import Image from "next/image";
-import testImage from "../../../public/banner-3.jpg";
+// import testImage from "../../../public/banner-3.jpg";
 
 type ProductBlurDataImageProps = {
   title: string;
@@ -17,14 +17,15 @@ export default async function ProductBlurDataImage({
 
   return (
     <Image
-      src={testImage}
+      src={image}
       alt={title}
       width={100}
       height={100}
       // {...img}
+      // alt={title}
       // placeholder="blur"
       // blurDataURL={base64}
-      className={`rounded-md text-black dark:text-white ${size}`}
+      className={`rounded-md text-black dark:text-white ${size} object-cover`}
     />
   );
 }

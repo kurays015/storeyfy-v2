@@ -35,7 +35,7 @@ export async function addProduct(formData: FormData) {
               return;
             }
             resolve(result);
-          }
+          },
         )
         .end(buffer);
     });
@@ -47,10 +47,10 @@ export async function addProduct(formData: FormData) {
     });
 
     if (!parsedData.success) {
-      console.log(parsedData.error);
+      console.log(parsedData.error, "server action/zod error here");
       return {
         message: "Invalid form data",
-        issues: parsedData.error.issues.map(issue => issue.message),
+        issues: parsedData.error.issues.map((issue) => issue.message),
       };
     }
 

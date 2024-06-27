@@ -1,6 +1,6 @@
 import { Skeleton } from "@/components/ui/skeleton";
 
-export function BestSellersSkeleton() {
+export default function BestSellersSkeleton() {
   return (
     <div>
       <Skeleton className="mb-6 ml-1 h-6 w-[280px] bg-gray-400" />

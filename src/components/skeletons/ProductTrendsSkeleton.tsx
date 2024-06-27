@@ -1,6 +1,6 @@
 import { Skeleton } from "@/components/ui/skeleton";
 
-export function ProductTrendsSkeleton() {
+export default function ProductTrendsSkeleton() {
   return (
     <div>
       <Skeleton className="mb-6 ml-1 h-8 customSm:w-1/2 lg:w-[500px]" />

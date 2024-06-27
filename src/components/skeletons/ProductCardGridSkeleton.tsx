@@ -1,6 +1,6 @@
 import { Skeleton } from "@/components/ui/skeleton";
 
-export function MostSoldProductsSkeleton() {
+export default function ProductCardGridSkeleton() {
   return (
     <div className="grid gap-5 customSm:grid-cols-1 480px:grid-cols-2 600px:grid-cols-3 lg:grid-cols-4">
       {Array.from({ length: 12 }).map((_, index) => (

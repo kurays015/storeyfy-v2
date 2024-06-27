@@ -43,9 +43,14 @@ export default async function DealOfTheDayCarouselContent({
             {formatCurrency(parseFloat(price))}
           </del>
         </div>
-        <Button className="bg-red-500 p-6 text-lg font-semibold hover:bg-red-700 dark:text-white customSm:my-3 480px:w-36">
-          Add to Cart
-        </Button>
+        <div className="my-4 flex gap-4">
+          <Button className="border-2 border-black bg-black text-white hover:bg-white hover:text-black">
+            Buy now
+          </Button>
+          <Button className="bg-red-500 text-white hover:bg-red-700">
+            Add to Cart
+          </Button>
+        </div>
         <div className="flex items-center justify-between text-sm font-medium uppercase customSm:text-xs">
           <p>
             Already sold: <span className="customSm:font-bold">20</span>

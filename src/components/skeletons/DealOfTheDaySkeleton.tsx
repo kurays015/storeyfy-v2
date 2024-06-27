@@ -1,6 +1,6 @@
 import { Skeleton } from "@/components/ui/skeleton";
 
-export function DealOfTheDaySkeleton() {
+export default function DealOfTheDaySkeleton() {
   return (
     <div className="flex w-full rounded-xl border px-8 py-5 customSm:flex-col customSm:gap-4 md:flex-row md:gap-8">
       <Skeleton className="customSm:h-52 600px:h-64 md:h-96 md:w-1/2" />
