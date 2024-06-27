@@ -44,7 +44,7 @@ export default async function DealOfTheDayCarouselContent({
           </del>
         </div>
         <div className="my-4 flex gap-4">
-          <Button className="border-2 border-black bg-black text-white hover:bg-white hover:text-black">
+          <Button className="border-2 border-black bg-black text-white hover:bg-white hover:text-black dark:bg-white dark:text-black">
             Buy now
           </Button>
           <Button className="bg-red-500 text-white hover:bg-red-700">
