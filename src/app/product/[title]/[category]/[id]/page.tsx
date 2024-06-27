@@ -75,22 +75,30 @@ export default async function SingleProductPage({
               {product.sellerName}
             </Link>
           </p>
-          <div className="mt-4 flex gap-4 xl:mt-0">
-            <Button className="border-2 border-black bg-black text-white hover:bg-white hover:text-black">
+          <div className="my-3">
+            <Button
+              variant="destructive"
+              className="w-full rounded-none border bg-white text-black hover:bg-black hover:text-white"
+            >
+              Add to Wishlist
+              <CiHeart className="ml-1 text-3xl" />
+            </Button>
+          </div>
+          <div className="flex gap-4 xl:mt-0">
+            <Button className="w-full border-2 border-black bg-black text-white hover:bg-white hover:text-black">
               Buy now
             </Button>
-            <Button className="bg-red-500 text-white hover:bg-red-700">
+            <Button className="w-full bg-red-500 text-white hover:bg-red-700">
               Add to Cart
             </Button>
-            <CiHeart className="absolute left-2 top-2 text-4xl text-gray-500" />
           </div>
         </div>
       </div>
 
       {/* Description Section */}
       <div className="rounded-lg border bg-white p-6 shadow-md">
-        <h2 className="text-2xl font-semibold text-gray-900">Description</h2>
-        <p className="mt-2 text-gray-700">{product.description}</p>
+        <h2 className="text-xl font-semibold text-gray-900">Description</h2>
+        <p className="mt-2 text-sm text-gray-700">{product.description}</p>
       </div>
     </div>
   );
