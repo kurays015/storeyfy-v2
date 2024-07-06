@@ -7,7 +7,7 @@ import {
   CarouselItem,
 } from "@/components/ui/carousel";
 import { banners } from "@/lib/banners";
-import BannerContent from "@/components/BannerContent";
+import BannerContent from "@/components/banner-content";
 
 export function BannerCarousel() {
   return (

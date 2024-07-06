@@ -1,6 +1,6 @@
-import Testimonial from "@/components/testimonials/Testimonial";
-import OurServices from "@/components/testimonials/OurServices";
-import SummerCollection from "@/components/testimonials/SummerCollection";
+import OurServices from "@/components/testimonials/our-services";
+import SummerCollection from "@/components/testimonials/summer-collection";
+import Testimonial from "@/components/testimonials/testimonials";
 
 export default function Testimonials() {
   return (

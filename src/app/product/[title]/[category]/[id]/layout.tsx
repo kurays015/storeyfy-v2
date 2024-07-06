@@ -1,5 +1,5 @@
-import SideBar from "@/components/SideBar";
-import RecommendedProducts from "@/components/products/RecommendedProducts";
+import SideBar from "@/components/side-bar";
+import RecommendedProducts from "@/components/products/recommended-products";
 import { SingleProductLayoutProps } from "@/types";
 
 export default function SingleProductLayout({

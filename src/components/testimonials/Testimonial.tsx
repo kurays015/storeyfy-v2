@@ -1,4 +1,4 @@
-import HeaderTitle from "@/components/HeaderTitle";
+import HeaderTitle from "@/components/header-title";
 import Image from "next/image";
 import { ImQuotesLeft } from "react-icons/im";
 

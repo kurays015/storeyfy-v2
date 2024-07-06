@@ -1,11 +1,11 @@
 import { ProductProps } from "@/types";
 import { formatCurrency } from "@/lib/currencyFormatter";
 import getDiscountValue from "@/lib/getDiscountValue";
-import Rating from "@/components/Rating";
-import SaleCountDown from "@/components/products/SaleCountDown";
+import Rating from "@/components/rating";
+import SaleCountDown from "@/components/products/sale-count-down";
 import { CarouselItem } from "@/components/ui/carousel";
 import { Button } from "@/components/ui/button";
-import ProductBlurDataImage from "@/components/products/ProductBlurDataImage";
+import ProductBlurDataImage from "@/components/products/product-blur-data-image";
 
 export default async function DealOfTheDayCarouselContent({
   id,

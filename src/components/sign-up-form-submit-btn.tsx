@@ -1,5 +1,5 @@
 import { useFormStatus } from "react-dom";
-import { SubmitButton } from "./SubmitButton";
+import { SubmitButton } from "@/components/submit-btn";
 
 export default function SignUpFormSubmitBtn() {
   const { pending } = useFormStatus();
@@ -7,7 +7,7 @@ export default function SignUpFormSubmitBtn() {
     <SubmitButton
       isLoading={pending}
       loadingText="Signing up..."
-      className="bg-green-700 hover:bg-green-600 dark:text-slate-300 font-bold"
+      className="bg-green-700 font-bold hover:bg-green-600 dark:text-slate-300"
     >
       Sign up
     </SubmitButton>

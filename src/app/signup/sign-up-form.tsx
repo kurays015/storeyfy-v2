@@ -16,8 +16,8 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import SignUpFormSubmitBtn from "@/components/SignUpFormSubmitBtn";
-import CustomFormSeperator from "@/components/CustomFormSeparator";
+import SignUpFormSubmitBtn from "@/components/sign-up-form-submit-btn";
+import CustomFormSeperator from "@/components/custom-form-separator";
 
 import Link from "next/link";
 import { signUpSchema } from "@/lib/formSchema";

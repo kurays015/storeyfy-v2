@@ -1,6 +1,6 @@
-import HeaderTitle from "@/components/HeaderTitle";
-import RecommendedProductsContent from "@/components/products/RecommendedProductsContent";
-import ProductCardGridSkeleton from "@/components/skeletons/ProductCardGridSkeleton";
+import HeaderTitle from "@/components/header-title";
+import RecommendedProductsContent from "@/components/products/recommended-products-content";
+import ProductCardGridSkeleton from "@/components/skeletons/product-card-grid-skeleton";
 import { Suspense } from "react";
 
 export default function RecommendedProducts({

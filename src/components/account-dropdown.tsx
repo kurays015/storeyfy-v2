@@ -4,8 +4,7 @@ import {
   DropdownMenu,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-
-import AccountDropdownContent from "@/components/AccountDropdownContent";
+import AccountDropdownContent from "@/components/account-dropdown-content";
 
 export default function AccountDropdown() {
   return (

@@ -22,7 +22,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import AddProductSubmitBtn from "@/components/AddProductSubmitBtn";
+import AddProductSubmitBtn from "@/components/add-product-submit-btn";
 import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
 import { productSchema } from "@/lib/formSchema";

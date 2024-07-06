@@ -1,7 +1,7 @@
 import { Suspense } from "react";
 
-import HeaderTitle from "@/components/HeaderTitle";
-import ProductTrendsSkeleton from "@/components/skeletons/ProductTrendsSkeleton";
+import HeaderTitle from "@/components/header-title";
+import ProductTrendsSkeleton from "@/components/skeletons/product-trends-skeleton";
 import { ScrollArea, ScrollBar } from "../ui/scroll-area";
 import NewArrivals from "@/components/trending-products/new-arrival";
 import Trending from "@/components/trending-products/trending";

@@ -1,4 +1,4 @@
-import ProductCard from "@/components/products/ProductCard";
+import ProductCard from "@/components/cards/product-card";
 import { ProductProps } from "@/types";
 
 export default async function ProductCardGrid({

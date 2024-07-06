@@ -1,5 +1,5 @@
 import { useFormStatus } from "react-dom";
-import { SubmitButton } from "./SubmitButton";
+import { SubmitButton } from "./submit-btn";
 
 export default function AddProductSubmitBtn() {
   const { pending } = useFormStatus();
