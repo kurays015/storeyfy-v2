@@ -8,8 +8,8 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import CategoryAccordion from "@/components/CategoryAccordion";
-import MobileLogout from "@/components/mobile/MobileLogout";
+import CategoryAccordion from "@/components/category-accordion";
+import MobileLogout from "@/components/mobile/mobile-logout";
 import { getSession } from "@/lib/auth";
 
 export default async function MobileBurgerMenu() {

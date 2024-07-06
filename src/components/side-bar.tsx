@@ -1,7 +1,7 @@
-import CategoryAccordion from "@/components/CategoryAccordion";
-import BestSellers from "@/components/products/BestSellers";
+import CategoryAccordion from "@/components/category-accordion";
+import BestSellers from "@/components/products/best-seller";
 import { Suspense } from "react";
-import BestSellersSkeleton from "@/components/skeletons/BestSellersSkeleton";
+import BestSellersSkeleton from "@/components/skeletons/best-sellers-skeleton";
 
 export default function SideBar() {
   return (

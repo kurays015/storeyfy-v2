@@ -3,11 +3,11 @@ import { Inter } from "next/font/google";
 import HolyLoader from "holy-loader";
 import "./globals.css";
 import ThemeProvider from "@/components/theme-provider";
-import NextAuthProvider from "./providers/NextAuthProvider";
-import Header from "@/components/Header";
+import NextAuthProvider from "./providers/next-auth-provider";
 import { Toaster } from "@/components/ui/toaster";
-import Footer from "@/components/Footer";
-import MobileBottomNav from "@/components/mobile/MobileBottomNav";
+import MobileBottomNav from "@/components/mobile/mobile-bottom-nav";
+import Header from "@/components/header";
+import Footer from "@/components/footer";
 
 const inter = Inter({ subsets: ["latin"] });
 

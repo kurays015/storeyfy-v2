@@ -3,12 +3,12 @@ import { FaRegHeart } from "react-icons/fa";
 import { IoBagHandleOutline } from "react-icons/io5";
 import { FaFacebook, FaTwitter, FaInstagram } from "react-icons/fa";
 import { getSession } from "@/lib/auth";
-import AccountDropdown from "@/components/AccountDropdown";
-import { DarkModeToggle } from "@/components/DarkModeToggle";
-import ProfileAvatar from "@/components/ProfileAvatar";
-import LoginButton from "@/components/LoginButton";
-import SearchForm from "@/components/SearchForm";
-import Count from "@/components/Count";
+import AccountDropdown from "@/components/account-dropdown";
+import { DarkModeToggle } from "@/components/dark-mode-toggle";
+import ProfileAvatar from "@/components/profile-avatar";
+import LoginButton from "@/components/login-btn";
+import SearchForm from "@/components/search-form";
+import Count from "@/components/count";
 
 export default async function Header() {
   const session = await getSession();

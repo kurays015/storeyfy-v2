@@ -1,7 +1,7 @@
-import { BannerCarousel } from "@/components/BannerCarousel";
-import Testimonials from "@/components/testimonials/Testimonials";
-import ProductSection from "@/components/products/ProductSection";
-import Blogs from "@/components/Blogs";
+import { BannerCarousel } from "@/components/banner-carousel";
+import ProductSection from "@/components/products/product-section";
+import Blogs from "@/components/blogs";
+import Testimonials from "@/components/testimonials/testimonials";
 
 export default function Home() {
   return (

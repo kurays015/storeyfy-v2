@@ -1,4 +1,4 @@
-import HeaderTitle from "@/components/HeaderTitle";
+import HeaderTitle from "@/components/header-title";
 // Icons
 import { BsFillTelephoneFill } from "react-icons/bs";
 import { TiArrowBack } from "react-icons/ti";

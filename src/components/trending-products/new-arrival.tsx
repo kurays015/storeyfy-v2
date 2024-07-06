@@ -1,5 +1,5 @@
-import ProductMiniCard from "@/components/products/ProductMiniCard";
-import HeaderTitle from "@/components/HeaderTitle";
+import ProductMiniCard from "@/components/products/product-mini-card";
+import HeaderTitle from "@/components/header-title";
 import { DL } from "@/data-layer";
 
 export default async function NewArrivals() {
