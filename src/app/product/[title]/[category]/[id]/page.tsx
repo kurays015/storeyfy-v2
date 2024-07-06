@@ -1,27 +1,21 @@
+import ProductBlurDataImage from "@/components/products/ProductBlurDataImage";
 import Rating from "@/components/Rating";
 import { Button } from "@/components/ui/button";
 import { DL } from "@/data-layer";
 import { formatCurrency } from "@/lib/currencyFormatter";
 import { SingleProductPageParamsProps } from "@/types";
-import { Metadata, ResolvingMetadata } from "next";
+import { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { CiHeart } from "react-icons/ci";
 
-export async function generateMetadata(
-  { params }: SingleProductPageParamsProps,
-  parent: ResolvingMetadata,
-): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: SingleProductPageParamsProps): Promise<Metadata> {
   const product = await DL.query.getSingleProduct(params.id);
-
-  // optionally access and extend (rather than replace) parent metadata
-  const previousImages = (await parent).openGraph?.images || [];
 
   return {
     title: product?.title,
-    // openGraph: {
-    //   images: ['/some-specific-page-image.jpg', ...previousImages],
-    // },
   };
 }
 export default async function SingleProductPage({
@@ -41,7 +35,7 @@ export default async function SingleProductPage({
             height={500}
             src={product.image}
             alt={product.title}
-            className="h-auto w-full rounded-lg object-cover"
+            className="max-h-[500px] w-full rounded-lg object-cover"
           />
         </div>
         <div className="flex w-full flex-col gap-2 md:w-1/2 lg:justify-evenly">

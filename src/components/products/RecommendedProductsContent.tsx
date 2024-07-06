@@ -13,5 +13,7 @@ export default async function RecommendedProductsContent({
     id,
   );
 
+  if (!recommendedProducts) return;
+
   return <ProductCardGrid products={recommendedProducts} />;
 }

@@ -1,7 +1,7 @@
 import * as React from "react";
 
 import { Carousel, CarouselContent } from "@/components/ui/carousel";
-import DealOfTheDayCarouselContent from "./DealOfTheDayCarouselContent";
+import DealOfTheDayCarouselContent from "@/components/deal-of-the-day/deal-of-the-day-carousel-content";
 import { DL } from "@/data-layer";
 
 export async function DealOfTheDayCarousel() {

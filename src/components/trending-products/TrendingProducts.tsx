@@ -1,10 +1,11 @@
 import { Suspense } from "react";
-import NewArrivals from "@/components/products/new-arrival/page";
-import Trending from "@/components/products/trending/page";
-import TopRated from "@/components/products/top-rated/page";
+
 import HeaderTitle from "@/components/HeaderTitle";
 import ProductTrendsSkeleton from "@/components/skeletons/ProductTrendsSkeleton";
 import { ScrollArea, ScrollBar } from "../ui/scroll-area";
+import NewArrivals from "@/components/trending-products/new-arrival";
+import Trending from "@/components/trending-products/trending";
+import TopRated from "@/components/trending-products/top-rated";
 
 export default function TrendingProducts() {
   return (

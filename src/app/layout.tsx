@@ -18,11 +18,11 @@ export const metadata: Metadata = {
   },
   creator: "Christ Narvarte",
   description:
-    "Storeyfy is an ecommerce platform made by Christ Narvarte. Has a CRUD features, you can create, update, and delete product as you like, you can also add them to cart...",
+    "Storeyfy is an ecommerce platform made by Christ Narvarte. Has a CRUD features, you can create, read, update, and delete product as you like, you can also add them to cart...",
   openGraph: {
     title: "StoreyfyV2",
     description:
-      "Storeyfy is an ecommerce platform made by Christ Narvarte. Has a CRUD features, you can create, update, and delete product as you like, you can also add them to cart...",
+      "Storeyfy is an ecommerce platform made by Christ Narvarte. Has a CRUD features, you can create, read, update, and delete product as you like, you can also add them to cart...",
     images:
       "https://res.cloudinary.com/dlyerb1wj/image/upload/v1720230925/cart-logo_dutnsh.jpg",
   },

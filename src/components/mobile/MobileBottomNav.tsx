@@ -3,8 +3,8 @@ import { IoCartOutline } from "react-icons/io5";
 import { IoHomeOutline } from "react-icons/io5";
 import { CiShoppingBasket } from "react-icons/ci";
 import Link from "next/link";
-import Count from "@/components/mobile/Count";
 import MobileBurgerMenu from "@/components/mobile/MobileBurgerMenu";
+import Count from "@/components/Count";
 
 export default function MobileBottomNav() {
   return (

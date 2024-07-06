@@ -8,6 +8,7 @@ import { DarkModeToggle } from "@/components/DarkModeToggle";
 import ProfileAvatar from "@/components/ProfileAvatar";
 import LoginButton from "@/components/LoginButton";
 import SearchForm from "@/components/SearchForm";
+import Count from "@/components/Count";
 
 export default async function Header() {
   const session = await getSession();
@@ -36,13 +37,18 @@ export default async function Header() {
             StoreyfyV2
           </h1>
         </Link>
-
         <div className="flex items-center gap-4 customSm:w-full">
           <SearchForm />
           <ul className="flex items-center gap-5 text-3xl text-gray-600 dark:text-white customSm:hidden lg:flex">
             {session?.user && <AccountDropdown />}
-            <FaRegHeart />
-            <IoBagHandleOutline />
+            <Link href="/my-cart" className="relative">
+              <Count count={0} />
+              <FaRegHeart />
+            </Link>
+            <Link href="/my-orders" className="relative">
+              <Count count={0} />
+              <IoBagHandleOutline />
+            </Link>
           </ul>
         </div>
       </div>

@@ -1,7 +1,7 @@
-import { DealOfTheDayCarousel } from "@/components/products/DealOfTheDayCarousel";
-import HeaderTitle from "@/components/HeaderTitle";
 import { Suspense } from "react";
-import DealOfTheDaySkeleton from "../skeletons/DealOfTheDaySkeleton";
+import { DealOfTheDayCarousel } from "@/components/deal-of-the-day/deal-of-the-day-caousel";
+import HeaderTitle from "@/components/HeaderTitle";
+import DealOfTheDaySkeleton from "@/components/skeletons/DealOfTheDaySkeleton";
 
 export default function DealOfTheDay() {
   return (
