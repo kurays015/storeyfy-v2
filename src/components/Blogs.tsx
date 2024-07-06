@@ -1,5 +1,5 @@
 import { blogCards } from "@/lib/blogCards";
-import BlogCard from "@/components/blog-card";
+import BlogCard from "@/components/cards/blog-card";
 import HeaderTitle from "@/components/header-title";
 
 export default function Blogs() {

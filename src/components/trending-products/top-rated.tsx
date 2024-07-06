@@ -1,4 +1,4 @@
-import ProductMiniCard from "@/components/products/product-mini-card";
+import ProductMiniCard from "@/components/cards/product-mini-card";
 import HeaderTitle from "@/components/header-title";
 import { DL } from "@/data-layer";
 

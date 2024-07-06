@@ -18,8 +18,8 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import GoogleLoginButton from "@/components/credentials-login-button/GoogleLoginButton";
-import GithubLoginButton from "@/components/credentials-login-button/GithubLoginButton";
+import GoogleLoginButton from "@/components/credentials-login-button/google-login-btn";
+import GithubLoginButton from "@/components/credentials-login-button/github-login-btn";
 import CustomFormSeparator from "@/components/custom-form-separator";
 import { loginSchema } from "@/lib/formSchema";
 import { SubmitButton } from "@/components/submit-btn";
