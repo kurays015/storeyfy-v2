@@ -46,17 +46,9 @@ export const DL = {
       });
     },
     getNewArrivals: async () => {
-      //less than one week product
-      const now = new Date();
-
-      const oneWeekAgo = new Date(now);
-      oneWeekAgo.setDate(now.getDate() - 7);
-
       return await db.product.findMany({
-        where: {
-          createdAt: {
-            gte: oneWeekAgo,
-          },
+        orderBy: {
+          createdAt: "desc",
         },
         take: 8,
       });
