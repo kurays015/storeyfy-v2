@@ -3,21 +3,27 @@ import { Button } from "@/components/ui/button";
 import { DL } from "@/data-layer";
 import { formatCurrency } from "@/lib/currencyFormatter";
 import { SingleProductPageParamsProps } from "@/types";
-import { Metadata } from "next";
+import { Metadata, ResolvingMetadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { CiHeart } from "react-icons/ci";
 
-export const generateMetadata = ({
-  params,
-}: SingleProductPageParamsProps): Metadata => {
-  const cleanedTitle = params.title.replace(/%|[0-9]/g, " ");
+export async function generateMetadata(
+  { params }: SingleProductPageParamsProps,
+  parent: ResolvingMetadata,
+): Promise<Metadata> {
+  const product = await DL.query.getSingleProduct(params.id);
+
+  // optionally access and extend (rather than replace) parent metadata
+  const previousImages = (await parent).openGraph?.images || [];
 
   return {
-    title: cleanedTitle,
+    title: product?.title,
+    // openGraph: {
+    //   images: ['/some-specific-page-image.jpg', ...previousImages],
+    // },
   };
-};
-
+}
 export default async function SingleProductPage({
   params,
 }: SingleProductPageParamsProps) {
