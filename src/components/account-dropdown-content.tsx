@@ -9,10 +9,9 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { LogOut } from "lucide-react";
 import { signOut } from "next-auth/react";
-import Link from "next/link";
 import { CgProfile } from "react-icons/cg";
 import { CiShoppingBasket } from "react-icons/ci";
-import { IoCartOutline } from "react-icons/io5";
+import { IoBagHandleOutline } from "react-icons/io5";
 import NavLinkMenu from "./nav-link-menu";
 
 export default function AccountDropdownContent() {
@@ -27,10 +26,10 @@ export default function AccountDropdownContent() {
             <span>My Products</span>
           </DropdownMenuItem>
         </NavLinkMenu>
-        <NavLinkMenu href="/my-cart">
+        <NavLinkMenu href="/my-orders">
           <DropdownMenuItem className="cursor-pointer">
-            <IoCartOutline className="mr-2 h-4 w-4" />
-            <span>My cart</span>
+            <IoBagHandleOutline className="mr-2 h-4 w-4" />
+            <span>My Orders</span>
           </DropdownMenuItem>
         </NavLinkMenu>
       </DropdownMenuGroup>

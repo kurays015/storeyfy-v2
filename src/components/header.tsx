@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { FaRegHeart } from "react-icons/fa";
-import { IoBagHandleOutline } from "react-icons/io5";
+import { IoCartOutline } from "react-icons/io5";
 import { FaFacebook, FaTwitter, FaInstagram } from "react-icons/fa";
 import { getSession } from "@/lib/auth";
 import AccountDropdown from "@/components/account-dropdown";
@@ -48,9 +48,9 @@ export default async function Header() {
               className="relative"
             />
             <NavLinkMenu
-              href="/my-orders"
+              href="/my-cart"
               count={1}
-              icon={<IoBagHandleOutline />}
+              icon={<IoCartOutline />}
               className="relative"
             />
           </ul>
