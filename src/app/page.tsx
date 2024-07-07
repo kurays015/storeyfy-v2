@@ -1,6 +1,6 @@
 import { BannerCarousel } from "@/components/banner-carousel";
 import ProductSection from "@/components/products/product-section";
-import Blogs from "@/components/Blogs";
+import BlogsContainer from "@/components/blogs-container";
 import Testimonials from "@/components/testimonials/Testimonials";
 
 export default function Home() {
@@ -9,7 +9,7 @@ export default function Home() {
       <BannerCarousel />
       <ProductSection />
       <Testimonials />
-      <Blogs />
+      <BlogsContainer />
     </main>
   );
 }
