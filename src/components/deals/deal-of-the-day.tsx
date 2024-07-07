@@ -1,5 +1,5 @@
 import { Suspense } from "react";
-import { DealOfTheDayCarousel } from "@/components/deal-of-the-day/deal-of-the-day-caousel";
+import { DealOfTheDayCarousel } from "@/components/deals/deal-of-the-day-caousel";
 import HeaderTitle from "@/components/header-title";
 import DealOfTheDaySkeleton from "@/components/skeletons/deal-of-the-day-skeleton";
 

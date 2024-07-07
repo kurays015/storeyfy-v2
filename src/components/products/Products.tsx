@@ -1,4 +1,4 @@
-import DealOfTheDay from "@/components/deal-of-the-day/deal-of-the-day";
+import DealOfTheDay from "@/components/deals/deal-of-the-day";
 import { MostSoldProducts } from "@/components/products/most-sold-products";
 import TrendingProducts from "@/components/trending-products/trending-products";
 
