@@ -1,7 +1,7 @@
 import { BannerCarousel } from "@/components/banner-carousel";
 import ProductSection from "@/components/products/product-section";
-import Blogs from "@/components/blogs";
-import Testimonials from "@/components/testimonials/testimonials";
+import Blogs from "@/components/Blogs";
+import Testimonials from "@/components/testimonials/Testimonials";
 
 export default function Home() {
   return (

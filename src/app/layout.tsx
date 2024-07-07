@@ -7,7 +7,7 @@ import NextAuthProvider from "./providers/next-auth-provider";
 import { Toaster } from "@/components/ui/toaster";
 import MobileBottomNav from "@/components/mobile/mobile-bottom-nav";
 import Footer from "@/components/footer";
-import Header from "@/components/header";
+import Header from "@/components/Header";
 
 const inter = Inter({ subsets: ["latin"] });
 
