@@ -1,7 +1,7 @@
 import { ProductProps } from "@/types";
 import { formatCurrency } from "@/lib/currencyFormatter";
 import getDiscountValue from "@/lib/getDiscountValue";
-import Rating from "@/components/rating";
+import Rating from "@/components/Rating";
 import SaleCountDown from "@/components/products/sale-count-down";
 import { CarouselItem } from "@/components/ui/carousel";
 import { Button } from "@/components/ui/button";
