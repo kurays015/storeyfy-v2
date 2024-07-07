@@ -12,6 +12,8 @@ import { signOut } from "next-auth/react";
 import Link from "next/link";
 import { CgProfile } from "react-icons/cg";
 import { CiShoppingBasket } from "react-icons/ci";
+import { IoCartOutline } from "react-icons/io5";
+import NavLinkMenu from "./nav-link-menu";
 
 export default function AccountDropdownContent() {
   return (
@@ -19,24 +21,30 @@ export default function AccountDropdownContent() {
       <DropdownMenuLabel>Products</DropdownMenuLabel>
       <DropdownMenuSeparator />
       <DropdownMenuGroup>
-        <Link href="/my-products">
+        <NavLinkMenu href="/my-products">
           <DropdownMenuItem className="cursor-pointer">
             <CiShoppingBasket className="mr-2 h-4 w-4" />
             <span>My Products</span>
           </DropdownMenuItem>
-        </Link>
+        </NavLinkMenu>
+        <NavLinkMenu href="/my-cart">
+          <DropdownMenuItem className="cursor-pointer">
+            <IoCartOutline className="mr-2 h-4 w-4" />
+            <span>My cart</span>
+          </DropdownMenuItem>
+        </NavLinkMenu>
       </DropdownMenuGroup>
       <DropdownMenuSeparator />
 
       <DropdownMenuLabel>My Account</DropdownMenuLabel>
       <DropdownMenuSeparator />
       <DropdownMenuGroup>
-        <Link href="/my-profile">
+        <NavLinkMenu href="/my-profile">
           <DropdownMenuItem className="cursor-pointer">
             <CgProfile className="mr-2 h-4 w-4" />
             <span>Profile</span>
           </DropdownMenuItem>
-        </Link>
+        </NavLinkMenu>
         <DropdownMenuItem onClick={() => signOut()} className="cursor-pointer">
           <LogOut className="mr-2 h-4 w-4" />
           <span>Log out</span>
