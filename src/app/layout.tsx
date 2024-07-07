@@ -8,23 +8,21 @@ import { Toaster } from "@/components/ui/toaster";
 import MobileBottomNav from "@/components/mobile/mobile-bottom-nav";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { siteMetadata } from "@/config/siteMetadata";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: {
-    default: "StoreyfyV2",
-    template: "%s | StoreyfyV2",
+    default: siteMetadata.title,
+    template: `%s | ${siteMetadata.title}`,
   },
-  creator: "Christ Narvarte",
-  description:
-    "Storeyfy is an ecommerce platform made by Christ Narvarte. Has a CRUD features, you can create, read, update, and delete product as you like, you can also add them to cart...",
+  creator: siteMetadata.creator,
+  description: siteMetadata.description,
   openGraph: {
-    title: "StoreyfyV2",
-    description:
-      "Storeyfy is an ecommerce platform made by Christ Narvarte. Has a CRUD features, you can create, read, update, and delete product as you like, you can also add them to cart...",
-    images:
-      "https://res.cloudinary.com/dlyerb1wj/image/upload/v1720230925/cart-logo_dutnsh.jpg",
+    title: siteMetadata.title,
+    description: siteMetadata.description,
+    images: siteMetadata.image,
   },
 };
 
