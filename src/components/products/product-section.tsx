@@ -1,5 +1,5 @@
 import SideBar from "@/components/side-bar";
-import Products from "@/components/products/products";
+import Products from "@/components/products/home-page-products";
 
 export default function ProductSection() {
   return (
