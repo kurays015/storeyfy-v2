@@ -1,6 +1,6 @@
 import { ProductMiniCardProps } from "@/types";
 import Rating from "@/components/products/my-rating";
-import Price from "@/components/products/price";
+import Price from "@/components/products/my-price";
 import Link from "next/link";
 import ProductBlurDataImage from "@/components/products/product-blur-data-image";
 

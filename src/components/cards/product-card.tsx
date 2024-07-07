@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Rating from "@/components/products/my-rating";
-import Price from "@/components/products/price";
+import Price from "@/components/products/my-price";
 import { ProductProps } from "@/types";
 import ProductBlurDataImage from "@/components/products/product-blur-data-image";
 
