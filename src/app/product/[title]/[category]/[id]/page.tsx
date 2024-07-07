@@ -1,4 +1,4 @@
-import Rating from "@/components/Rating";
+import Rating from "@/components/rating";
 import { Button } from "@/components/ui/button";
 import { DL } from "@/data-layer";
 import { formatCurrency } from "@/lib/currencyFormatter";
