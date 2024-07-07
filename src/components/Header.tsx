@@ -8,7 +8,7 @@ import { DarkModeToggle } from "@/components/dark-mode-toggle";
 import ProfileAvatar from "@/components/profile-avatar";
 import LoginButton from "@/components/login-btn";
 import SearchForm from "@/components/search-form";
-import Count from "./mobile/count";
+import Count from "@/components/count";
 
 export default async function Header() {
   const session = await getSession();
