@@ -8,7 +8,7 @@ import { DarkModeToggle } from "@/components/dark-mode-toggle";
 import ProfileAvatar from "@/components/profile-avatar";
 import LoginButton from "@/components/login-btn";
 import SearchForm from "@/components/search-form";
-import Count from "@/components/count";
+import NavLinkMenu from "./nav-link-menu";
 
 export default async function Header() {
   const session = await getSession();
@@ -39,16 +39,20 @@ export default async function Header() {
         </Link>
         <div className="flex items-center gap-4 customSm:w-full">
           <SearchForm />
-          <ul className="flex items-center gap-5 text-3xl text-gray-600 dark:text-white customSm:hidden lg:flex">
+          <ul className="flex items-center gap-5 text-3xl customSm:hidden lg:flex">
             {session?.user && <AccountDropdown />}
-            <Link href="/my-cart" className="relative">
-              <Count count={0} />
-              <FaRegHeart />
-            </Link>
-            <Link href="/my-orders" className="relative">
-              <Count count={0} />
-              <IoBagHandleOutline />
-            </Link>
+            <NavLinkMenu
+              href="/my-wishlist"
+              count={1}
+              icon={<FaRegHeart />}
+              className="relative"
+            />
+            <NavLinkMenu
+              href="/my-orders"
+              count={1}
+              icon={<IoBagHandleOutline />}
+              className="relative"
+            />
           </ul>
         </div>
       </div>
