@@ -30,10 +30,10 @@ export const signUpSchema = z
     confirmPassword: z.string(),
   })
   .refine(
-    values => {
+    (values) => {
       return values.password === values.confirmPassword;
     },
-    { message: "Passwords must match!", path: ["confirmPassword"] }
+    { message: "Passwords must match!", path: ["confirmPassword"] },
   );
 
 export const productSchema = z.object({
@@ -44,8 +44,10 @@ export const productSchema = z.object({
   description: z
     .string()
     .min(6, { message: "Description must be at least 6 characters" }),
-  category: z.string().min(3, { message: "Category must not be empty" }),
-  price: z.string().refine(value => isValidNumber(value), {
+  category: z.string().min(3, { message: "Category is required" }),
+  subCategory: z.string().min(3, { message: "Sub category is required" }),
+  condition: z.string().min(3, { message: "Condition is required" }),
+  price: z.string().refine((value) => isValidNumber(value), {
     message: "Price must be a valid number",
   }),
   image: z.any(),

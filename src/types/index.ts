@@ -8,6 +8,8 @@ export type ProductProps = {
   description: string;
   image: string;
   category: string;
+  subCategory: string;
+  condition: string;
   price: string;
   sellerName: string;
   discount: number | null;

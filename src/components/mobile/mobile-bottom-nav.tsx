@@ -8,7 +8,7 @@ import NavLinkMenu from "@/components/nav-link-menu";
 
 export default function MobileBottomNav() {
   return (
-    <div className="fixed bottom-0 left-1/2 flex w-full max-w-[500px] -translate-x-1/2 items-center border bg-white p-4 shadow-customBoxShadow dark:border-none customSm:justify-between 480px:justify-around 480px:rounded-t-lg lg:hidden">
+    <div className="fixed bottom-0 left-1/2 z-10 flex w-full max-w-[500px] -translate-x-1/2 items-center border bg-white p-4 shadow-customBoxShadow dark:border-none customSm:justify-between 480px:justify-around 480px:rounded-t-lg lg:hidden">
       <MobileBurgerMenu />
 
       <NavLinkMenu href="/" icon={<IoHomeOutline />} className="relative" />

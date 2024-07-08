@@ -10,36 +10,36 @@ export const categories = [
   {
     category: "Clothes",
     logo: dress,
-    subCategory: ["Shirt", "Shorts & Jeans", "Jacket", "Dress & Frock"],
+    subCategories: ["Shirt", "Shorts & Jeans", "Jacket", "Dress & Frock"],
   },
   {
     category: "Footwear",
     logo: shoes,
-    subCategory: ["Sports", "Formal", "Casual", "Safety Shoes"],
+    subCategories: ["Sports", "Formal", "Casual", "Safety Shoes"],
   },
   {
     category: "Jewelry",
     logo: jewelry,
-    subCategory: ["Earrings", "Couple Rings", "Necklace"],
+    subCategories: ["Earrings", "Couple Rings", "Necklace"],
   },
   {
     category: "Perfume",
     logo: perfume,
-    subCategory: ["Clothes Perfume", "Deodorant", "Jacket", "Dress & Frock"],
+    subCategories: ["Clothes Perfume", "Deodorant", "Jacket", "Dress & Frock"],
   },
   {
     category: "Cosmetics",
     logo: cosmetics,
-    subCategory: ["Shampoo", "Sunscreen", "Body Wash", "Makeup Kit"],
+    subCategories: ["Shampoo", "Sunscreen", "Body Wash", "Makeup Kit"],
   },
   {
     category: "Glasses",
     logo: glasses,
-    subCategory: ["Sunglasses", "Lenses"],
+    subCategories: ["Sunglasses", "Lenses"],
   },
   {
     category: "Bags",
     logo: bag,
-    subCategory: ["Shopping Bag", "Gym Backpack", "Purse", "Wallet"],
+    subCategories: ["Shopping Bag", "Gym Backpack", "Purse", "Wallet"],
   },
 ];

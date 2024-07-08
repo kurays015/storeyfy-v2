@@ -14,7 +14,7 @@ export default function CategoryAccordion() {
       collapsible
       className="rounded-xl border-slate-300 dark:border-gray-700 lg:w-[250px] lg:border lg:p-5 xl:w-[300px]"
     >
-      {categories.map(({ category, subCategory, logo }) => (
+      {categories.map(({ category, subCategories, logo }) => (
         <AccordionItem value={category} key={category} className="p-0">
           <AccordionTrigger className="py-3">
             <div className="flex items-center gap-4">
@@ -23,7 +23,7 @@ export default function CategoryAccordion() {
             </div>
           </AccordionTrigger>
           <AccordionContent>
-            {subCategory.map((sub, index) => (
+            {subCategories.map((sub, index) => (
               <div key={index}>{sub}</div>
             ))}
           </AccordionContent>

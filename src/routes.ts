@@ -24,3 +24,13 @@ export const apiAuthPrefix: string = "/api/auth";
  * @type {string}
  */
 export const DEFAULT_LOGIN_REDIRECT: string = "/";
+
+/**
+ * Footer position absolutes route
+ * @type {string}
+ */
+export const absoluteRoute: string[] = [
+  "/my-products",
+  "/my-orders",
+  "/my-wishlist",
+];

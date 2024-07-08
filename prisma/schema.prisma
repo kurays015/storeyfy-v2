@@ -93,6 +93,8 @@ model Product {
   description String
   image       String
   category    String
+  subCategory String
+  condition   String
   price       String
   sellerName  String  
   stock       Int

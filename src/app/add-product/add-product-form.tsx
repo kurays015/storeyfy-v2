@@ -34,6 +34,8 @@ export default function AddProductForm() {
   const [productImage, setProductImage] = useState<null | string | ArrayBuffer>(
     "",
   );
+  const [subCategoryIndex, setSubCategoryIndex] = useState("");
+
   const formRef = useRef<HTMLFormElement>(null);
 
   const form = useForm<z.infer<typeof productSchema>>({
@@ -46,6 +48,8 @@ export default function AddProductForm() {
       image: "",
       sellerName: "",
       userId: "",
+      subCategory: "",
+      condition: "",
     },
   });
 
@@ -110,37 +114,116 @@ export default function AddProductForm() {
           )}
         />
 
-        <FormField
-          control={form.control}
-          name="category"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>{capitalFirstLetter(field.name)}</FormLabel>
-              <Select
-                name={field.name}
-                onValueChange={field.onChange}
-                value={field.value}
-              >
-                <FormControl>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Select category" />
-                  </SelectTrigger>
-                </FormControl>
-                <SelectContent>
-                  {categories.map(({ category }) => (
-                    <SelectItem value={category} key={category}>
-                      {category}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-              <FormDescription className="text-muted-foreground">
-                Product Category
-              </FormDescription>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+        <div className="flex gap-12">
+          <FormField
+            control={form.control}
+            name="category"
+            render={({ field }) => (
+              <FormItem className="flex-1">
+                <FormLabel>{capitalFirstLetter(field.name)}</FormLabel>
+                <Select
+                  name={field.name}
+                  onValueChange={(value) => {
+                    const index = categories.findIndex(
+                      (category) => category.category === value,
+                    );
+                    setSubCategoryIndex(index.toString());
+                    return field.onChange(value);
+                  }}
+                  value={field.value}
+                >
+                  <FormControl>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select category" />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent>
+                    {categories.map(({ category }) => (
+                      <SelectItem value={category} key={category}>
+                        {category}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+                <FormDescription className="text-muted-foreground">
+                  Product Category
+                </FormDescription>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="subCategory"
+            render={({ field }) => (
+              <FormItem className="flex-1">
+                <FormLabel>{capitalFirstLetter(field.name)}</FormLabel>
+                <Select
+                  onValueChange={field.onChange}
+                  name={field.name}
+                  value={field.value}
+                  disabled={!subCategoryIndex}
+                >
+                  <FormControl>
+                    <SelectTrigger>
+                      <SelectValue
+                        placeholder={
+                          subCategoryIndex
+                            ? categories[parseInt(subCategoryIndex)]
+                                .subCategories[0]
+                            : "Select a sub category"
+                        }
+                      />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent>
+                    {subCategoryIndex &&
+                      categories[parseInt(subCategoryIndex)].subCategories.map(
+                        (subCategory, index) => (
+                          <SelectItem value={subCategory} key={index}>
+                            {subCategory}
+                          </SelectItem>
+                        ),
+                      )}
+                  </SelectContent>
+                </Select>
+                <FormDescription className="text-muted-foreground">
+                  Product Category
+                </FormDescription>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="condition"
+            render={({ field }) => (
+              <FormItem className="flex-1">
+                <FormLabel>{capitalFirstLetter(field.name)}</FormLabel>
+                <Select
+                  name={field.name}
+                  onValueChange={field.onChange}
+                  value={field.value}
+                >
+                  <FormControl>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select category" />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent>
+                    <SelectItem value="New">New</SelectItem>
+                    <SelectItem value="Used">Used</SelectItem>
+                  </SelectContent>
+                </Select>
+                <FormDescription className="text-muted-foreground">
+                  Product Category
+                </FormDescription>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </div>
 
         <div className="flex gap-12 customSm:flex-col md:flex-row">
           <FormField

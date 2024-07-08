@@ -61,6 +61,8 @@ export async function addProduct(formData: FormData) {
         userId: parsedData.data.userId,
         title: parsedData.data.title,
         category: parsedData.data.category,
+        subCategory: parsedData.data.subCategory,
+        condition: parsedData.data.condition,
         price: parsedData.data.price,
         description: parsedData.data.description,
         discount: parsedData.data.discount ? parsedData.data.discount : 0,
