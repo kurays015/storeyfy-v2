@@ -3,6 +3,28 @@ import db from "@/lib/db";
 
 export const DL = {
   query: {
+    getCartItem: async (productId: string) => {
+      return await db.cartItems.findFirst({
+        where: {
+          productId: productId,
+        },
+      });
+    },
+    getCartItems: async () => {
+      return await db.cartItems.findMany({
+        include: {
+          product: {
+            select: {
+              title: true,
+              image: true,
+              price: true,
+              discount: true,
+              stock: true,
+            },
+          },
+        },
+      });
+    },
     getBestSellers: async () => {
       return await db.product.findMany({
         where: {
@@ -85,5 +107,25 @@ export const DL = {
       });
     },
   },
-  mutations: {},
+  mutations: {
+    createCartItems: async (userId: string, productId: string) => {
+      return await db.cartItems.create({
+        data: {
+          userId: userId,
+          productId: productId,
+        },
+        include: {
+          product: {
+            select: {
+              title: true,
+              image: true,
+              price: true,
+              discount: true,
+              stock: true,
+            },
+          },
+        },
+      });
+    },
+  },
 };

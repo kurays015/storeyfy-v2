@@ -9,14 +9,17 @@ export default function BlogCard({
   image,
 }: BlogCardProps) {
   return (
-    <div className="w-full">
-      <Image
-        className="w-full rounded-xl"
-        src={image}
-        height={100}
-        width={100}
-        alt={title}
-      />
+    <div>
+      <div>
+        <Image
+          className="max-h-[165px] w-full rounded-xl"
+          src={image}
+          height={100}
+          width={100}
+          alt={title}
+          placeholder="blur"
+        />
+      </div>
       <div className="my-4 space-y-1">
         <p className="text-red-400">{category}</p>
         <h1 className="overflow-hidden text-ellipsis whitespace-nowrap text-lg font-bold dark:text-slate-200">

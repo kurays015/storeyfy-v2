@@ -2,17 +2,16 @@ import "server-only";
 import { getPlaiceholder } from "plaiceholder";
 
 export async function getRemoteImageBlurDataURL(src: string) {
-  const buffer = await fetch(src, { cache: "no-store" }).then(async res =>
-    Buffer.from(await res.arrayBuffer())
-  );
+  try {
+    const res = await fetch(src);
+    if (!res.ok) {
+      throw new Error("Failed to fetch remote image");
+    }
 
-  const {
-    metadata: { height, width },
-    ...plaiceholder
-  } = await getPlaiceholder(buffer, { size: 10 });
-
-  return {
-    ...plaiceholder,
-    img: { src, height, width },
-  };
+    const buffer = await res.arrayBuffer();
+    const { base64 } = await getPlaiceholder(Buffer.from(buffer));
+    return base64;
+  } catch (error) {
+    console.log(error);
+  }
 }
