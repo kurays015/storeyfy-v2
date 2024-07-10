@@ -10,8 +10,11 @@ export const DL = {
         },
       });
     },
-    getCartItems: async () => {
+    getCartItems: async (userId: string) => {
       return await db.cartItems.findMany({
+        where: {
+          userId: userId,
+        },
         include: {
           product: {
             select: {
