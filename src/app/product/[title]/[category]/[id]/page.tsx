@@ -1,3 +1,7 @@
+import { addToCart } from "@/app/product/_actions/action";
+import AddToCartBtn from "@/components/cart/add-to-cart-btn";
+import { CartButton } from "@/components/cart/cart-button";
+import Price from "@/components/products/price";
 import Rating from "@/components/products/rating";
 import { Button } from "@/components/ui/button";
 import { DL } from "@/data-layer";
@@ -17,10 +21,15 @@ export async function generateMetadata({
     title: product?.title,
   };
 }
+
 export default async function SingleProductPage({
   params,
 }: SingleProductPageParamsProps) {
-  const product = await DL.query.getSingleProduct(params.id);
+  const [product, isAlreadyInTheCart] = await Promise.all([
+    DL.query.getSingleProduct(params.id),
+    DL.query.getCartItem(params.id),
+  ]);
+  // const product = await DL.query.getSingleProduct(params.id);
 
   if (!product) return <h1>No product found!</h1>;
 
@@ -39,9 +48,7 @@ export default async function SingleProductPage({
         </div>
         <div className="flex w-full flex-col gap-2 md:w-1/2 lg:justify-evenly">
           <h1 className="text-3xl font-bold">{product.title}</h1>
-          <p className="text-xl font-semibold">
-            {formatCurrency(parseFloat(product.price))}
-          </p>
+          <Price price={product.price} discount={product.discount} />
           <div className="space-y-1">
             <p
               className={`text-sm font-medium ${product.stock > 3 ? "text-green-600" : "text-red-600"}`}
@@ -78,21 +85,23 @@ export default async function SingleProductPage({
             </Link>
           </p>
           <div className="my-3">
-            <Button
-              variant="destructive"
-              className="w-full rounded-none border bg-white text-black hover:bg-black hover:text-white dark:bg-gray-50 dark:text-black dark:hover:bg-slate-300"
-            >
+            <Button className="w-full">
               Add to Wishlist
               <CiHeart className="ml-1 text-3xl" />
             </Button>
           </div>
-          <div className="flex gap-4 xl:mt-0">
-            <Button className="w-full border-2 border-black bg-black text-white hover:bg-white hover:text-black">
-              Buy now
-            </Button>
-            <Button className="w-full bg-red-500 text-white hover:bg-red-700">
-              Add to Cart
-            </Button>
+          <div className="flex items-center gap-4 xl:mt-0">
+            <Button className="w-full">Buy now</Button>
+            {isAlreadyInTheCart ? (
+              <CartButton isAlreadyInTheCart={isAlreadyInTheCart} />
+            ) : (
+              <form
+                className="w-full"
+                action={addToCart.bind(null, product.id, product.title)}
+              >
+                <AddToCartBtn />
+              </form>
+            )}
           </div>
         </div>
       </div>

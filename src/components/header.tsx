@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { FaRegHeart } from "react-icons/fa";
-import { IoCartOutline } from "react-icons/io5";
 import { FaFacebook, FaTwitter, FaInstagram } from "react-icons/fa";
 import { getSession } from "@/lib/auth";
 import AccountDropdown from "@/components/account-dropdown";
@@ -9,6 +8,7 @@ import ProfileAvatar from "@/components/profile-avatar";
 import LoginButton from "@/components/login-btn";
 import SearchForm from "@/components/search-form";
 import NavLinkMenu from "./nav-link-menu";
+import { CartButton } from "@/components/cart/cart-button";
 
 export default async function Header() {
   const session = await getSession();
@@ -47,12 +47,7 @@ export default async function Header() {
               icon={<FaRegHeart />}
               className="relative"
             />
-            <NavLinkMenu
-              href="/my-cart"
-              count={1}
-              icon={<IoCartOutline />}
-              className="relative"
-            />
+            <CartButton />
           </ul>
         </div>
       </div>

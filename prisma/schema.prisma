@@ -108,10 +108,8 @@ model Product {
 }
 
 model CartItems {
+  id        String  @id @default(uuid()) 
   userId    String
-  id        String  @id @default(uuid())
-  title     String
-  image     String
   productId String
   product   Product @relation(fields: [productId], references: [id])
   user      User    @relation(fields: [userId], references: [id], onDelete: Cascade)

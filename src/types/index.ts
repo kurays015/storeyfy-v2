@@ -19,6 +19,22 @@ export type ProductProps = {
   updatedAt: Date;
 };
 
+export type CartItemProps = Pick<
+  ProductProps,
+  "title" | "image" | "price" | "stock" | "discount"
+>;
+
+export type CartItems = {
+  id: string;
+  userId: string;
+  productId: string;
+  product: CartItemProps;
+};
+
+export type CartContentProps = {
+  cartItems: CartItems[];
+};
+
 export type ProductMiniCardProps = ProductProps & {
   hideRating?: boolean;
 };
