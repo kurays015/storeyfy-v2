@@ -4,9 +4,14 @@ import { IoCartOutline } from "react-icons/io5";
 import Count from "@/components/count";
 import CartContent from "@/components/cart/cart-content";
 import { DL } from "@/data-layer";
+import { getSession } from "@/lib/auth";
 
 export async function CartButton({ isAlreadyInTheCart }: any) {
-  const cartItems = await DL.query.getCartItems();
+  const session = await getSession();
+
+  if (!session) return;
+
+  const cartItems = await DL.query.getCartItems(session.user.id);
   return (
     <Sheet>
       <SheetTrigger asChild>
