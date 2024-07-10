@@ -22,7 +22,7 @@ export async function CartButton({ isAlreadyInTheCart }: any) {
           ) : (
             <>
               <Count count={cartItems.length} />
-              <IoCartOutline />
+              <IoCartOutline className="customSm:text-2xl lg:text-3xl" />
             </>
           )}
         </Button>

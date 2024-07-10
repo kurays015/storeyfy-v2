@@ -5,6 +5,7 @@ import { FaRegHeart } from "react-icons/fa";
 import { CiShoppingBasket } from "react-icons/ci";
 import MobileBurgerMenu from "@/components/mobile/mobile-burger-menu";
 import NavLinkMenu from "@/components/nav-link-menu";
+import { CartButton } from "../cart/cart-button";
 
 export default function MobileBottomNav() {
   return (
@@ -19,12 +20,7 @@ export default function MobileBottomNav() {
         className="relative"
       />
 
-      <NavLinkMenu
-        href="/my-cart"
-        count={1}
-        icon={<IoCartOutline />}
-        className="relative"
-      />
+      <CartButton />
 
       <NavLinkMenu
         href="/my-wishlist"
