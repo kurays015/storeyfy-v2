@@ -6,12 +6,15 @@ import CartContent from "@/components/cart/cart-content";
 import { DL } from "@/data-layer";
 import { getSession } from "@/lib/auth";
 
-export async function CartButton({ isAlreadyInTheCart }: any) {
+export async function CartButton({
+  isAlreadyInTheCart,
+}: {
+  isAlreadyInTheCart?: boolean;
+}) {
   const session = await getSession();
 
-  if (!session) return;
+  const cartItems = await DL.query.getCartItems(session?.user.id);
 
-  const cartItems = await DL.query.getCartItems(session.user.id);
   return (
     <Sheet>
       <SheetTrigger asChild>
@@ -26,7 +29,7 @@ export async function CartButton({ isAlreadyInTheCart }: any) {
             "Show cart"
           ) : (
             <>
-              <Count count={cartItems.length} />
+              <Count count={!session ? 0 : cartItems.length} />
               <IoCartOutline className="customSm:text-2xl lg:text-3xl" />
             </>
           )}

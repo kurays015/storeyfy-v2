@@ -13,11 +13,11 @@ export async function addToCart(
 
   if (!session) return;
 
-  const isAlreadyExist = await DL.query.getCartItem(productId);
+  const isAlreadyInTheCart = (
+    await DL.query.getCartItems(session.user.id)
+  ).some((item) => item.productId === productId);
 
-  if (isAlreadyExist) {
-    return { message: "Product is already in the cart!" };
-  }
+  if (isAlreadyInTheCart) return { message: "Product is already in the cart!" };
 
   await DL.mutations.createCartItems(session.user.id, productId);
 

@@ -13,8 +13,8 @@ export default function CartItem({
   discount,
 }: CartItemProps) {
   return (
-    <div className="640px:px-4 640px:pb-4 640px:pt-0 relative rounded-md border-b border-gray-200 bg-white shadow-sm customSm:p-4">
-      <h2 className="640px:text-lg mb-2 font-semibold text-gray-800 customSm:text-sm 480px:text-base">
+    <div className="relative rounded-md border-b border-gray-200 shadow-sm customSm:p-4 640px:px-4 640px:pb-4 640px:pt-0">
+      <h2 className="mb-2 font-semibold text-gray-800 dark:text-white customSm:text-sm 480px:text-base 640px:text-lg">
         {title}
       </h2>
       <div className="flex flex-col items-center justify-between gap-5 sm:flex-row sm:items-start">
@@ -27,11 +27,18 @@ export default function CartItem({
             className="rounded-md border border-gray-300"
           />
           <div className="flex flex-col">
-            <p className="text-sm text-gray-500">In stock: {stock}</p>
+            <p className="text-sm text-gray-500 dark:text-white">
+              In stock:{" "}
+              <span
+                className={`text-sm font-medium ${stock > 3 ? "text-green-600" : "text-red-600"}`}
+              >
+                {stock}
+              </span>
+            </p>
             <Price price={price} discount={discount} />
           </div>
         </div>
-        <div className="640px:flex-col mt-3 flex w-full items-center justify-between gap-3 self-center sm:mt-0 sm:w-auto">
+        <div className="mt-3 flex w-full items-center justify-between gap-3 self-center sm:mt-0 sm:w-auto 640px:flex-col">
           <Input
             type="number"
             value={1}

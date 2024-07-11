@@ -5,7 +5,7 @@ import Price from "@/components/products/price";
 import Rating from "@/components/products/rating";
 import { Button } from "@/components/ui/button";
 import { DL } from "@/data-layer";
-import { formatCurrency } from "@/lib/currencyFormatter";
+import { getSession } from "@/lib/auth";
 import { SingleProductPageParamsProps } from "@/types";
 import { Metadata } from "next";
 import Image from "next/image";
@@ -25,14 +25,18 @@ export async function generateMetadata({
 export default async function SingleProductPage({
   params,
 }: SingleProductPageParamsProps) {
-  const [product, isAlreadyInTheCart] = await Promise.all([
+  const session = await getSession();
+
+  const [product, cartItems] = await Promise.all([
     DL.query.getSingleProduct(params.id),
-    DL.query.getCartItem(params.id),
+    DL.query.getCartItems(session?.user.id),
   ]);
-  // const product = await DL.query.getSingleProduct(params.id);
 
   if (!product) return <h1>No product found!</h1>;
 
+  const isAlreadyInTheCart = cartItems.some(
+    (item) => item.productId === product.id,
+  );
   return (
     <div className="space-y-8">
       {/* Product Details Section */}
