@@ -1,4 +1,4 @@
-import AddProductForm from "./add-product-form";
+import AddProductForm from "@/app/add-product/add-product-form";
 
 export default function AddProductPage() {
   return (

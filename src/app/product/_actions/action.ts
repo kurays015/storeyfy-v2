@@ -23,3 +23,17 @@ export async function addToCart(
 
   revalidatePath(`/product/${title}/${productId}`);
 }
+
+export async function deleteItemToCart(
+  productId: string,
+  title: string,
+  formData: FormData,
+) {
+  const session = await getSession();
+
+  if (!session) return;
+
+  await DL.mutations.deleteCartItem(productId);
+
+  revalidatePath(`/product/${title}/${productId}`);
+}

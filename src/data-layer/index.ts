@@ -123,5 +123,12 @@ export const DL = {
         },
       });
     },
+    deleteCartItem: async (id: string) => {
+      return await db.cartItems.delete({
+        where: {
+          id: id,
+        },
+      });
+    },
   },
 };
