@@ -98,7 +98,7 @@ export default async function SingleProductPage({
             </Button>
           </div>
           <div className="flex items-center gap-4 xl:mt-0">
-            <Button className="w-full bg-black text-white hover:opacity-90 dark:bg-white dark:text-black">
+            <Button className="w-full bg-blue-500 text-white hover:bg-blue-600 dark:bg-blue-600 dark:text-white dark:hover:bg-blue-500">
               Buy now
             </Button>
             {isAlreadyInTheCart ? (
