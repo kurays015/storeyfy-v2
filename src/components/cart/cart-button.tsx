@@ -26,11 +26,11 @@ export async function CartButton({
           }
         >
           {isAlreadyInTheCart ? (
-            "Show cart"
+            "Check Cart"
           ) : (
             <>
               <Count count={!session ? 0 : cartItems.length} />
-              <IoCartOutline className="customSm:text-2xl lg:text-3xl" />
+              <IoCartOutline className="text-black customSm:text-2xl lg:text-3xl lg:dark:text-white" />
             </>
           )}
         </Button>

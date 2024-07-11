@@ -12,10 +12,12 @@ import { CartContentProps } from "@/types";
 import CartItem from "@/components/cart/cart-item";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
+import NoCartItems from "@/components/cart/no-cart-items";
 
+//can make this a server component later
 export default function CartContent({ cartItems }: CartContentProps) {
   const session = useSession();
-
+  const hasCartItems = cartItems.length > 0;
   return (
     <SheetContent className="overflow-auto p-3">
       {session.data?.user ? (
@@ -24,19 +26,21 @@ export default function CartContent({ cartItems }: CartContentProps) {
             <SheetTitle>Your Cart ({cartItems.length})</SheetTitle>
           </SheetHeader>
           <div className="grid grid-cols-1 gap-4 py-4">
-            {cartItems.length > 0 ? (
+            {hasCartItems ? (
               cartItems.map((item) => (
-                <CartItem key={item.id} {...item.product} />
+                <CartItem key={item.id} id={item.id} {...item.product} />
               ))
             ) : (
-              <div>No cart items...</div>
+              <NoCartItems />
             )}
           </div>
-          <SheetFooter>
-            <SheetClose asChild>
-              <Button type="submit">Checkout</Button>
-            </SheetClose>
-          </SheetFooter>
+          {hasCartItems && (
+            <SheetFooter>
+              <SheetClose asChild>
+                <Button type="submit">Checkout</Button>
+              </SheetClose>
+            </SheetFooter>
+          )}
         </>
       ) : (
         <Button

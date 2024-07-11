@@ -1,9 +1,15 @@
 import { CartItemProps } from "@/types";
-import { MdDelete } from "react-icons/md";
 import Image from "next/image";
 import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import Price from "../products/price";
+import Price from "@/components/products/price";
+import { deleteItemToCart } from "@/app/product/_actions/action";
+import DeleteCartItem from "@/components/cart/delete-cart-item";
+
+type IdProp = {
+  id: string;
+};
+
+type Props = CartItemProps & IdProp;
 
 export default function CartItem({
   title,
@@ -11,7 +17,8 @@ export default function CartItem({
   price,
   stock,
   discount,
-}: CartItemProps) {
+  id,
+}: Props) {
   return (
     <div className="relative rounded-md border-b border-gray-200 shadow-sm customSm:p-4 640px:px-4 640px:pb-4 640px:pt-0">
       <h2 className="mb-2 font-semibold text-gray-800 dark:text-white customSm:text-sm 480px:text-base 640px:text-lg">
@@ -51,12 +58,9 @@ export default function CartItem({
           )}
         </div>
       </div>
-      <Button
-        variant="unstyled"
-        className="absolute -right-4 -top-4 text-red-600"
-      >
-        <MdDelete />
-      </Button>
+      <form action={deleteItemToCart.bind(null, id, title)}>
+        <DeleteCartItem />
+      </form>
     </div>
   );
 }
