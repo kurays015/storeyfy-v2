@@ -1,16 +1,16 @@
 import { addToCart } from "@/app/product/_actions/action";
-import AddToCartBtn from "@/components/cart/add-to-cart-btn";
-import { CartButton } from "@/components/cart/cart-button";
-import Price from "@/components/products/price";
-import Rating from "@/components/products/rating";
-import { Button } from "@/components/ui/button";
 import { DL } from "@/data-layer";
-import { formatCurrency } from "@/lib/currencyFormatter";
+import { getSession } from "@/lib/auth";
 import { SingleProductPageParamsProps } from "@/types";
 import { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { CiHeart } from "react-icons/ci";
+import AddToCartBtn from "@/components/cart/add-to-cart-btn";
+import { CartButton } from "@/components/cart/cart-button";
+import Price from "@/components/products/price";
+import Rating from "@/components/products/rating";
+import { Button } from "@/components/ui/button";
 
 export async function generateMetadata({
   params,
@@ -25,14 +25,18 @@ export async function generateMetadata({
 export default async function SingleProductPage({
   params,
 }: SingleProductPageParamsProps) {
-  const [product, isAlreadyInTheCart] = await Promise.all([
+  const session = await getSession();
+
+  const [product, cartItems] = await Promise.all([
     DL.query.getSingleProduct(params.id),
-    DL.query.getCartItem(params.id),
+    DL.query.getCartItems(session?.user.id),
   ]);
-  // const product = await DL.query.getSingleProduct(params.id);
 
   if (!product) return <h1>No product found!</h1>;
 
+  const isAlreadyInTheCart = cartItems.some(
+    (item) => item.productId === product.id,
+  );
   return (
     <div className="space-y-8">
       {/* Product Details Section */}
@@ -43,7 +47,7 @@ export default async function SingleProductPage({
             height={500}
             src={product.image}
             alt={product.title}
-            className="h-full max-h-[450px] w-full rounded-lg object-cover"
+            className="h-full w-full rounded-lg object-cover md:max-h-[450px]"
           />
         </div>
         <div className="flex w-full flex-col gap-2 md:w-1/2 lg:justify-evenly">
@@ -85,13 +89,18 @@ export default async function SingleProductPage({
             </Link>
           </p>
           <div className="my-3">
-            <Button className="w-full">
+            <Button
+              className="w-full bg-black text-white hover:opacity-90 dark:bg-white dark:text-black"
+              variant="unstyled"
+            >
               Add to Wishlist
               <CiHeart className="ml-1 text-3xl" />
             </Button>
           </div>
           <div className="flex items-center gap-4 xl:mt-0">
-            <Button className="w-full">Buy now</Button>
+            <Button className="w-full bg-blue-500 text-white hover:bg-blue-600 dark:bg-blue-600 dark:text-white dark:hover:bg-blue-500">
+              Buy now
+            </Button>
             {isAlreadyInTheCart ? (
               <CartButton isAlreadyInTheCart={isAlreadyInTheCart} />
             ) : (

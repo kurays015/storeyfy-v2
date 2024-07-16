@@ -3,14 +3,7 @@ import db from "@/lib/db";
 
 export const DL = {
   query: {
-    getCartItem: async (productId: string) => {
-      return await db.cartItems.findFirst({
-        where: {
-          productId: productId,
-        },
-      });
-    },
-    getCartItems: async (userId: string) => {
+    getCartItems: async (userId: string | undefined) => {
       return await db.cartItems.findMany({
         where: {
           userId: userId,
@@ -127,6 +120,13 @@ export const DL = {
               stock: true,
             },
           },
+        },
+      });
+    },
+    deleteCartItem: async (id: string) => {
+      return await db.cartItems.delete({
+        where: {
+          id: id,
         },
       });
     },

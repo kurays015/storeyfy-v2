@@ -6,6 +6,11 @@ import SaleCountDown from "@/components/products/sale-count-down";
 import { CarouselItem } from "@/components/ui/carousel";
 import { Button } from "@/components/ui/button";
 import ProductBlurDataImage from "@/components/products/product-blur-data-image";
+import { CartButton } from "../cart/cart-button";
+import AddToCartBtn from "../cart/add-to-cart-btn";
+import { addToCart } from "@/app/product/_actions/action";
+import { DL } from "@/data-layer";
+import { getSession } from "@/lib/auth";
 
 export default async function DealOfTheDayCarouselContent({
   id,
@@ -18,6 +23,12 @@ export default async function DealOfTheDayCarouselContent({
   rating,
   stock,
 }: ProductProps) {
+  const session = await getSession();
+
+  const cartItems = await DL.query.getCartItems(session?.user.id);
+
+  const isAlreadyInTheCart = cartItems.some((item) => item.productId === id);
+
   return (
     <CarouselItem
       key={id}
@@ -44,12 +55,16 @@ export default async function DealOfTheDayCarouselContent({
           </del>
         </div>
         <div className="my-4 flex gap-4">
-          <Button className="border-2 border-black bg-black text-white hover:bg-white hover:text-black dark:bg-white dark:text-black">
+          <Button className="w-full bg-blue-500 text-white hover:bg-blue-600 dark:bg-blue-600 dark:text-white dark:hover:bg-blue-500">
             Buy now
           </Button>
-          <Button className="bg-red-500 text-white hover:bg-red-700">
-            Add to Cart
-          </Button>
+          {isAlreadyInTheCart ? (
+            <CartButton isAlreadyInTheCart={isAlreadyInTheCart} />
+          ) : (
+            <form className="w-full" action={addToCart.bind(null, id, title)}>
+              <AddToCartBtn />
+            </form>
+          )}
         </div>
         <div className="flex items-center justify-between text-sm font-medium uppercase customSm:text-xs">
           <p>

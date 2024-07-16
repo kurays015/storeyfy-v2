@@ -13,13 +13,27 @@ export async function addToCart(
 
   if (!session) return;
 
-  const isAlreadyExist = await DL.query.getCartItem(productId);
+  const isAlreadyInTheCart = (
+    await DL.query.getCartItems(session.user.id)
+  ).some((item) => item.productId === productId);
 
-  if (isAlreadyExist) {
-    return { message: "Product is already in the cart!" };
-  }
+  if (isAlreadyInTheCart) return { message: "Product is already in the cart!" };
 
   await DL.mutations.createCartItems(session.user.id, productId);
+
+  revalidatePath(`/product/${title}/${productId}`);
+}
+
+export async function deleteItemToCart(
+  productId: string,
+  title: string,
+  formData: FormData,
+) {
+  const session = await getSession();
+
+  if (!session) return;
+
+  await DL.mutations.deleteCartItem(productId);
 
   revalidatePath(`/product/${title}/${productId}`);
 }

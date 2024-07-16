@@ -1,5 +1,5 @@
 import { StaticImageData } from "next/image";
-import { ReactNode } from "react";
+import { MouseEvent, ReactNode } from "react";
 
 export type ProductProps = {
   userId: string;
@@ -67,4 +67,22 @@ export type SingleProductPageParamsProps = {
 
 export type SingleProductLayoutProps = SingleProductPageParamsProps & {
   children: ReactNode;
+};
+
+type ButtonVariant =
+  | "unstyled"
+  | "default"
+  | "destructive"
+  | "ghost"
+  | "outline"
+  | "secondary"
+  | "link";
+
+export type SubmitButtonProps = {
+  isLoading: boolean;
+  children: ReactNode;
+  loadingText: string;
+  className?: string;
+  onClick?: (e: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>) => void;
+  variant?: ButtonVariant;
 };

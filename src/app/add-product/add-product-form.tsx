@@ -114,7 +114,7 @@ export default function AddProductForm() {
           )}
         />
 
-        <div className="flex gap-12">
+        <div className="flex gap-5">
           <FormField
             control={form.control}
             name="category"
@@ -145,13 +145,14 @@ export default function AddProductForm() {
                     ))}
                   </SelectContent>
                 </Select>
-                <FormDescription className="text-muted-foreground">
+                <FormDescription className="text-xs text-muted-foreground">
                   Product Category
                 </FormDescription>
                 <FormMessage />
               </FormItem>
             )}
           />
+
           <FormField
             control={form.control}
             name="subCategory"
@@ -187,8 +188,8 @@ export default function AddProductForm() {
                       )}
                   </SelectContent>
                 </Select>
-                <FormDescription className="text-muted-foreground">
-                  Product Category
+                <FormDescription className="text-xs text-muted-foreground">
+                  Product sub category
                 </FormDescription>
                 <FormMessage />
               </FormItem>
@@ -216,8 +217,8 @@ export default function AddProductForm() {
                     <SelectItem value="Used">Used</SelectItem>
                   </SelectContent>
                 </Select>
-                <FormDescription className="text-muted-foreground">
-                  Product Category
+                <FormDescription className="text-xs text-muted-foreground">
+                  Product Condition
                 </FormDescription>
                 <FormMessage />
               </FormItem>

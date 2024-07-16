@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
+import { SubmitButtonProps } from "@/types";
 import { LoaderIcon } from "lucide-react";
-import { MouseEvent, ReactNode } from "react";
 
 export function SubmitButton({
   isLoading,
@@ -8,19 +8,15 @@ export function SubmitButton({
   loadingText,
   onClick,
   className,
-}: {
-  isLoading: boolean;
-  children: ReactNode;
-  loadingText: string;
-  className?: string;
-  onClick?: (e: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>) => void;
-}) {
+  variant,
+}: SubmitButtonProps) {
   return (
     <Button
-      className={`flex gap-1 items-center ${className}`}
+      variant={variant}
+      className={`flex items-center gap-1 ${className}`}
       disabled={isLoading}
       type="submit"
-      onClick={e => {
+      onClick={(e) => {
         onClick?.(e);
       }}
     >
