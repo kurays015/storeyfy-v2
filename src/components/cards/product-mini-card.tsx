@@ -15,7 +15,7 @@ export default async function ProductMiniCard({
   hideRating,
 }: ProductMiniCardProps) {
   return (
-    <Link href={`/product/${title}/${category}/${id}`}>
+    <Link href={`/product/${encodeURIComponent(title)}/${category}/${id}`}>
       <div
         className={`flex gap-4 overflow-hidden rounded-md border p-2 customSm:gap-4 lg:max-w-[250px] xl:max-w-[300px]`}
       >
