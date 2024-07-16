@@ -14,7 +14,7 @@ export default async function ProductCard({
   discount,
 }: ProductProps) {
   return (
-    <Link href={`/product/${title}/${category}/${id}`}>
+    <Link href={`/product/${encodeURIComponent(title)}/${category}/${id}`}>
       <div className="flex h-full flex-col justify-evenly gap-2 overflow-hidden rounded-xl border p-4">
         <ProductBlurDataImage
           image={image}
