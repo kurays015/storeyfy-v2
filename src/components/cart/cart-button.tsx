@@ -19,11 +19,8 @@ export async function CartButton({
     <Sheet>
       <SheetTrigger asChild>
         <Button
-          style={
-            isAlreadyInTheCart
-              ? { width: "100%" }
-              : { all: "unset", position: "relative", cursor: "pointer" }
-          }
+          variant="unstyled"
+          className={`h-auto p-0 ${isAlreadyInTheCart ? "w-full border border-black dark:border-white" : "relative"}`}
         >
           {isAlreadyInTheCart ? (
             "Check Cart"
