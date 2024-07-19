@@ -14,7 +14,7 @@ export async function addToCart(
   if (!session) return;
 
   const isAlreadyInTheCart = (
-    await DL.query.getCartItems(session.user.id)
+    await DL.query.getUserCartItems(session.user.id)
   ).some((item) => item.productId === productId);
 
   if (isAlreadyInTheCart) return { message: "Product is already in the cart!" };

@@ -27,6 +27,7 @@ export type CartItemProps = Pick<
 export type CartItems = {
   id: string;
   userId: string;
+  quantity: number | null;
   productId: string;
   product: CartItemProps;
 };
@@ -85,4 +86,17 @@ export type SubmitButtonProps = {
   className?: string;
   onClick?: (e: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>) => void;
   variant?: ButtonVariant;
+};
+
+export type Quantity = { [id: string]: number };
+
+export type CartQuantityInputProps = {
+  id: string;
+  quantity: number | null;
+  stock: number;
+};
+
+export type CartFormProps = {
+  id: string;
+  title: string;
 };

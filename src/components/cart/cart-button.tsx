@@ -13,7 +13,7 @@ export async function CartButton({
 }) {
   const session = await getSession();
 
-  const cartItems = await DL.query.getCartItems(session?.user.id);
+  const cartItems = await DL.query.getUserCartItems(session?.user.id);
 
   return (
     <Sheet>

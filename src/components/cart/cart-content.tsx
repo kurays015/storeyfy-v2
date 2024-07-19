@@ -1,8 +1,7 @@
-"use client";
-
 import {
   SheetClose,
   SheetContent,
+  SheetDescription,
   SheetFooter,
   SheetHeader,
   SheetTitle,
@@ -10,30 +9,32 @@ import {
 import { Button } from "@/components/ui/button";
 import { CartContentProps } from "@/types";
 import CartItem from "@/components/cart/cart-item";
-import { useSession } from "next-auth/react";
 import Link from "next/link";
 import NoCartItems from "@/components/cart/no-cart-items";
+import { getSession } from "@/lib/auth";
+import CartTotal from "./cart-total";
 
-//can make this a server component later
-export default function CartContent({ cartItems }: CartContentProps) {
-  const session = useSession();
+export default async function CartContent({ cartItems }: CartContentProps) {
+  const session = await getSession();
   const hasCartItems = cartItems.length > 0;
   return (
     <SheetContent className="overflow-auto p-3">
-      {session.data?.user ? (
+      {session?.user ? (
         <>
           <SheetHeader>
             <SheetTitle>Your Cart ({cartItems.length})</SheetTitle>
+            <SheetDescription>Enjoy shopping!</SheetDescription>
           </SheetHeader>
           <div className="grid grid-cols-1 gap-4 py-4">
             {hasCartItems ? (
               cartItems.map((item) => (
-                <CartItem key={item.id} id={item.id} {...item.product} />
+                <CartItem key={item.id} {...item} {...item.product} />
               ))
             ) : (
               <NoCartItems />
             )}
           </div>
+          <CartTotal cartItems={cartItems} />
           {hasCartItems && (
             <SheetFooter>
               <SheetClose asChild>

@@ -1,25 +1,22 @@
-import { ProductProps } from "@/types";
+import { Quantity } from "@/types";
 import { create } from "zustand";
 
 type State = {
-  cartItems: ProductProps[];
+  quantities: Quantity;
 };
 
 type Actions = {
-  addToCart: (product: ProductProps) => void;
-  removeFromCart: (id: string) => void;
+  updateQuantity: (id: string, quantity: number) => void;
 };
 
 type CartStore = State & Actions;
 
 export const useCartStore = create<CartStore>((set) => ({
-  cartItems: [],
-  addToCart: (product: ProductProps) =>
+  quantities: {},
+  updateQuantity: (id: string, quantity: number) =>
     set((state) => {
-      return {};
-    }),
-  removeFromCart: (id: string) =>
-    set((state) => {
-      return {};
+      return {
+        quantities: { ...state.quantities, [id]: quantity },
+      };
     }),
 }));

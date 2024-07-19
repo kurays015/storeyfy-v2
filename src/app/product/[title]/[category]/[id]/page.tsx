@@ -1,4 +1,3 @@
-import { addToCart } from "@/app/product/_actions/action";
 import { DL } from "@/data-layer";
 import { getSession } from "@/lib/auth";
 import { SingleProductPageParamsProps } from "@/types";
@@ -6,11 +5,11 @@ import { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { CiHeart } from "react-icons/ci";
-import AddToCartBtn from "@/components/cart/add-to-cart-btn";
 import { CartButton } from "@/components/cart/cart-button";
 import Price from "@/components/products/price";
 import Rating from "@/components/products/rating";
 import { Button } from "@/components/ui/button";
+import AddToCartForm from "@/components/cart/add-to-cart-form";
 
 export async function generateMetadata({
   params,
@@ -29,7 +28,7 @@ export default async function SingleProductPage({
 
   const [product, cartItems] = await Promise.all([
     DL.query.getSingleProduct(params.id),
-    DL.query.getCartItems(session?.user.id),
+    DL.query.getUserCartItems(session?.user.id),
   ]);
 
   if (!product) return <h1>No product found!</h1>;
@@ -104,12 +103,7 @@ export default async function SingleProductPage({
             {isAlreadyInTheCart ? (
               <CartButton isAlreadyInTheCart={isAlreadyInTheCart} />
             ) : (
-              <form
-                className="w-full"
-                action={addToCart.bind(null, product.id, product.title)}
-              >
-                <AddToCartBtn />
-              </form>
+              <AddToCartForm id={product.id} title={product.title} />
             )}
           </div>
         </div>
