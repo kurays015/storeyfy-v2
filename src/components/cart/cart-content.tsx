@@ -13,6 +13,7 @@ import Link from "next/link";
 import NoCartItems from "@/components/cart/no-cart-items";
 import { getSession } from "@/lib/auth";
 import CartTotal from "./cart-total";
+import React from "react";
 
 export default async function CartContent({ cartItems }: CartContentProps) {
   const session = await getSession();
@@ -28,13 +29,15 @@ export default async function CartContent({ cartItems }: CartContentProps) {
           <div className="grid grid-cols-1 gap-4 py-4">
             {hasCartItems ? (
               cartItems.map((item) => (
-                <CartItem key={item.id} {...item} {...item.product} />
+                <React.Fragment key={item.id}>
+                  <CartItem {...item} {...item.product} />
+                  <CartTotal cartItems={cartItems} />
+                </React.Fragment>
               ))
             ) : (
               <NoCartItems />
             )}
           </div>
-          <CartTotal cartItems={cartItems} />
           {hasCartItems && (
             <SheetFooter>
               <SheetClose asChild>
