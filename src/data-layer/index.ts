@@ -3,7 +3,7 @@ import db from "@/lib/db";
 
 export const DL = {
   query: {
-    getCartItems: async (userId: string | undefined) => {
+    getUserCartItems: async (userId: string | undefined) => {
       return await db.cartItems.findMany({
         where: {
           userId: userId,
@@ -109,6 +109,7 @@ export const DL = {
         data: {
           userId: userId,
           productId: productId,
+          quantity: 1,
         },
         include: {
           product: {

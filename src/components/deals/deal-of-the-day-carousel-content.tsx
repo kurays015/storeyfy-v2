@@ -25,7 +25,7 @@ export default async function DealOfTheDayCarouselContent({
 }: ProductProps) {
   const session = await getSession();
 
-  const cartItems = await DL.query.getCartItems(session?.user.id);
+  const cartItems = await DL.query.getUserCartItems(session?.user.id);
 
   const isAlreadyInTheCart = cartItems.some((item) => item.productId === id);
 

@@ -3,7 +3,7 @@ import { MdDelete } from "react-icons/md";
 import { useFormStatus } from "react-dom";
 import { SubmitButton } from "../submit-btn";
 
-export default function DeleteCartItem() {
+export default function DeleteCartItemBtn() {
   const { pending } = useFormStatus();
   return (
     <SubmitButton

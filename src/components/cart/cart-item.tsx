@@ -1,15 +1,13 @@
 import { CartItemProps } from "@/types";
 import Image from "next/image";
-import { Input } from "@/components/ui/input";
 import Price from "@/components/products/price";
-import { deleteItemToCart } from "@/app/product/_actions/action";
-import DeleteCartItem from "@/components/cart/delete-cart-item";
+import DeleteCartForm from "@/components/cart/delete-cart-form";
+import CartQuantityInput from "./cart-quantity-input";
 
-type IdProp = {
+type Props = CartItemProps & {
   id: string;
+  quantity: number | null;
 };
-
-type Props = CartItemProps & IdProp;
 
 export default function CartItem({
   title,
@@ -18,6 +16,7 @@ export default function CartItem({
   stock,
   discount,
   id,
+  quantity,
 }: Props) {
   return (
     <div className="relative rounded-md border-b border-gray-200 shadow-sm customSm:p-4 640px:px-4 640px:pb-4 640px:pt-0">
@@ -46,11 +45,7 @@ export default function CartItem({
           </div>
         </div>
         <div className="mt-3 flex w-full items-center justify-between gap-3 self-center sm:mt-0 sm:w-auto 640px:flex-col">
-          <Input
-            type="number"
-            value={1}
-            className="w-16 rounded-md border border-gray-300 text-center"
-          />
+          <CartQuantityInput id={id} quantity={quantity} stock={stock} />
           {discount && (
             <p className="text-sm font-semibold text-green-600">
               {discount}% OFF!
@@ -58,9 +53,7 @@ export default function CartItem({
           )}
         </div>
       </div>
-      <form action={deleteItemToCart.bind(null, id, title)}>
-        <DeleteCartItem />
-      </form>
+      <DeleteCartForm id={id} title={title} />
     </div>
   );
 }
