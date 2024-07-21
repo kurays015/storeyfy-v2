@@ -28,12 +28,12 @@ export default async function CartContent({ cartItems }: CartContentProps) {
           </SheetHeader>
           <div className="grid grid-cols-1 gap-4 py-4">
             {hasCartItems ? (
-              cartItems.map((item) => (
-                <React.Fragment key={item.id}>
-                  <CartItem {...item} {...item.product} />
-                  <CartTotal cartItems={cartItems} />
-                </React.Fragment>
-              ))
+              <>
+                {cartItems.map((item) => (
+                  <CartItem key={item.id} {...item} {...item.product} />
+                ))}
+                <CartTotal cartItems={cartItems} />
+              </>
             ) : (
               <NoCartItems />
             )}

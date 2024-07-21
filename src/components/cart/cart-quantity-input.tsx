@@ -3,7 +3,7 @@
 import { Input } from "@/components/ui/input";
 import { useCartStore } from "@/stores/cart-store";
 import { CartQuantityInputProps } from "@/types";
-import { ChangeEvent } from "react";
+// import { ChangeEvent } from "react";
 
 export default function CartQuantityInput({
   id,
@@ -14,24 +14,24 @@ export default function CartQuantityInput({
   const updateQuantity = useCartStore((state) => state.updateQuantity);
   const currentQuantity = cartItemQuantity > stock ? stock : cartItemQuantity;
 
-  const handleQuantityChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
+  // const handleQuantityChange = (e: ChangeEvent<HTMLInputElement>) => {
+  //   const value = e.target.value;
 
-    // Check if the input value is a valid number
-    if (!/^\d*$/.test(value)) {
-      return;
-    }
+  //   // Check if the input value is a valid number
+  //   if (!/^\d*$/.test(value)) {
+  //     return;
+  //   }
 
-    const newQuantity = Number(value);
+  //   const newQuantity = Number(value);
 
-    updateQuantity(id, newQuantity);
-  };
+  //   updateQuantity(id, newQuantity);
+  // };
 
   return (
     <Input
-      type="text"
+      type="number"
       value={currentQuantity ?? quantity}
-      onInput={handleQuantityChange}
+      onChange={(e) => updateQuantity(id, Number(e.target.value))}
       className="w-16 rounded-md border border-gray-300 text-center"
     />
   );
