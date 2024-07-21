@@ -12,11 +12,7 @@ export default function CartQuantityInput({
 }: CartQuantityInputProps) {
   const cartItemQuantity = useCartStore((state) => state.quantities[id]);
   const updateQuantity = useCartStore((state) => state.updateQuantity);
-
-  const availableQuantityStock =
-    cartItemQuantity > stock ? stock : cartItemQuantity;
-
-  const displayQuantity = availableQuantityStock ?? quantity ?? 1;
+  const currentQuantity = cartItemQuantity > stock ? stock : cartItemQuantity;
 
   const handleQuantityChange = (e: ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
@@ -34,8 +30,8 @@ export default function CartQuantityInput({
   return (
     <Input
       type="text"
-      value={displayQuantity}
-      onChange={handleQuantityChange}
+      value={currentQuantity ?? quantity}
+      onInput={handleQuantityChange}
       className="w-16 rounded-md border border-gray-300 text-center"
     />
   );
