@@ -6,6 +6,7 @@ import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import { compare } from "bcrypt";
 import db from "./db";
 import { loginSchema } from "./formSchema";
+import { DL } from "@/data-layer";
 
 // for session id fix
 declare module "next-auth" {
@@ -49,11 +50,7 @@ export const authConfig = {
 
         if (!parsedData.success) return null;
 
-        const user = await db.user.findUnique({
-          where: {
-            email: parsedData.data.email,
-          },
-        });
+        const user = await DL.query.findUser(parsedData.data.email);
 
         if (!user) {
           throw new Error("User doesn't exist!");
@@ -61,7 +58,7 @@ export const authConfig = {
 
         const isPasswordMatch = await compare(
           credentials.password,
-          user.password as string
+          user.password as string,
         );
 
         if (!isPasswordMatch) {
@@ -75,11 +72,7 @@ export const authConfig = {
   callbacks: {
     //jwt callback will run first before session
     async jwt({ token, user }) {
-      const dbUser = await db.user.findUnique({
-        where: {
-          email: token.email as string,
-        },
-      });
+      const dbUser = await DL.query.findUser(token.email as string);
 
       if (!dbUser) {
         throw new Error("no user with email found");

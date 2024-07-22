@@ -7,7 +7,7 @@ import {
 import { categories } from "@/lib/categories";
 import Image from "next/image";
 import Link from "next/link";
-import ProductBySubCategoryCount from "@/components/ProductBySubCategoryCount";
+import ProductSubCategoryCount from "@/components/product-sub-category-count";
 
 export default async function CategoryAccordion() {
   return (
@@ -28,7 +28,7 @@ export default async function CategoryAccordion() {
             {subCategories.map((sub, index) => (
               <div key={index} className="flex items-center justify-between">
                 <Link href={`/products/${category}/${sub}`}>{sub}</Link>
-                <ProductBySubCategoryCount subCategory={sub} />
+                <ProductSubCategoryCount subCategory={sub} />
               </div>
             ))}
           </AccordionContent>

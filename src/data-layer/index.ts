@@ -1,8 +1,17 @@
 import "server-only";
 import db from "@/lib/db";
+import { ZSafeParseSuccessProps } from "@/types";
+import { SafeParseSuccess } from "zod";
 
 export const DL = {
   query: {
+    findUser: async (email: string) => {
+      return await db.user.findUnique({
+        where: {
+          email: email,
+        },
+      });
+    },
     isAlreadyInTheCart: async (productId: string) => {
       return await db.cartItems.findFirst({
         where: {
@@ -173,6 +182,37 @@ export const DL = {
       return await db.cartItems.delete({
         where: {
           id: id,
+        },
+      });
+    },
+
+    addProduct: async (
+      parsedData: SafeParseSuccess<ZSafeParseSuccessProps>,
+      uploadResponse: any,
+    ) => {
+      return await db.product.create({
+        data: {
+          sellerName: parsedData.data.sellerName,
+          userId: parsedData.data.userId,
+          title: parsedData.data.title,
+          category: parsedData.data.category,
+          subCategory: parsedData.data.subCategory,
+          condition: parsedData.data.condition,
+          price: parsedData.data.price,
+          description: parsedData.data.description,
+          discount: parsedData.data.discount ? parsedData.data.discount : 0,
+          stock: parsedData.data.stock,
+          image: uploadResponse.secure_url,
+        },
+      });
+    },
+
+    signUp: async (email: string, hashedPassword: string) => {
+      return await db.user.create({
+        data: {
+          email: email,
+          password: hashedPassword,
+          confirmPassword: hashedPassword,
         },
       });
     },

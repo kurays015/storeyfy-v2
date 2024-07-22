@@ -19,6 +19,21 @@ export type ProductProps = {
   updatedAt: Date;
 };
 
+export type ZSafeParseSuccessProps = {
+  userId: string;
+  title: string;
+  description: string;
+  image?: any;
+  category: string;
+  subCategory: string;
+  condition: string;
+  price: string;
+  sellerName: string;
+  discount?: number | "" | undefined;
+  rating?: number | null | undefined;
+  stock: number;
+};
+
 export type CartItemProps = Pick<
   ProductProps,
   "title" | "image" | "price" | "stock" | "discount"
