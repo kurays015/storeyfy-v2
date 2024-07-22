@@ -6,11 +6,7 @@ import CartContent from "@/components/cart/cart-content";
 import { DL } from "@/data-layer";
 import { getSession } from "@/lib/auth";
 
-export async function CartButton({
-  isAlreadyInTheCart,
-}: {
-  isAlreadyInTheCart?: boolean;
-}) {
+export async function CartButton({ isInTheCart }: { isInTheCart: boolean }) {
   const session = await getSession();
 
   const cartItems = await DL.query.getUserCartItems(session?.user.id);
@@ -20,9 +16,9 @@ export async function CartButton({
       <SheetTrigger asChild>
         <Button
           variant="unstyled"
-          className={`p-0 ${isAlreadyInTheCart ? "w-full border border-black dark:border-white" : "relative h-auto"}`}
+          className={`p-0 ${isInTheCart ? "w-full border border-black dark:border-white" : "relative h-auto"}`}
         >
-          {isAlreadyInTheCart ? (
+          {isInTheCart ? (
             "Check Cart"
           ) : (
             <>

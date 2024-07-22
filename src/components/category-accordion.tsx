@@ -6,8 +6,10 @@ import {
 } from "@/components/ui/accordion";
 import { categories } from "@/lib/categories";
 import Image from "next/image";
+import Link from "next/link";
+import ProductBySubCategoryCount from "@/components/ProductBySubCategoryCount";
 
-export default function CategoryAccordion() {
+export default async function CategoryAccordion() {
   return (
     <Accordion
       type="single"
@@ -24,7 +26,10 @@ export default function CategoryAccordion() {
           </AccordionTrigger>
           <AccordionContent>
             {subCategories.map((sub, index) => (
-              <div key={index}>{sub}</div>
+              <div key={index} className="flex items-center justify-between">
+                <Link href={`/products/${category}/${sub}`}>{sub}</Link>
+                <ProductBySubCategoryCount subCategory={sub} />
+              </div>
             ))}
           </AccordionContent>
         </AccordionItem>

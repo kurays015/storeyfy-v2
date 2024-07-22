@@ -12,9 +12,10 @@ export default async function ProductCard({
   rating,
   price,
   discount,
+  subCategory,
 }: ProductProps) {
   return (
-    <Link href={`/product/${encodeURIComponent(title)}/${category}/${id}`}>
+    <Link href={`/product/${category}/${subCategory}/${id}`}>
       <div className="flex h-full flex-col justify-evenly gap-2 overflow-hidden rounded-xl border p-4">
         <ProductBlurDataImage
           image={image}
@@ -24,7 +25,7 @@ export default async function ProductCard({
         <p className="lg:sm font-medium uppercase text-red-400 customSm:text-xs xl:text-base">
           {category}
         </p>
-        <h3 className="text-slate-500 dark:text-white customSm:text-sm lg:text-base xl:text-lg">
+        <h3 className="truncate text-slate-500 dark:text-white customSm:text-sm lg:text-base">
           {title}
         </h3>
         <Rating rating={rating} />

@@ -41,7 +41,7 @@ export default async function DealOfTheDayCarouselContent({
       />
       <div className="flex flex-1 flex-col justify-evenly customSm:gap-2">
         <Rating rating={rating} />
-        <h3 className="overflow-hidden text-ellipsis whitespace-nowrap text-lg font-bold customSm:text-base">
+        <h3 className="truncate text-lg font-bold customSm:text-base">
           {title}
         </h3>
         <p className="font-medium uppercase text-red-500">{category}</p>

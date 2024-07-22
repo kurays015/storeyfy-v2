@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -11,10 +10,16 @@ import {
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
 import { usePathname } from "next/navigation";
+import React from "react";
 
 export function BreadCrumbs() {
   const pathname = usePathname();
-  const splittedPathname = pathname.split("/");
+  const splittedPathnames = pathname
+    .split("/")
+    .filter(
+      (path) => path !== "" && !path.includes("-") && !path.includes("product"),
+    );
+
   return (
     <Breadcrumb className="my-4">
       <BreadcrumbList>
@@ -23,18 +28,27 @@ export function BreadCrumbs() {
             <Link href="/">Home</Link>
           </BreadcrumbLink>
         </BreadcrumbItem>
-        <BreadcrumbSeparator />
-        <BreadcrumbItem>
-          <BreadcrumbLink asChild>
-            <Link href="/products">{splittedPathname[1]}</Link>
-          </BreadcrumbLink>
-        </BreadcrumbItem>
-        <BreadcrumbSeparator />
-        <BreadcrumbItem>
-          <BreadcrumbPage>
-            {decodeURIComponent(splittedPathname[2])}
-          </BreadcrumbPage>
-        </BreadcrumbItem>
+        {splittedPathnames.length > 0 && <BreadcrumbSeparator />}
+        {splittedPathnames.map((path, index) => {
+          const isLastPath = splittedPathnames.length === index + 1;
+
+          return (
+            <React.Fragment key={index}>
+              <BreadcrumbItem>
+                {!isLastPath ? (
+                  <BreadcrumbLink asChild>
+                    <Link href={`/products/${path}`}>
+                      {decodeURIComponent(path)}
+                    </Link>
+                  </BreadcrumbLink>
+                ) : (
+                  <BreadcrumbPage>{decodeURIComponent(path)}</BreadcrumbPage>
+                )}
+              </BreadcrumbItem>
+              {!isLastPath && <BreadcrumbSeparator />}
+            </React.Fragment>
+          );
+        })}
       </BreadcrumbList>
     </Breadcrumb>
   );

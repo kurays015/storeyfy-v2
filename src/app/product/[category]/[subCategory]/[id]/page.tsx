@@ -1,5 +1,4 @@
 import { DL } from "@/data-layer";
-import { getSession } from "@/lib/auth";
 import { SingleProductPageParamsProps } from "@/types";
 import { Metadata } from "next";
 import Image from "next/image";
@@ -24,18 +23,15 @@ export async function generateMetadata({
 export default async function SingleProductPage({
   params,
 }: SingleProductPageParamsProps) {
-  const session = await getSession();
-
-  const [product, cartItems] = await Promise.all([
+  const [product, isAlreadyInTheCart] = await Promise.all([
     DL.query.getSingleProduct(params.id),
-    DL.query.getUserCartItems(session?.user.id),
+    DL.query.isAlreadyInTheCart(params.id),
   ]);
 
   if (!product) return <h1>No product found!</h1>;
 
-  const isAlreadyInTheCart = cartItems.some(
-    (item) => item.productId === product.id,
-  );
+  const isInTheCart = isAlreadyInTheCart !== null;
+
   return (
     <div className="space-y-8">
       {/* Product Details Section */}
@@ -100,8 +96,8 @@ export default async function SingleProductPage({
             <Button className="w-full bg-blue-500 text-white hover:bg-blue-600 dark:bg-blue-600 dark:text-white dark:hover:bg-blue-500">
               Buy now
             </Button>
-            {isAlreadyInTheCart ? (
-              <CartButton isAlreadyInTheCart={isAlreadyInTheCart} />
+            {isInTheCart ? (
+              <CartButton isInTheCart={isInTheCart} />
             ) : (
               <AddToCartForm id={product.id} title={product.title} />
             )}

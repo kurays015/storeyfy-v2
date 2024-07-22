@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import {
   Sheet,
   SheetContent,
+  SheetDescription,
   SheetHeader,
   SheetTitle,
   SheetTrigger,
@@ -24,6 +25,7 @@ export default async function MobileBurgerMenu() {
       <SheetContent side="left" className="p-4 lg:hidden">
         <SheetHeader>
           <SheetTitle className="mb-12 border-b text-start">Menu</SheetTitle>
+          <SheetDescription>Categories</SheetDescription>
         </SheetHeader>
         <div>
           <CategoryAccordion />

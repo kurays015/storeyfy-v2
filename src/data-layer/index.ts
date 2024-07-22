@@ -3,6 +3,42 @@ import db from "@/lib/db";
 
 export const DL = {
   query: {
+    isAlreadyInTheCart: async (productId: string) => {
+      return await db.cartItems.findFirst({
+        where: {
+          productId: productId,
+        },
+      });
+    },
+
+    getProductByCategory: async (category: string) => {
+      return db.product.findMany({
+        where: {
+          category: category,
+        },
+      });
+    },
+
+    getProductBySubCategory: async (subCategory: string) => {
+      return await db.product.findMany({
+        where: {
+          subCategory: subCategory,
+        },
+      });
+    },
+
+    getProductCountBySubCategory: async (subCategory: string) => {
+      return await db.product.count({
+        where: {
+          subCategory: subCategory,
+        },
+      });
+    },
+
+    getAllProducts: async () => {
+      return await db.product.findMany();
+    },
+
     getUserCartItems: async (userId: string | undefined) => {
       return await db.cartItems.findMany({
         where: {
@@ -21,6 +57,7 @@ export const DL = {
         },
       });
     },
+
     getBestSellers: async () => {
       return await db.product.findMany({
         where: {
@@ -31,13 +68,15 @@ export const DL = {
         take: 4,
       });
     },
+
     getSingleProduct: async (id: string) => {
-      return await db.product.findFirst({
+      return await db.product.findUnique({
         where: {
           id: id,
         },
       });
     },
+
     findUserProduct: async (userId: string) => {
       return await db.product.findMany({
         where: {
@@ -45,6 +84,7 @@ export const DL = {
         },
       });
     },
+
     getHighestDiscount: async () => {
       return await db.product.findMany({
         where: {
@@ -54,8 +94,8 @@ export const DL = {
         },
       });
     },
+
     getMostSoldProducts: async () => {
-      //need to change this
       return await db.product.findMany({
         where: {
           rating: 5,
@@ -63,6 +103,7 @@ export const DL = {
         take: 12,
       });
     },
+
     getNewArrivals: async () => {
       return await db.product.findMany({
         orderBy: {
@@ -71,6 +112,7 @@ export const DL = {
         take: 8,
       });
     },
+
     getTrending: async () => {
       return await db.product.findMany({
         where: {
@@ -81,6 +123,7 @@ export const DL = {
         take: 8,
       });
     },
+
     getTopRated: async () => {
       return await db.product.findMany({
         where: {
@@ -91,6 +134,7 @@ export const DL = {
         take: 8,
       });
     },
+
     getRecommendedProducts: async (category: string, id: string) => {
       return await db.product.findMany({
         where: {
@@ -124,6 +168,7 @@ export const DL = {
         },
       });
     },
+
     deleteCartItem: async (id: string) => {
       return await db.cartItems.delete({
         where: {

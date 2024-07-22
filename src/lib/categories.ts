@@ -25,7 +25,7 @@ export const categories = [
   {
     category: "Perfume",
     logo: perfume,
-    subCategories: ["Clothes Perfume", "Deodorant", "Jacket", "Dress & Frock"],
+    subCategories: ["Clothes Perfume", "Deodorant"],
   },
   {
     category: "Cosmetics",

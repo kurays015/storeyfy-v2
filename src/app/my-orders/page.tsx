@@ -1,3 +1,3 @@
 export default function MyOrdersPage() {
-  return <div>page</div>;
+  return <div>pagess</div>;
 }

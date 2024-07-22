@@ -22,7 +22,7 @@ export default function BlogCard({
       </div>
       <div className="my-4 space-y-1">
         <p className="text-red-400">{category}</p>
-        <h1 className="overflow-hidden text-ellipsis whitespace-nowrap text-lg font-bold dark:text-slate-200">
+        <h1 className="truncate text-lg font-bold dark:text-slate-200">
           {title}
         </h1>
         <p className="text-slate-700 dark:text-slate-400">
