@@ -10,7 +10,6 @@ import { CartButton } from "../cart/cart-button";
 import AddToCartBtn from "../cart/add-to-cart-btn";
 import { addToCart } from "@/app/product/_actions/action";
 import { DL } from "@/data-layer";
-import { getSession } from "@/lib/auth";
 
 export default async function DealOfTheDayCarouselContent({
   id,
@@ -23,11 +22,8 @@ export default async function DealOfTheDayCarouselContent({
   rating,
   stock,
 }: ProductProps) {
-  const session = await getSession();
-
-  const cartItems = await DL.query.getUserCartItems(session?.user.id);
-
-  const isAlreadyInTheCart = cartItems.some((item) => item.productId === id);
+  const isAlreadyInTheCart = await DL.query.isAlreadyInTheCart(id);
+  const isInTheCart = isAlreadyInTheCart !== null;
 
   return (
     <CarouselItem
@@ -58,8 +54,8 @@ export default async function DealOfTheDayCarouselContent({
           <Button className="w-full bg-blue-500 text-white hover:bg-blue-600 dark:bg-blue-600 dark:text-white dark:hover:bg-blue-500">
             Buy now
           </Button>
-          {isAlreadyInTheCart ? (
-            <CartButton isAlreadyInTheCart={isAlreadyInTheCart} />
+          {isInTheCart ? (
+            <CartButton isInTheCart={isInTheCart} />
           ) : (
             <form className="w-full" action={addToCart.bind(null, id, title)}>
               <AddToCartBtn />
