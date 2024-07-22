@@ -1,6 +1,6 @@
 import { DL } from "@/data-layer";
 
-export default async function ProductBySubCategoryCount({
+export default async function ProductSubCategoryCount({
   subCategory,
 }: {
   subCategory: string;

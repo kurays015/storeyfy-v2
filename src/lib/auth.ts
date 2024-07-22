@@ -1,4 +1,4 @@
-import { DefaultSession, NextAuthOptions, getServerSession } from "next-auth";
+import { NextAuthOptions, getServerSession } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import GithubProvider from "next-auth/providers/github";
 import CredentialsProvider from "next-auth/providers/credentials";
@@ -6,15 +6,7 @@ import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import { compare } from "bcrypt";
 import db from "./db";
 import { loginSchema } from "./formSchema";
-
-// for session id fix
-declare module "next-auth" {
-  interface Session extends DefaultSession {
-    user: {
-      id: string;
-    } & DefaultSession["user"];
-  }
-}
+import { DL } from "@/data-layer";
 
 export const authConfig = {
   adapter: PrismaAdapter(db),
@@ -49,11 +41,7 @@ export const authConfig = {
 
         if (!parsedData.success) return null;
 
-        const user = await db.user.findUnique({
-          where: {
-            email: parsedData.data.email,
-          },
-        });
+        const user = await DL.query.findUser(parsedData.data.email);
 
         if (!user) {
           throw new Error("User doesn't exist!");
@@ -61,7 +49,7 @@ export const authConfig = {
 
         const isPasswordMatch = await compare(
           credentials.password,
-          user.password as string
+          user.password as string,
         );
 
         if (!isPasswordMatch) {
@@ -75,11 +63,7 @@ export const authConfig = {
   callbacks: {
     //jwt callback will run first before session
     async jwt({ token, user }) {
-      const dbUser = await db.user.findUnique({
-        where: {
-          email: token.email as string,
-        },
-      });
+      const dbUser = await DL.query.findUser(token.email as string);
 
       if (!dbUser) {
         throw new Error("no user with email found");

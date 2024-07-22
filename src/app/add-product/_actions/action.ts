@@ -1,10 +1,10 @@
 "use server";
 
 import { v2 as cloudinary } from "cloudinary";
-import db from "@/lib/db";
 import { productSchema } from "@/lib/formSchema";
 import { redirect } from "next/navigation";
 import { getSession } from "@/lib/auth";
+import { DL } from "@/data-layer";
 
 cloudinary.config({
   cloud_name: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME,
@@ -55,21 +55,7 @@ export async function addProduct(formData: FormData) {
     }
 
     // Save product data to database
-    await db.product.create({
-      data: {
-        sellerName: parsedData.data.sellerName,
-        userId: parsedData.data.userId,
-        title: parsedData.data.title,
-        category: parsedData.data.category,
-        subCategory: parsedData.data.subCategory,
-        condition: parsedData.data.condition,
-        price: parsedData.data.price,
-        description: parsedData.data.description,
-        discount: parsedData.data.discount ? parsedData.data.discount : 0,
-        stock: parsedData.data.stock,
-        image: uploadResponse.secure_url,
-      },
-    });
+    await DL.mutations.addProduct(parsedData, uploadResponse);
   } catch (error) {
     return { message: "An unexpected error occured", success: false, error };
   }
