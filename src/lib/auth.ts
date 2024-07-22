@@ -1,4 +1,4 @@
-import { DefaultSession, NextAuthOptions, getServerSession } from "next-auth";
+import { NextAuthOptions, getServerSession } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import GithubProvider from "next-auth/providers/github";
 import CredentialsProvider from "next-auth/providers/credentials";
@@ -7,15 +7,6 @@ import { compare } from "bcrypt";
 import db from "./db";
 import { loginSchema } from "./formSchema";
 import { DL } from "@/data-layer";
-
-// for session id fix
-declare module "next-auth" {
-  interface Session extends DefaultSession {
-    user: {
-      id: string;
-    } & DefaultSession["user"];
-  }
-}
 
 export const authConfig = {
   adapter: PrismaAdapter(db),
