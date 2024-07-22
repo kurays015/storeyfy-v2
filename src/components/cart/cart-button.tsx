@@ -6,7 +6,7 @@ import CartContent from "@/components/cart/cart-content";
 import { DL } from "@/data-layer";
 import { getSession } from "@/lib/auth";
 
-export async function CartButton({ isInTheCart }: { isInTheCart: boolean }) {
+export async function CartButton({ isInTheCart }: { isInTheCart?: boolean }) {
   const session = await getSession();
 
   const cartItems = await DL.query.getUserCartItems(session?.user.id);
