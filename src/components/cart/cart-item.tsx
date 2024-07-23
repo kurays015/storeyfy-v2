@@ -1,9 +1,11 @@
-import { CartItemProps } from "@/types";
 import Image from "next/image";
+import Link from "next/link";
+
+import { CartItemProps } from "@/types";
 import Price from "@/components/products/price";
 import DeleteCartForm from "@/components/cart/delete-cart-form";
-import CartQuantityInput from "./cart-quantity-input";
-import Link from "next/link";
+import CartQuantityInput from "@/components/cart/cart-quantity-input";
+import ProductBlurDataImage from "@/components/products/product-blur-data-image";
 
 type Props = CartItemProps & {
   id: string;
@@ -32,13 +34,13 @@ export default function CartItem({
       </Link>
       <div className="flex flex-col items-center justify-between gap-5 sm:flex-row sm:items-start">
         <div className="flex w-full items-center gap-5 sm:w-auto">
-          <Image
-            src={image}
-            width={80}
-            height={80}
-            alt={title}
-            className="max-h-[70px] rounded-md"
-          />
+          <div className="h-20 w-20 overflow-hidden rounded-md">
+            <ProductBlurDataImage
+              image={image}
+              title={title}
+              size="h-full w-full"
+            />
+          </div>
           <div className="flex flex-col">
             <p className="text-sm text-gray-500 dark:text-white">
               In stock:{" "}

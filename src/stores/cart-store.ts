@@ -15,6 +15,8 @@ export const useCartStore = create<CartStore>((set) => ({
   quantities: {},
   updateQuantity: (id: string, quantity: number) =>
     set((state) => {
+      if (quantity < 1) return {};
+
       return {
         quantities: { ...state.quantities, [id]: quantity ?? 1 },
       };
