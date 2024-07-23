@@ -3,10 +3,12 @@ import Image from "next/image";
 import Price from "@/components/products/price";
 import DeleteCartForm from "@/components/cart/delete-cart-form";
 import CartQuantityInput from "./cart-quantity-input";
+import Link from "next/link";
 
 type Props = CartItemProps & {
   id: string;
   quantity: number | null;
+  productId: string;
 };
 
 export default function CartItem({
@@ -17,12 +19,17 @@ export default function CartItem({
   discount,
   id,
   quantity,
+  category,
+  subCategory,
+  productId,
 }: Props) {
   return (
     <div className="relative rounded-md border-b border-gray-200 shadow-sm customSm:p-4 640px:px-4 640px:pb-4 640px:pt-0">
-      <h2 className="mb-2 font-semibold text-gray-800 dark:text-white customSm:text-sm 480px:text-base 640px:text-lg">
-        {title}
-      </h2>
+      <Link href={`/product/${category}/${subCategory}/${productId}`}>
+        <h2 className="mb-2 font-semibold text-gray-800 dark:text-white customSm:text-sm 480px:text-base 640px:text-lg">
+          {title}
+        </h2>
+      </Link>
       <div className="flex flex-col items-center justify-between gap-5 sm:flex-row sm:items-start">
         <div className="flex w-full items-center gap-5 sm:w-auto">
           <Image
