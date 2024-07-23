@@ -114,7 +114,7 @@ export default function AddProductForm() {
           )}
         />
 
-        <div className="flex gap-5">
+        <div className="flex flex-wrap gap-5">
           <FormField
             control={form.control}
             name="category"
@@ -127,6 +127,7 @@ export default function AddProductForm() {
                     const index = categories.findIndex(
                       (category) => category.category === value,
                     );
+
                     setSubCategoryIndex(index.toString());
                     return field.onChange(value);
                   }}

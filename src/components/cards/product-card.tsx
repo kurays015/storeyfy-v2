@@ -20,7 +20,7 @@ export default async function ProductCard({
         <ProductBlurDataImage
           image={image}
           title={title}
-          size="w-full max-h-[170px]"
+          size="w-full max-h-[155px]"
         />
         <p className="lg:sm font-medium uppercase text-red-400 customSm:text-xs xl:text-base">
           {category}

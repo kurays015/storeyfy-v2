@@ -36,7 +36,13 @@ export type ZSafeParseSuccessProps = {
 
 export type CartItemProps = Pick<
   ProductProps,
-  "title" | "image" | "price" | "stock" | "discount"
+  | "title"
+  | "image"
+  | "price"
+  | "stock"
+  | "discount"
+  | "category"
+  | "subCategory"
 >;
 
 export type CartItems = {

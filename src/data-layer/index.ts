@@ -12,6 +12,7 @@ export const DL = {
         },
       });
     },
+
     isAlreadyInTheCart: async (productId: string) => {
       return await db.cartItems.findFirst({
         where: {
@@ -61,6 +62,8 @@ export const DL = {
               price: true,
               discount: true,
               stock: true,
+              subCategory: true,
+              category: true,
             },
           },
         },

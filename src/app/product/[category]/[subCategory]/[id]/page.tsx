@@ -35,7 +35,7 @@ export default async function SingleProductPage({
   return (
     <div className="space-y-8">
       {/* Product Details Section */}
-      <div className="b relative flex flex-col gap-6 rounded-lg border p-6 shadow-md md:flex-row">
+      <div className="relative flex flex-col gap-6 rounded-lg border p-6 shadow-md md:flex-row">
         <div className="w-full md:w-1/2">
           <Image
             width={500}
