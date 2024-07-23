@@ -3,7 +3,7 @@ import ProductBySubCategoryContent from "@/components/products/product-sub-categ
 import ProductCardGridSkeleton from "@/components/skeletons/product-card-grid-skeleton";
 import HeaderTitle from "@/components/header-title";
 
-export default async function ProductBySubCategory({
+export default function ProductBySubCategory({
   params,
 }: {
   params: { category: string; subCategory: string };

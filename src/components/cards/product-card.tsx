@@ -4,7 +4,7 @@ import Price from "@/components/products/price";
 import { ProductProps } from "@/types";
 import ProductBlurDataImage from "@/components/products/product-blur-data-image";
 
-export default async function ProductCard({
+export default function ProductCard({
   id,
   image,
   title,

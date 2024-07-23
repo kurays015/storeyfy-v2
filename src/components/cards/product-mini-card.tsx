@@ -4,7 +4,7 @@ import Price from "@/components/products/price";
 import Link from "next/link";
 import ProductBlurDataImage from "@/components/products/product-blur-data-image";
 
-export default async function ProductMiniCard({
+export default function ProductMiniCard({
   id,
   title,
   image,

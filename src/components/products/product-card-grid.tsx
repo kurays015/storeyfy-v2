@@ -1,7 +1,7 @@
 import ProductCard from "@/components/cards/product-card";
 import { ProductProps } from "@/types";
 
-export default async function ProductCardGrid({
+export default function ProductCardGrid({
   products,
 }: {
   products: ProductProps[];
