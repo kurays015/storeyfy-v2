@@ -30,7 +30,7 @@ export default function CartItem({
             width={80}
             height={80}
             alt={title}
-            className="rounded-md border border-gray-300"
+            className="max-h-[70px] rounded-md"
           />
           <div className="flex flex-col">
             <p className="text-sm text-gray-500 dark:text-white">
