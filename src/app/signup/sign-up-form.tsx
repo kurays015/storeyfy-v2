@@ -20,7 +20,7 @@ import SignUpFormSubmitBtn from "@/components/sign-up-form-submit-btn";
 import CustomFormSeperator from "@/components/custom-form-separator";
 
 import Link from "next/link";
-import { signUpSchema } from "@/lib/formSchema";
+import { signUpSchema } from "@/schema/formSchema";
 import { signUp } from "@/app/signup/_actions/action";
 
 export default function SignUpForm() {

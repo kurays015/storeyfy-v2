@@ -191,7 +191,7 @@ export const DL = {
 
     addProduct: async (
       parsedData: SafeParseSuccess<ZSafeParseSuccessProps>,
-      uploadResponse: any,
+      secure_url: string,
     ) => {
       return await db.product.create({
         data: {
@@ -205,7 +205,7 @@ export const DL = {
           description: parsedData.data.description,
           discount: parsedData.data.discount ? parsedData.data.discount : 0,
           stock: parsedData.data.stock,
-          image: uploadResponse.secure_url,
+          image: secure_url,
         },
       });
     },

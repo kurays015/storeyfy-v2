@@ -21,7 +21,7 @@ import { Button } from "@/components/ui/button";
 import GoogleLoginButton from "@/components/credentials-login-button/google-login-btn";
 import GithubLoginButton from "@/components/credentials-login-button/github-login-btn";
 import CustomFormSeparator from "@/components/custom-form-separator";
-import { loginSchema } from "@/lib/formSchema";
+import { loginSchema } from "@/schema/formSchema";
 import { SubmitButton } from "@/components/submit-btn";
 
 export default function SignInForm() {

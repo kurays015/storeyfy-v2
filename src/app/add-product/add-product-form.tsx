@@ -25,10 +25,10 @@ import {
 import AddProductSubmitBtn from "@/components/add-product-submit-btn";
 import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
-import { productSchema } from "@/lib/formSchema";
 import { categories } from "@/lib/categories";
 import capitalFirstLetter from "@/lib/capitalFirstLetter";
 import { addProduct } from "@/app/add-product/_actions/action";
+import { productSchema } from "@/schema/formSchema";
 
 export default function AddProductForm() {
   const [productImage, setProductImage] = useState<null | string | ArrayBuffer>(
@@ -52,6 +52,8 @@ export default function AddProductForm() {
       condition: "",
     },
   });
+
+  const fileRef = form.register("image");
 
   function handleImageOnChange(e: React.FormEvent<HTMLInputElement>) {
     const target = e.target as HTMLInputElement & {
@@ -127,6 +129,8 @@ export default function AddProductForm() {
                     const index = categories.findIndex(
                       (category) => category.category === value,
                     );
+
+                    form.setValue("subCategory", "");
 
                     setSubCategoryIndex(index.toString());
                     return field.onChange(value);
@@ -293,7 +297,8 @@ export default function AddProductForm() {
                   placeholder="your image"
                   accept="image/*"
                   type="file"
-                  {...field}
+                  {...fileRef}
+                  // onChange={handleImageOnChange}
                   onChangeCapture={handleImageOnChange}
                 />
               </FormControl>
