@@ -1,44 +1,19 @@
 "use server";
 
-import { v2 as cloudinary } from "cloudinary";
-import { productSchema } from "@/lib/formSchema";
+import { productSchema } from "@/schema/formSchema";
 import { redirect } from "next/navigation";
 import { getSession } from "@/lib/auth";
 import { DL } from "@/data-layer";
-
-cloudinary.config({
-  cloud_name: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME,
-  api_key: process.env.NEXT_PUBLIC_CLOUDINARY_API_KEY,
-  api_secret: process.env.CLOUDINARY_API_SECRET,
-});
+import cloudinaryUpload from "@/app/add-product/cloudinary-upload";
 
 export async function addProduct(formData: FormData) {
   try {
     const data = Object.fromEntries(formData);
     const session = await getSession();
-    const image = formData.get("image") as File;
 
     if (!session) return;
 
     const userName = session.user.email?.split("@")[0];
-
-    //cloudinary upload
-    const arrayBuffer = await image.arrayBuffer();
-    const buffer = new Uint8Array(arrayBuffer);
-    const uploadResponse: any = await new Promise((resolve, reject) => {
-      cloudinary.uploader
-        .upload_stream(
-          { folder: `${userName} Products` },
-          function (err, result) {
-            if (err) {
-              reject(err);
-              return;
-            }
-            resolve(result);
-          },
-        )
-        .end(buffer);
-    });
 
     const parsedData = productSchema.safeParse({
       ...data,
@@ -53,11 +28,12 @@ export async function addProduct(formData: FormData) {
         issues: parsedData.error.issues.map((issue) => issue.message),
       };
     }
+    const uploadRes = await cloudinaryUpload(parsedData.data.image, userName);
 
     // Save product data to database
-    await DL.mutations.addProduct(parsedData, uploadResponse);
+    await DL.mutations.addProduct(parsedData, uploadRes.secure_url);
   } catch (error) {
-    return { message: "An unexpected error occured", success: false, error };
+    return { message: "An error occured", error, success: false };
   }
 
   redirect("/my-products");

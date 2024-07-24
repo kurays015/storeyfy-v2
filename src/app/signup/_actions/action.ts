@@ -1,7 +1,7 @@
 "use server";
 
 import { DL } from "@/data-layer";
-import { signUpSchema } from "@/lib/formSchema";
+import { signUpSchema } from "@/schema/formSchema";
 import { hash } from "bcrypt";
 import { redirect } from "next/navigation";
 
