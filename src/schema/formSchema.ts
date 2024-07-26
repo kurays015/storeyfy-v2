@@ -14,17 +14,68 @@ export const loginSchema = z.object({
 export const signUpSchema = z
   .object({
     email: z.string().email().min(1, { message: "Invalid Email" }),
-    password: z
-      .string()
-      .min(6, { message: "Password must be at least 6 characters long." }),
+    password: z.string(),
     confirmPassword: z.string(),
   })
-  .refine(
-    (values) => {
-      return values.password === values.confirmPassword;
-    },
-    { message: "Passwords must match!", path: ["confirmPassword"] },
-  );
+  .superRefine(({ password, confirmPassword }, checkPassComplexity) => {
+    const containsUppercase = (ch: string) => /[A-Z]/.test(ch);
+    const containsLowercase = (ch: string) => /[a-z]/.test(ch);
+    const containsSpecialChar = (ch: string) =>
+      /[`!@#$%^&*()_\-+=\[\]{};':"\\|,.<>\/?~ ]/.test(ch);
+    let countOfUpperCase = 0,
+      countOfLowerCase = 0,
+      countOfNumbers = 0,
+      countOfSpecialChar = 0;
+
+    for (let i = 0; i < password.length; i++) {
+      let ch = password.charAt(i);
+      if (!isNaN(+ch)) countOfNumbers++;
+      else if (containsUppercase(ch)) countOfUpperCase++;
+      else if (containsLowercase(ch)) countOfLowerCase++;
+      else if (containsSpecialChar(ch)) countOfSpecialChar++;
+    }
+
+    let errObj = {
+      upperCase: { pass: true, message: "add upper case" },
+      lowerCase: { pass: true, message: "add lower case" },
+      specialCh: { pass: true, message: "add special ch" },
+      totalNumber: { pass: true, message: "add number" },
+    };
+
+    if (countOfLowerCase < 1) {
+      errObj.lowerCase.pass = false;
+    }
+    if (countOfNumbers < 1) {
+      errObj.totalNumber.pass = false;
+    }
+    if (countOfUpperCase < 1) {
+      errObj.upperCase.pass = false;
+    }
+    if (countOfSpecialChar < 1) {
+      errObj.specialCh.pass = false;
+    }
+
+    const errorMessages = Object.values(errObj)
+      .filter((obj) => !obj.pass)
+      .map((obj) => obj.message)
+      .join(", ");
+
+    if (errorMessages) {
+      checkPassComplexity.addIssue({
+        code: "custom",
+        path: ["password"],
+        message: errorMessages,
+      });
+    }
+
+    if (password !== confirmPassword) {
+      checkPassComplexity.addIssue({
+        code: "custom",
+        path: ["confirmPassword"],
+        message: "Passwords do not match.",
+      });
+    }
+  });
 
 export const productSchema = z.object({
   title: z
