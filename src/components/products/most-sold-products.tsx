@@ -1,7 +1,7 @@
 import { Suspense } from "react";
 import HeaderTitle from "@/components/header-title";
 import ProductCardGridSkeleton from "@/components/skeletons/product-card-grid-skeleton";
-import MostSoldProductsContent from "@/components/products/most-sold-products-content";
+import MostSoldProductsContent from "@/components/products/suspense-contents/most-sold-products-content";
 
 export function MostSoldProducts() {
   return (

@@ -5,6 +5,18 @@ import { SafeParseSuccess } from "zod";
 
 export const DL = {
   query: {
+    getSearchResult: async (query: string) => {
+      const sanitizedQuery = query?.trim().replace(/\s+/g, " | ");
+
+      return await db.product.findMany({
+        where: {
+          title: {
+            search: sanitizedQuery,
+          },
+        },
+      });
+    },
+
     findUser: async (email: string) => {
       return await db.user.findUnique({
         where: {

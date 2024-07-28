@@ -1,20 +1,20 @@
 import { Suspense } from "react";
 import ProductCardGridSkeleton from "@/components/skeletons/product-card-grid-skeleton";
 import HeaderTitle from "@/components/header-title";
-import ProductByCategoryContent from "@/components/products/suspense-contents/product-by-category-content";
+import SearchResultContent from "@/components/products/suspense-contents/search-result-content";
 
-export default function ProductByCategory({
-  params,
+export default function ProductBySearch({
+  searchParams: { query },
 }: {
-  params: { category: string };
+  searchParams: { query: string };
 }) {
   return (
     <div>
       <HeaderTitle className="mb-6 border-b text-lg font-semibold tracking-wide text-slate-700 dark:text-white">
-        {decodeURIComponent(params.category)} Products
+        Searching for {query}
       </HeaderTitle>
-      <Suspense fallback={<ProductCardGridSkeleton />}>
-        <ProductByCategoryContent category={params.category} />
+      <Suspense key={query} fallback={<ProductCardGridSkeleton />}>
+        <SearchResultContent query={query} />
       </Suspense>
     </div>
   );

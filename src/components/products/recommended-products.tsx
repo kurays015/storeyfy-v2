@@ -1,5 +1,5 @@
 import HeaderTitle from "@/components/header-title";
-import RecommendedProductsContent from "@/components/products/recommended-products-content";
+import RecommendedProductsContent from "@/components/products/suspense-contents/recommended-products-content";
 import ProductCardGridSkeleton from "@/components/skeletons/product-card-grid-skeleton";
 import { Suspense } from "react";
 

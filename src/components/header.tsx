@@ -6,7 +6,7 @@ import AccountDropdown from "@/components/account-dropdown";
 import { DarkModeToggle } from "@/components/dark-mode-toggle";
 import ProfileAvatar from "@/components/profile-avatar";
 import LoginButton from "@/components/login-btn";
-import SearchForm from "@/components/search-form";
+import SearchInput from "@/components/search-input";
 import NavLinkMenu from "./nav-link-menu";
 import { CartButton } from "@/components/cart/cart-button";
 
@@ -38,7 +38,7 @@ export default async function Header() {
           </h1>
         </Link>
         <div className="flex items-center gap-4 customSm:w-full">
-          <SearchForm />
+          <SearchInput />
           <ul className="flex items-center gap-5 text-3xl customSm:hidden lg:flex">
             {session?.user && <AccountDropdown />}
             <NavLinkMenu
