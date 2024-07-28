@@ -8,7 +8,7 @@ export default function SearchResultLayout({
   children: ReactNode;
 }) {
   return (
-    <main className="my-12 xl:container customSm:px-4 md:mx-auto md:max-w-3xl lg:max-w-7xl">
+    <main className="mb-28 mt-12 xl:container customSm:px-4 md:mx-auto md:max-w-3xl lg:max-w-7xl">
       <BreadCrumbs />
       <div className="flex gap-7">
         <SideBar />

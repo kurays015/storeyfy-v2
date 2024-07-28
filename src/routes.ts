@@ -33,4 +33,5 @@ export const absoluteRoute: string[] = [
   "/my-products",
   "/my-orders",
   "/my-wishlist",
+  "/search",
 ];
