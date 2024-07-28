@@ -17,7 +17,7 @@ export default function SearchInput() {
       params.delete("query");
     }
 
-    replace(`/search-result?${params.toString()}`);
+    replace(`/search?${params.toString()}`);
   }, 300);
 
   return (

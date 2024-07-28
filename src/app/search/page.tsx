@@ -11,7 +11,7 @@ export default function ProductBySearch({
   return (
     <div>
       <HeaderTitle className="mb-6 border-b text-lg font-semibold tracking-wide text-slate-700 dark:text-white">
-        Searching for {query}
+        Searching for {query ? query : "..."}
       </HeaderTitle>
       <Suspense key={query} fallback={<ProductCardGridSkeleton />}>
         <SearchResultContent query={query} />

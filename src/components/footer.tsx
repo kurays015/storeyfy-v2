@@ -10,7 +10,7 @@ export default function Footer() {
 
   return (
     <footer
-      className={`bg-[#242424] text-center font-semibold text-slate-300 dark:bg-slate-800 customSm:h-40 customSm:p-4 lg:h-auto lg:p-12 ${atBottom ? "hidden" : ""}`}
+      className={`bg-[#242424] text-center font-semibold text-slate-300 dark:bg-slate-800 customSm:h-40 customSm:p-4 lg:h-auto lg:p-12 ${atBottom ? "hidden" : ""} ${pathname.startsWith("/search") && "customSm:absolute customSm:bottom-0 customSm:w-full lg:static lg:bottom-auto lg:w-auto"}`}
     >
       Copyright © {currentYear} Storeyfy All rights reserve.
     </footer>

@@ -1,5 +1,6 @@
 import { DL } from "@/data-layer";
 import ProductCardGrid from "@/components/products/product-card-grid";
+import NotFound from "@/components/not-found";
 
 export default async function RecommendedProductsContent({
   category,
@@ -13,7 +14,7 @@ export default async function RecommendedProductsContent({
     id,
   );
 
-  if (!recommendedProducts) return;
+  if (!recommendedProducts || !recommendedProducts.length) return <NotFound />;
 
   return <ProductCardGrid products={recommendedProducts} />;
 }

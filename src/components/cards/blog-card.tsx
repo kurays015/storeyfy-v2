@@ -12,7 +12,7 @@ export default function BlogCard({
     <div>
       <div>
         <Image
-          className="max-h-[165px] w-full rounded-xl"
+          className="w-full rounded-xl"
           src={image}
           height={100}
           width={100}
