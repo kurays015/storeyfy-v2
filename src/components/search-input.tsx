@@ -23,7 +23,7 @@ export default function SearchInput() {
   return (
     <div className="relative flex flex-1">
       <Input
-        type="search"
+        type="text"
         placeholder="Search a product..."
         className="w-full"
         onChange={(e) => handleSearch(e.target.value)}
