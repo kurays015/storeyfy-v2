@@ -54,7 +54,7 @@ export default function CartItem({
         </div>
         <div className="mt-3 flex w-full items-center justify-between gap-3 self-center sm:mt-0 sm:w-auto 640px:flex-col">
           <CartQuantityInput id={id} quantity={quantity} stock={stock} />
-          {discount && (
+          {discount !== 0 && (
             <p className="text-sm font-semibold text-green-600">
               {discount}% OFF!
             </p>
