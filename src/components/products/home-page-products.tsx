@@ -6,7 +6,7 @@ export default function Products() {
   return (
     <div className="overflow-hidden">
       <TrendingProducts />
-      {/* <DealOfTheDay /> */}
+      <DealOfTheDay />
       <MostSoldProducts />
     </div>
   );
