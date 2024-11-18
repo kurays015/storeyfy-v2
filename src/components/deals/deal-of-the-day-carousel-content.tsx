@@ -30,7 +30,9 @@ export default async function DealOfTheDayCarouselContent({
       key={id}
       className="flex customSm:flex-col customSm:gap-4 md:flex-row md:gap-8"
     >
-      <ProductBlurDataImage
+      <SaleCountDown />
+
+      {/* <ProductBlurDataImage
         image={image}
         title={title}
         size="customSm:w-full md:w-2/5"
@@ -74,9 +76,9 @@ export default async function DealOfTheDayCarouselContent({
           <div className="text-sm font-semibold text-black dark:text-white">
             HURRY UP! OFFER ENDS IN:
           </div>
-          {/* <SaleCountDown /> */}
+          <SaleCountDown />
         </div>
-      </div>
+      </div> */}
     </CarouselItem>
   );
 }

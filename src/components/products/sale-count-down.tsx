@@ -20,16 +20,16 @@ export default function SaleCountDown() {
     );
 
   return (
-    <div className="text-3xl font-bold my-4">
-      <span className="bg-red-400 text-white p-2 rounded-xl">
+    <div className="my-4 text-3xl font-bold">
+      <span className="rounded-xl bg-red-400 p-2 text-white">
         {hours < 10 ? `0${hours}` : hours}
       </span>{" "}
       :{" "}
-      <span className="bg-red-400 text-white p-2 rounded-xl">
+      <span className="rounded-xl bg-red-400 p-2 text-white">
         {minutes < 10 ? `0${minutes}` : minutes}
       </span>{" "}
       :{" "}
-      <span className="bg-red-400 text-white p-2 rounded-xl">
+      <span className="rounded-xl bg-red-400 p-2 text-white">
         {seconds < 10 ? `0${seconds}` : seconds}
       </span>
     </div>
