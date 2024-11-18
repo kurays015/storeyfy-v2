@@ -74,7 +74,7 @@ export default async function DealOfTheDayCarouselContent({
           <div className="text-sm font-semibold text-black dark:text-white">
             HURRY UP! OFFER ENDS IN:
           </div>
-          <SaleCountDown />
+          {/* <SaleCountDown /> */}
         </div>
       </div>
     </CarouselItem>
