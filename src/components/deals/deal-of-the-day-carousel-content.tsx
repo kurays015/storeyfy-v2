@@ -50,7 +50,8 @@ export default async function DealOfTheDayCarouselContent({
             {formatCurrency(parseFloat(price))}
           </del>
         </div>
-        {/* <div className="my-4 flex gap-4">
+        {/* //here */}
+        <div className="my-4 flex gap-4">
           <Button className="w-full bg-blue-500 text-white hover:bg-blue-600 dark:bg-blue-600 dark:text-white dark:hover:bg-blue-500">
             Buy now
           </Button>
@@ -61,7 +62,8 @@ export default async function DealOfTheDayCarouselContent({
               <AddToCartBtn />
             </form>
           )}
-        </div> */}
+        </div>
+        {/* //here */}
         <div className="flex items-center justify-between text-sm font-medium uppercase customSm:text-xs">
           <p>
             Already sold: <span className="customSm:font-bold">20</span>
