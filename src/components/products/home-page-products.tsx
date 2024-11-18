@@ -5,8 +5,8 @@ import TrendingProducts from "@/components/trending-products/trending-products";
 export default function Products() {
   return (
     <div className="overflow-hidden">
-      {/* <TrendingProducts />
-      <DealOfTheDay /> */}
+      <TrendingProducts />
+      {/* <DealOfTheDay /> */}
       <MostSoldProducts />
     </div>
   );
