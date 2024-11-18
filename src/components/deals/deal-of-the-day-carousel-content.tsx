@@ -30,15 +30,13 @@ export default async function DealOfTheDayCarouselContent({
       key={id}
       className="flex customSm:flex-col customSm:gap-4 md:flex-row md:gap-8"
     >
-      <SaleCountDown />
-
-      {/* <ProductBlurDataImage
+      <ProductBlurDataImage
         image={image}
         title={title}
         size="customSm:w-full md:w-2/5"
       />
       <div className="flex flex-1 flex-col justify-evenly customSm:gap-2">
-        <Rating rating={rating} />
+        {/* <Rating rating={rating} />
         <h3 className="truncate text-lg font-bold customSm:text-base">
           {title}
         </h3>
@@ -63,7 +61,7 @@ export default async function DealOfTheDayCarouselContent({
               <AddToCartBtn />
             </form>
           )}
-        </div>
+        </div> */}
         <div className="flex items-center justify-between text-sm font-medium uppercase customSm:text-xs">
           <p>
             Already sold: <span className="customSm:font-bold">20</span>
@@ -78,7 +76,7 @@ export default async function DealOfTheDayCarouselContent({
           </div>
           <SaleCountDown />
         </div>
-      </div> */}
+      </div>
     </CarouselItem>
   );
 }
