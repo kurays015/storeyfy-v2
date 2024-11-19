@@ -28,9 +28,9 @@ export default function middleware(req: NextRequest) {
     return null;
   }
 
-  // if (!token && !isPublicRoute) {
-  //   return NextResponse.redirect(new URL("/signin", req.nextUrl));
-  // }
+  if (!token && !isPublicRoute) {
+    return NextResponse.redirect(new URL("/signin", req.nextUrl));
+  }
 
   return null;
 }
