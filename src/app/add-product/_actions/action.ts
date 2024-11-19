@@ -2,14 +2,13 @@
 
 import { productSchema } from "@/schema/formSchema";
 import { redirect } from "next/navigation";
-import { getSession } from "@/lib/auth";
 import { DL } from "@/data-layer";
 import cloudinaryUpload from "@/app/add-product/cloudinary-upload";
 
 export async function addProduct(formData: FormData) {
   try {
     const data = Object.fromEntries(formData);
-    const session = await getSession();
+    const session = await DL.mutations.getSession();
 
     if (!session) return;
 

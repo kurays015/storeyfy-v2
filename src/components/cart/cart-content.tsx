@@ -11,12 +11,12 @@ import { CartContentProps } from "@/types";
 import CartItem from "@/components/cart/cart-item";
 import Link from "next/link";
 import NoCartItems from "@/components/cart/no-cart-items";
-import { getSession } from "@/lib/auth";
 import CartTotal from "./cart-total";
 import React from "react";
+import { DL } from "@/data-layer";
 
 export default async function CartContent({ cartItems }: CartContentProps) {
-  const session = await getSession();
+  const session = await DL.mutations.getSession();
   const hasCartItems = cartItems.length > 0;
   return (
     <SheetContent className="overflow-auto p-3">

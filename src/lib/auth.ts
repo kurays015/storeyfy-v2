@@ -90,7 +90,3 @@ export const authConfig = {
   },
   secret: process.env.NEXTAUTH_SECRET,
 } satisfies NextAuthOptions;
-
-export function getSession() {
-  return getServerSession(authConfig);
-}

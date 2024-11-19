@@ -22,7 +22,12 @@ export default async function DealOfTheDayCarouselContent({
   rating,
   stock,
 }: ProductProps) {
-  const isAlreadyInTheCart = await DL.query.isAlreadyInTheCart(id);
+  const session = await DL.mutations.getSession();
+
+  const isAlreadyInTheCart = await DL.query.isAlreadyInTheCart(
+    id,
+    session?.user.id,
+  );
   const isInTheCart = isAlreadyInTheCart !== null;
 
   return (
@@ -55,7 +60,7 @@ export default async function DealOfTheDayCarouselContent({
           <Button className="w-full bg-blue-500 text-white hover:bg-blue-600 dark:bg-blue-600 dark:text-white dark:hover:bg-blue-500">
             Buy now
           </Button>
-          {isInTheCart ? (
+          {isInTheCart && session ? (
             <CartButton isInTheCart={isInTheCart} />
           ) : (
             <form className="w-full" action={addToCart.bind(null, id, title)}>

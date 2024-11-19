@@ -11,10 +11,10 @@ import {
 } from "@/components/ui/sheet";
 import CategoryAccordion from "@/components/category-accordion";
 import MobileLogout from "@/components/mobile/mobile-logout";
-import { getSession } from "@/lib/auth";
+import { DL } from "@/data-layer";
 
 export default async function MobileBurgerMenu() {
-  const session = await getSession();
+  const session = await DL.mutations.getSession();
   return (
     <Sheet>
       <SheetTrigger asChild>

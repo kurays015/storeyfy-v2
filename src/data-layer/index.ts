@@ -2,6 +2,8 @@ import "server-only";
 import db from "@/lib/db";
 import { ZSafeParseSuccessProps } from "@/types";
 import { SafeParseSuccess } from "zod";
+import { getServerSession } from "next-auth";
+import { authConfig } from "@/lib/auth";
 
 export const DL = {
   query: {
@@ -25,9 +27,13 @@ export const DL = {
       });
     },
 
-    isAlreadyInTheCart: async (productId: string) => {
+    isAlreadyInTheCart: async (
+      productId: string,
+      userId: string | undefined,
+    ) => {
       return await db.cartItems.findFirst({
         where: {
+          userId: userId,
           productId: productId,
         },
       });
@@ -172,6 +178,10 @@ export const DL = {
     },
   },
   mutations: {
+    getSession: () => {
+      return getServerSession(authConfig);
+    },
+
     createCartItems: async (userId: string, productId: string) => {
       return await db.cartItems.create({
         data: {

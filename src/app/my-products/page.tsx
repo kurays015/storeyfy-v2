@@ -1,6 +1,5 @@
 import Link from "next/link";
 
-import { getSession } from "@/lib/auth";
 import ProductTable from "@/app/my-products/product-table";
 import { Button } from "@/components/ui/button";
 import { Metadata } from "next";
@@ -11,7 +10,7 @@ export const metadata: Metadata = {
 };
 
 export default async function MyProductPage() {
-  const session = await getSession();
+  const session = await DL.mutations.getSession();
 
   if (!session) return;
 

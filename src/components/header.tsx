@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { FaRegHeart } from "react-icons/fa";
 import { FaFacebook, FaTwitter, FaInstagram } from "react-icons/fa";
-import { getSession } from "@/lib/auth";
 import AccountDropdown from "@/components/account-dropdown";
 import { DarkModeToggle } from "@/components/dark-mode-toggle";
 import ProfileAvatar from "@/components/profile-avatar";
@@ -9,9 +8,10 @@ import LoginButton from "@/components/login-btn";
 import SearchInput from "@/components/search-input";
 import NavLinkMenu from "./nav-link-menu";
 import { CartButton } from "@/components/cart/cart-button";
+import { DL } from "@/data-layer";
 
 export default async function Header() {
-  const session = await getSession();
+  const session = await DL.mutations.getSession();
 
   return (
     <header className="border-b">

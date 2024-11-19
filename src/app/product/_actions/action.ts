@@ -1,7 +1,6 @@
 "use server";
 
 import { DL } from "@/data-layer";
-import { getSession } from "@/lib/auth";
 import { revalidatePath } from "next/cache";
 
 export async function addToCart(
@@ -9,11 +8,14 @@ export async function addToCart(
   title: string,
   formData: FormData,
 ) {
-  const session = await getSession();
+  const session = await DL.mutations.getSession();
 
   if (!session) return;
 
-  const isAlreadyInTheCart = await DL.query.isAlreadyInTheCart(productId);
+  const isAlreadyInTheCart = await DL.query.isAlreadyInTheCart(
+    productId,
+    session.user.id,
+  );
 
   if (isAlreadyInTheCart || isAlreadyInTheCart !== null) {
     return { message: "Product is already in the cart!" };
@@ -29,7 +31,7 @@ export async function deleteItemToCart(
   title: string,
   formData: FormData,
 ) {
-  const session = await getSession();
+  const session = await DL.mutations.getSession();
 
   if (!session) return;
 

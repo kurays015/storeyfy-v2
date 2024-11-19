@@ -1,8 +1,8 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { getSession } from "@/lib/auth";
+import { DL } from "@/data-layer";
 
 export default async function ProfileAvatar() {
-  const session = await getSession();
+  const session = await DL.mutations.getSession();
   return (
     <div className="flex items-center gap-2">
       <Avatar>

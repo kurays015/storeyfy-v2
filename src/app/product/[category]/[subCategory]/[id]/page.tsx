@@ -9,6 +9,7 @@ import Price from "@/components/products/price";
 import Rating from "@/components/products/rating";
 import { Button } from "@/components/ui/button";
 import AddToCartForm from "@/components/cart/add-to-cart-form";
+import NotFound from "@/components/not-found";
 
 export async function generateMetadata({
   params,
@@ -23,12 +24,14 @@ export async function generateMetadata({
 export default async function SingleProductPage({
   params,
 }: SingleProductPageParamsProps) {
+  const session = await DL.mutations.getSession();
+
   const [product, isAlreadyInTheCart] = await Promise.all([
     DL.query.getSingleProduct(params.id),
-    DL.query.isAlreadyInTheCart(params.id),
+    DL.query.isAlreadyInTheCart(params.id, session?.user.id),
   ]);
 
-  if (!product) return <h1>No product found!</h1>;
+  if (!product) return <NotFound />;
 
   const isInTheCart = isAlreadyInTheCart !== null;
 
@@ -36,16 +39,16 @@ export default async function SingleProductPage({
     <div className="space-y-8">
       {/* Product Details Section */}
       <div className="relative flex flex-col gap-6 rounded-lg border p-6 shadow-md md:flex-row">
-        <div className="w-full md:w-1/2">
+        <div className="">
           <Image
             width={500}
             height={500}
             src={product.image}
             alt={product.title}
-            className="h-full w-full rounded-lg object-cover md:max-h-[450px]"
+            className="w-full rounded-lg object-contain md:max-h-[400px]"
           />
         </div>
-        <div className="flex w-full flex-col gap-2 md:w-1/2 lg:justify-evenly">
+        <div className="flex flex-1 flex-col gap-2 md:w-1/2 lg:justify-evenly">
           <h1 className="text-3xl font-bold">{product.title}</h1>
           <Price price={product.price} discount={product.discount} />
           <div className="space-y-1">
@@ -97,9 +100,9 @@ export default async function SingleProductPage({
               className="w-full bg-blue-500 text-white hover:bg-blue-600 dark:bg-blue-600 dark:text-white dark:hover:bg-blue-500"
               asChild
             >
-              <Link href={`/purchase/${product.id}`}>Buy now</Link>
+              <Link href={`/product/purchase/${product.id}`}>Buy now</Link>
             </Button>
-            {isInTheCart ? (
+            {isInTheCart && session ? (
               <CartButton isInTheCart={isInTheCart} />
             ) : (
               <AddToCartForm id={product.id} title={product.title} />
