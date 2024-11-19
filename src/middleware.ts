@@ -22,15 +22,15 @@ export default function middleware(req: NextRequest) {
   if (isAuthRoute) {
     if (token) {
       return NextResponse.redirect(
-        new URL(DEFAULT_LOGIN_REDIRECT, req.nextUrl)
+        new URL(DEFAULT_LOGIN_REDIRECT, req.nextUrl),
       );
     }
     return null;
   }
 
-  if (!token && !isPublicRoute) {
-    return NextResponse.redirect(new URL("/signin", req.nextUrl));
-  }
+  // if (!token && !isPublicRoute) {
+  //   return NextResponse.redirect(new URL("/signin", req.nextUrl));
+  // }
 
   return null;
 }

@@ -6,7 +6,7 @@ export default function PaymentSuccess({
   searchParams: { amount: string };
 }) {
   return (
-    <main className="mx-4 mb-12 mt-12 rounded-md border bg-gradient-to-tr from-blue-500 to-purple-500 p-10 xl:container customSm:px-4 md:mx-auto md:max-w-3xl lg:max-w-7xl">
+    <main className="mx-4 mb-12 mt-12 rounded-md border bg-gradient-to-tr from-blue-500 to-purple-500 p-10 text-center xl:container customSm:px-4 md:mx-auto md:max-w-3xl lg:max-w-7xl">
       <div className="mb-10">
         <h1 className="mb-2 text-4xl font-extrabold">
           Thank you for your purchase!
