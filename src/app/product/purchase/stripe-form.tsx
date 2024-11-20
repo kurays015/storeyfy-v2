@@ -59,7 +59,9 @@ export default function StripeForm({
 
   if (!stripe || !elements)
     return (
-      <Loader2 className="mx-auto h-full animate-spin customSm:w-8 md:w-24" />
+      <div className="absolute left-1/2 top-1/2 flex -translate-x-1/2 -translate-y-1/2 items-center justify-center">
+        <Loader2 className="animate-spin text-blue-500 dark:text-blue-500" />
+      </div>
     );
 
   return (

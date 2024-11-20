@@ -3,10 +3,8 @@
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import { ProductProps } from "@/types";
-import Image from "next/image";
-import { formatCurrency } from "@/lib/currencyFormatter";
-import getDiscountValue from "@/lib/getDiscountValue";
 import StripeForm from "@/app/product/purchase/stripe-form";
+import ProductDetails from "@/app/product/purchase/product-details";
 
 type CheckoutFormProps = {
   product: ProductProps;
@@ -25,37 +23,29 @@ export default function CheckoutForm({
   clientSecret,
 }: CheckoutFormProps) {
   return (
-    <div className="flex flex-col gap-10 md:flex-row">
-      <div className="flex flex-1 flex-col rounded-lg bg-white p-6 shadow-md dark:bg-gray-700">
-        <p className="mb-2 text-black dark:text-slate-300">Your Order</p>
-        <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
-          {product.title}
-        </h1>
-        <p className="mt-4 text-2xl font-semibold text-gray-700 dark:text-gray-300">
-          {formatCurrency(
-            getDiscountValue(product.discount, parseFloat(product.price)),
-          )}
-        </p>
-
-        <div className="w-full">
-          <Image
-            src={product.image}
-            alt={product.title}
-            width={200}
-            height={200}
-            className="mt-6 rounded-lg customSm:w-full lg:w-40"
-          />
-        </div>
-        <div className="mt-6 space-y-2">
-          <p className="text-sm italic text-gray-700 dark:text-gray-300">
-            Address: Sample Street. 321 Nowhere City
+    <div className="rounded-lg bg-white p-4 shadow-lg dark:bg-gray-900 md:p-6 lg:p-8">
+      <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:gap-12">
+        <ProductDetails product={product} />
+        <div className="relative rounded-lg bg-gray-100 p-4 shadow-md dark:bg-gray-800 md:p-6 lg:p-8">
+          <h2 className="mb-4 text-2xl font-bold text-gray-800 dark:text-gray-200">
+            Complete Your Payment
+          </h2>
+          <p className="mb-6 text-sm text-gray-600 dark:text-gray-400">
+            This is a test mode, you won't get charged. To complete the payment
+            use the following details:
+            <br />
+            Ex.
+            <br />
+            Card Number: 4242 4242 4242 4242
+            <br />
+            Expiration: 01/25
+            <br />
+            Security Code: 123
           </p>
+          <Elements options={{ clientSecret }} stripe={stripePromise}>
+            <StripeForm price={product.price} discount={product.discount} />
+          </Elements>
         </div>
-      </div>
-      <div className="dark:bg- flex-1 rounded-lg bg-white p-6 shadow-md">
-        <Elements options={{ clientSecret }} stripe={stripePromise}>
-          <StripeForm price={product.price} discount={product.discount} />
-        </Elements>
       </div>
     </div>
   );
