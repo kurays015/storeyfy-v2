@@ -6,24 +6,30 @@ export default function PaymentSuccess({
   searchParams: { amount: string };
 }) {
   return (
-    <main className="mx-4 mb-12 mt-12 rounded-md border bg-gradient-to-tr from-blue-500 to-purple-500 p-10 text-center xl:container customSm:px-4 md:mx-auto md:max-w-3xl lg:max-w-7xl">
-      <div className="mb-10">
-        <h1 className="mb-2 text-4xl font-extrabold">
-          Thank you for your purchase!
+    <main className="my-12 flex items-center justify-center text-gray-800 dark:text-gray-200 customSm:mx-4 customSm:min-h-[50vh] md:mx-0 lg:min-h-[65vh]">
+      <div className="w-full max-w-lg rounded-lg border bg-white p-6 text-center shadow-lg dark:bg-gray-800 sm:p-8">
+        {/* Success Message */}
+        <h1 className="mb-4 text-2xl font-extrabold text-gray-900 dark:text-gray-100 sm:text-3xl lg:text-4xl">
+          Thank You for Your Purchase!
         </h1>
-        <h2 className="text-2xl">Your payment was processed successfully.</h2>
+        <p className="text-sm text-gray-700 dark:text-gray-300 sm:text-base lg:text-lg">
+          Your payment was processed successfully.
+        </p>
 
-        <div className="mt-5 rounded-md bg-white p-2 text-center text-4xl font-bold text-purple-500">
-          {amount}
+        {/* Amount Display */}
+        <div className="mt-6 rounded-md bg-gray-200 p-4 text-lg font-semibold text-gray-900 shadow-md dark:bg-gray-700 dark:text-gray-100 sm:text-xl lg:text-2xl">
+          Total Paid: {amount}
         </div>
-      </div>
-      <div className="text-center">
-        <Link
-          href="/my-orders"
-          className="mt-5 inline-block rounded bg-white px-4 py-2 font-semibold text-purple-500 transition duration-300 hover:bg-purple-500 hover:text-white"
-        >
-          View Your Orders
-        </Link>
+
+        {/* Call-to-Action */}
+        <div className="mt-8">
+          <Link
+            href="/my-orders"
+            className="inline-block rounded bg-gray-900 px-3 py-1.5 text-xs font-semibold text-gray-100 shadow transition hover:bg-gray-800 dark:bg-blue-500 dark:text-white dark:hover:bg-blue-600 sm:px-4 sm:py-2 sm:text-sm lg:text-base"
+          >
+            View Your Orders
+          </Link>
+        </div>
       </div>
     </main>
   );

@@ -81,7 +81,7 @@ export default function StripeForm({
         </div>
         <footer>
           <Button
-            className="mt-4 w-full bg-black dark:bg-blue-500 dark:text-white"
+            className="mt-4 w-full bg-black dark:bg-blue-500 dark:text-white dark:hover:bg-blue-600"
             size="lg"
             disabled={!stripe || !elements || isLoading}
           >

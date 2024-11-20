@@ -100,7 +100,7 @@ export default function ProductTable({ data }: any) {
       </div>
       <div className="max-h-[500px] overflow-auto rounded-md border">
         <Table className="relative">
-          <TableHeader className="sticky top-0 z-10 bg-white">
+          <TableHeader className="sticky top-0 z-10">
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>
                 {headerGroup.headers.map((header) => {

@@ -30,8 +30,8 @@ export const DEFAULT_LOGIN_REDIRECT: string = "/";
  * @type {string}
  */
 export const absoluteRoute: string[] = [
-  "/my-products",
-  "/my-orders",
-  "/my-wishlist",
-  "/search",
+  // "/my-products",
+  // "/my-orders",
+  // "/my-wishlist",
+  // "/search",
 ];

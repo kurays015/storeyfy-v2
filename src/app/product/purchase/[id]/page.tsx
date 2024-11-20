@@ -28,7 +28,7 @@ export default async function PuchasePage({
   }
 
   return (
-    <div className="xl:container customSm:mb-24 customSm:px-4 md:mx-auto md:max-w-3xl lg:mb-52 lg:max-w-7xl">
+    <div className="my-12 xl:container customSm:px-4 md:mx-auto md:max-w-3xl lg:max-w-7xl">
       <BreadCrumbs />
       <CheckoutForm
         product={product}
