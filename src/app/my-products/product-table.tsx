@@ -32,14 +32,6 @@ import {
 } from "@/components/ui/table";
 import { columns } from "@/app/my-products/columns";
 
-export type Product = {
-  id: string;
-  title: string;
-  description: string;
-  category: string;
-  price: string;
-};
-
 export default function ProductTable({ data }: any) {
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
@@ -70,7 +62,7 @@ export default function ProductTable({ data }: any) {
 
   return (
     <div className="w-full">
-      <div className="flex items-center py-4">
+      <div className="flex items-center gap-4 py-4">
         <Input
           placeholder="Filter title..."
           value={(table.getColumn("title")?.getFilterValue() as string) ?? ""}
@@ -82,7 +74,7 @@ export default function ProductTable({ data }: any) {
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="outline" className="ml-auto">
-              Columns <ChevronDown className="ml-2 h-4 w-4" />
+              Filter <ChevronDown className="ml-2 h-4 w-4" />
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
@@ -106,9 +98,9 @@ export default function ProductTable({ data }: any) {
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
-      <div className="rounded-md border">
-        <Table>
-          <TableHeader>
+      <div className="max-h-[500px] overflow-auto rounded-md border">
+        <Table className="relative">
+          <TableHeader className="sticky top-0 z-10 bg-white">
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>
                 {headerGroup.headers.map((header) => {

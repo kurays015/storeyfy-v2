@@ -10,10 +10,20 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { formatCurrency } from "@/lib/currencyFormatter";
-import { Product } from "@/app/my-products/product-table";
 import { format } from "date-fns";
+import Link from "next/link";
+import deleteItemFromTable from "@/app/my-products/_actions/action";
 
-export const columns: ColumnDef<Product>[] = [
+type ProductTableColumn = {
+  id: string;
+  title: string;
+  description: string;
+  category: string;
+  subCategory: string;
+  price: string;
+};
+
+export const columns: ColumnDef<ProductTableColumn>[] = [
   {
     id: "select",
     header: ({ table }) => (
@@ -54,6 +64,13 @@ export const columns: ColumnDef<Product>[] = [
     cell: ({ row }) => <div>{row.getValue("category")}</div>,
   },
   {
+    accessorKey: "subCategory",
+    header: () => {
+      return <div>Sub-Category</div>;
+    },
+    cell: ({ row }) => <div>{row.getValue("subCategory")}</div>,
+  },
+  {
     accessorKey: "price",
     header: ({ column }) => (
       <Button
@@ -82,13 +99,16 @@ export const columns: ColumnDef<Product>[] = [
       return <div className="font-medium">{formattedDate}</div>;
     },
   },
-
   {
     id: "actions",
     enableHiding: false,
     cell: ({ row }) => {
       //the Product[] data
       const product = row.original;
+
+      async function handleDelete(e: React.MouseEvent) {
+        deleteItemFromTable(product.id);
+      }
 
       return (
         <DropdownMenu>
@@ -99,9 +119,13 @@ export const columns: ColumnDef<Product>[] = [
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
-            <DropdownMenuItem>View</DropdownMenuItem>
+            <Link
+              href={`/product/${product.category}/${product.subCategory}/${product.id}`}
+            >
+              <DropdownMenuItem>View</DropdownMenuItem>
+            </Link>
             <DropdownMenuItem>Edit</DropdownMenuItem>
-            <DropdownMenuItem>Delete</DropdownMenuItem>
+            <DropdownMenuItem onClick={handleDelete}>Delete</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       );

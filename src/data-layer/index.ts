@@ -178,6 +178,10 @@ export const DL = {
     },
   },
   mutations: {
+    deleteProduct: async (id: string) => {
+      return await db.product.delete({ where: { id: id } });
+    },
+
     getSession: () => {
       return getServerSession(authConfig);
     },

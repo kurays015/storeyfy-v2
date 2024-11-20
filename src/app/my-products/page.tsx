@@ -17,7 +17,7 @@ export default async function MyProductPage() {
   const products = await DL.query.findUserProduct(session.user.id);
 
   return (
-    <div className="my-12 xl:container customSm:px-4 md:mx-auto md:max-w-3xl lg:max-w-7xl">
+    <div className="mb-24 mt-12 xl:container customSm:px-4 md:mx-auto md:max-w-3xl lg:max-w-7xl">
       {products.length ? (
         <>
           <div className="flex items-center justify-between">
