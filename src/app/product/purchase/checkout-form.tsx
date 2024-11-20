@@ -31,8 +31,8 @@ export default function CheckoutForm({
             Complete Your Payment
           </h2>
           <p className="mb-6 text-sm text-gray-600 dark:text-gray-400">
-            This is a test mode, you won't get charged. To complete the payment
-            use the following details:
+            This is a test mode, you won&apos;t get charged. To complete the
+            payment use the following details:
             <br />
             Ex.
             <br />
