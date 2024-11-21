@@ -4,7 +4,6 @@ import * as React from "react";
 import { ColumnDef } from "@tanstack/react-table";
 import { ArrowUpDown, MoreHorizontal } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Checkbox } from "@/components/ui/checkbox";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -14,36 +13,68 @@ import {
 import { formatCurrency } from "@/lib/currencyFormatter";
 import { format } from "date-fns";
 import Link from "next/link";
-import deleteItemFromTable from "@/app/my-products/_actions/action";
 import { ProductTableColumn } from "@/types";
+import Image from "next/image";
+import { Badge } from "@/components/ui/badge";
+import deleteOrder from "@/app/my-orders/_actions/action";
 
 export const columns: ColumnDef<ProductTableColumn>[] = [
+  // {
+  //   id: "select",
+  //   header: ({ table }) => (
+  //     <Checkbox
+  //       checked={
+  //         table.getIsAllPageRowsSelected() ||
+  //         (table.getIsSomePageRowsSelected() && "indeterminate")
+  //       }
+  //       onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
+  //       aria-label="Select all"
+  //     />
+  //   ),
+  //   cell: ({ row }) => (
+  //     <Checkbox
+  //       checked={row.getIsSelected()}
+  //       onCheckedChange={(value) => row.toggleSelected(!!value)}
+  //       aria-label="Select row"
+  //     />
+  //   ),
+  //   enableSorting: false,
+  //   enableHiding: false,
+  // },
   {
-    id: "select",
-    header: ({ table }) => (
-      <Checkbox
-        checked={
-          table.getIsAllPageRowsSelected() ||
-          (table.getIsSomePageRowsSelected() && "indeterminate")
-        }
-        onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
-        aria-label="Select all"
-      />
-    ),
+    accessorKey: "orderId",
+    header: "Order ID",
     cell: ({ row }) => (
-      <Checkbox
-        checked={row.getIsSelected()}
-        onCheckedChange={(value) => row.toggleSelected(!!value)}
-        aria-label="Select row"
-      />
+      <div className="capitalize">{row.getValue("orderId")}</div>
     ),
-    enableSorting: false,
-    enableHiding: false,
   },
   {
-    accessorKey: "id",
-    header: "ID",
-    cell: ({ row }) => <div className="capitalize">{row.getValue("id")}</div>,
+    accessorKey: "image",
+    header: () => {
+      return <div>Category</div>;
+    },
+    cell: ({ row }) => (
+      <div>
+        <Image
+          src={row.getValue("image")}
+          alt={row.getValue("title")}
+          width={60}
+          height={60}
+          className="max-h-14 rounded-md object-contain"
+        />
+      </div>
+    ),
+  },
+  {
+    accessorKey: "status",
+    header: "Status",
+    cell: ({ row }) => (
+      <div className="capitalize">
+        <Badge className="bg-green-600 text-white" variant="outline">
+          {row.getValue("status")}
+        </Badge>
+      </div>
+    ),
   },
   {
     accessorKey: "title",
@@ -101,7 +132,7 @@ export const columns: ColumnDef<ProductTableColumn>[] = [
       const product = row.original;
 
       async function handleDelete(e: React.MouseEvent) {
-        deleteItemFromTable(product.id);
+        deleteOrder(row.getValue("orderId"));
       }
 
       return (
@@ -116,9 +147,8 @@ export const columns: ColumnDef<ProductTableColumn>[] = [
             <Link
               href={`/product/${product.category}/${product.subCategory}/${product.id}`}
             >
-              <DropdownMenuItem>View</DropdownMenuItem>
+              <DropdownMenuItem>View product</DropdownMenuItem>
             </Link>
-            <DropdownMenuItem>Edit</DropdownMenuItem>
             <DropdownMenuItem onClick={handleDelete}>Delete</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>

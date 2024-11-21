@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import {
+  ColumnDef,
   ColumnFiltersState,
   SortingState,
   VisibilityState,
@@ -30,9 +31,15 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { columns } from "@/app/my-products/columns";
+import { ProductProps, ProductTableColumn } from "@/types";
 
-export default function ProductTable({ data }: any) {
+export default function ReusableTable({
+  data,
+  columns,
+}: {
+  data: ProductProps[];
+  columns: ColumnDef<ProductTableColumn>[];
+}) {
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     [],

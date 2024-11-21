@@ -121,3 +121,8 @@ export type CartFormProps = {
   id: string;
   title: string;
 };
+
+export type ProductTableColumn = Pick<
+  ProductProps,
+  "id" | "title" | "description" | "category" | "subCategory" | "price"
+>;

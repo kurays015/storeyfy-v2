@@ -7,6 +7,17 @@ import { authConfig } from "@/lib/auth";
 
 export const DL = {
   query: {
+    findUserOrders: async (userId: string) => {
+      return await db.order.findMany({
+        where: {
+          userId: userId,
+        },
+        include: {
+          product: true,
+        },
+      });
+    },
+
     getSearchResult: async (query: string) => {
       const sanitizedQuery = query?.trim().replace(/\s+/g, " | ");
 
@@ -177,7 +188,15 @@ export const DL = {
       });
     },
   },
+
   mutations: {
+    deleteOrder: async (id: string) => {
+      return await db.order.delete({
+        where: {
+          id: id,
+        },
+      });
+    },
     createOrders: async (productId: string, userId: string, price: number) => {
       if (!userId) {
         throw new Error("user id is required");
