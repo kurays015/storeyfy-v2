@@ -48,10 +48,22 @@ export const columns: ColumnDef<ProductTableColumn>[] = [
       <div className="capitalize">{row.getValue("orderId")}</div>
     ),
   },
+
+  {
+    accessorKey: "status",
+    header: "Status",
+    cell: ({ row }) => (
+      <div className="capitalize">
+        <Badge className="bg-green-600 text-white" variant="outline">
+          {row.getValue("status")}
+        </Badge>
+      </div>
+    ),
+  },
   {
     accessorKey: "image",
     header: () => {
-      return <div>Category</div>;
+      return <div>Image</div>;
     },
     cell: ({ row }) => (
       <div>
@@ -62,17 +74,6 @@ export const columns: ColumnDef<ProductTableColumn>[] = [
           height={60}
           className="max-h-14 rounded-md object-contain"
         />
-      </div>
-    ),
-  },
-  {
-    accessorKey: "status",
-    header: "Status",
-    cell: ({ row }) => (
-      <div className="capitalize">
-        <Badge className="bg-green-600 text-white" variant="outline">
-          {row.getValue("status")}
-        </Badge>
       </div>
     ),
   },
@@ -114,10 +115,10 @@ export const columns: ColumnDef<ProductTableColumn>[] = [
     },
   },
   {
-    accessorKey: "createdAt",
-    header: () => <div>List Date</div>,
+    accessorKey: "orderDate",
+    header: () => <div>Order Date</div>,
     cell: ({ row }) => {
-      const parsedDate = new Date(row.getValue("createdAt"));
+      const parsedDate = new Date(row.getValue("orderDate"));
 
       const formattedDate = format(parsedDate, "MMMM do, yyyy h:mm:ss a");
 

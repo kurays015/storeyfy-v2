@@ -7,6 +7,18 @@ import { authConfig } from "@/lib/auth";
 
 export const DL = {
   query: {
+    getUserOrdersCount: async (userId: string | undefined) => {
+      if (!userId) {
+        throw new Error("user id is required");
+      }
+
+      return await db.order.count({
+        where: {
+          userId: userId,
+        },
+      });
+    },
+
     findUserOrders: async (userId: string) => {
       return await db.order.findMany({
         where: {

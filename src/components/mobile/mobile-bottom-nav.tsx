@@ -1,13 +1,19 @@
 import { IoBagHandleOutline } from "react-icons/io5";
-import { IoCartOutline } from "react-icons/io5";
 import { IoHomeOutline } from "react-icons/io5";
 import { FaRegHeart } from "react-icons/fa";
 import { CiShoppingBasket } from "react-icons/ci";
 import MobileBurgerMenu from "@/components/mobile/mobile-burger-menu";
 import NavLinkMenu from "@/components/nav-link-menu";
 import { CartButton } from "../cart/cart-button";
+import { DL } from "@/data-layer";
 
-export default function MobileBottomNav() {
+export default async function MobileBottomNav() {
+  const session = await DL.mutations.getSession();
+
+  if (!session) return;
+
+  const orderCount = await DL.query.getUserOrdersCount(session?.user.id);
+
   return (
     <div className="fixed bottom-0 left-1/2 z-10 flex w-full max-w-[500px] -translate-x-1/2 items-center border bg-white p-4 shadow-customBoxShadow dark:border-none customSm:justify-between 480px:justify-around 480px:rounded-t-lg lg:hidden">
       <MobileBurgerMenu />
@@ -31,7 +37,7 @@ export default function MobileBottomNav() {
 
       <NavLinkMenu
         href="/my-orders"
-        count={1}
+        count={orderCount}
         icon={<IoBagHandleOutline />}
         className="relative"
       />

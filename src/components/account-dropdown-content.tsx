@@ -12,7 +12,7 @@ import { signOut } from "next-auth/react";
 import { CgProfile } from "react-icons/cg";
 import { CiShoppingBasket } from "react-icons/ci";
 import { IoBagHandleOutline } from "react-icons/io5";
-import NavLinkMenu from "./nav-link-menu";
+import NavLinkMenu from "@/components/nav-link-menu";
 
 export default function AccountDropdownContent() {
   return (
