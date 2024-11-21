@@ -178,6 +178,20 @@ export const DL = {
     },
   },
   mutations: {
+    createOrders: async (productId: string, userId: string, price: number) => {
+      if (!userId) {
+        throw new Error("user id is required");
+      }
+
+      return await db.order.create({
+        data: {
+          price,
+          productId,
+          userId: userId,
+        },
+      });
+    },
+
     deleteProduct: async (id: string) => {
       return await db.product.delete({ where: { id: id } });
     },
@@ -232,6 +246,7 @@ export const DL = {
           discount: parsedData.data.discount ? parsedData.data.discount : 0,
           stock: parsedData.data.stock,
           image: secure_url,
+          rating: 0,
         },
       });
     },

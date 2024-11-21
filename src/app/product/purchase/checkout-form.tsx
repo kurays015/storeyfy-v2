@@ -43,7 +43,7 @@ export default function CheckoutForm({
             Security Code: 123
           </p>
           <Elements options={{ clientSecret }} stripe={stripePromise}>
-            <StripeForm price={product.price} discount={product.discount} />
+            <StripeForm {...product} />
           </Elements>
         </div>
       </div>

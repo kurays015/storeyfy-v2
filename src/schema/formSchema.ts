@@ -89,7 +89,7 @@ export const productSchema = z.object({
   subCategory: z.string().min(3, { message: "Sub category is required" }),
   condition: z.string().min(3, { message: "Condition is required" }),
   price: z.string().refine((value) => isValidNumber(value), {
-    message: "Price must be a valid number",
+    message: "Price must be a valid number and not exceed $999,999.99",
   }),
   image:
     typeof window === "undefined"
