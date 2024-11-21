@@ -17,7 +17,9 @@ export default async function MyProductPage() {
   const products = await DL.query.findUserProduct(session.user.id);
 
   return (
-    <div className="mb-24 mt-12 xl:container customSm:px-4 md:mx-auto md:max-w-3xl lg:max-w-7xl">
+    <div
+      className={`mb-24 mt-12 gap-2 xl:container customSm:min-h-[37vh] customSm:px-4 md:mx-auto md:max-w-3xl lg:min-h-[60vh] lg:max-w-7xl ${!products.length && "flex items-center justify-center"} `}
+    >
       {products.length ? (
         <>
           <div className="flex items-center justify-between">
@@ -31,7 +33,7 @@ export default async function MyProductPage() {
           <ProductTable data={products} />
         </>
       ) : (
-        <div className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-center">
+        <div className="text-center">
           <p className="mb-2 dark:text-muted-foreground">
             No product listed yet...
           </p>
