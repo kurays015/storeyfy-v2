@@ -10,14 +10,11 @@ import { Button } from "@/components/ui/button";
 import { formatCurrency } from "@/lib/currencyFormatter";
 import getDiscountValue from "@/lib/getDiscountValue";
 import { Loader2 } from "lucide-react";
+import createOrder from "./_actions/action";
+import { ProductProps } from "@/types";
+import convertToCents from "@/lib/convertToCents";
 
-export default function StripeForm({
-  price,
-  discount,
-}: {
-  price: string;
-  discount: number | null;
-}) {
+export default function StripeForm({ price, discount, id }: ProductProps) {
   const stripe = useStripe();
   const elements = useElements();
   const [isLoading, setIsLoading] = useState(false);
@@ -38,6 +35,13 @@ export default function StripeForm({
       setIsLoading(false);
       return;
     }
+
+    const orders = await createOrder(
+      id,
+      convertToCents(getDiscountValue(discount, parseFloat(price))),
+    );
+
+    if (!orders) return;
 
     const { error } = await stripe.confirmPayment({
       elements,
@@ -68,7 +72,7 @@ export default function StripeForm({
     <form onSubmit={handleSubmit}>
       <div>
         <div>
-          <HeaderTitle className="">Checkout</HeaderTitle>
+          <HeaderTitle className="mb-2">Checkout</HeaderTitle>
           {errorMessage && <p className="text-destructive">{errorMessage}</p>}
         </div>
         <div>
