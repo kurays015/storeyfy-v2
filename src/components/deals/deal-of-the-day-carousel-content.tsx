@@ -10,7 +10,7 @@ import { CartButton } from "../cart/cart-button";
 import AddToCartBtn from "../cart/add-to-cart-btn";
 import { addToCart } from "@/app/product/_actions/action";
 import { DL } from "@/data-layer";
-import Image from "next/image";
+import Link from "next/link";
 
 export default async function DealOfTheDayCarouselContent({
   id,
@@ -58,8 +58,11 @@ export default async function DealOfTheDayCarouselContent({
         </div>
         {/* //here */}
         <div className="my-4 flex gap-4">
-          <Button className="w-full bg-blue-500 text-white hover:bg-blue-600 dark:bg-blue-600 dark:text-white dark:hover:bg-blue-500">
-            Buy now
+          <Button
+            className="w-full bg-blue-500 text-white hover:bg-blue-600 dark:bg-blue-600 dark:text-white dark:hover:bg-blue-500"
+            asChild
+          >
+            <Link href={`/product/purchase/${id}`}>Buy Now</Link>
           </Button>
           {isInTheCart && session ? (
             <CartButton isInTheCart={isInTheCart} />
