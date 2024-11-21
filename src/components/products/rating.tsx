@@ -8,6 +8,7 @@ import {
   ThreeStar,
   TwoPointFiveStar,
   TwoStar,
+  ZeroStar,
 } from "@/components/star-icons";
 import { RatingProps } from "@/types";
 
@@ -18,6 +19,7 @@ type StarsComponent = {
 };
 
 const starComponents = {
+  0: <ZeroStar />,
   1: <OneStar />,
   1.5: <OnePointFiveStar />,
   2: <TwoStar />,

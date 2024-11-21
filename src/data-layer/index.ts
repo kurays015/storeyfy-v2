@@ -246,6 +246,7 @@ export const DL = {
           discount: parsedData.data.discount ? parsedData.data.discount : 0,
           stock: parsedData.data.stock,
           image: secure_url,
+          rating: 0,
         },
       });
     },

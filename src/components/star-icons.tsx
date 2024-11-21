@@ -1,5 +1,15 @@
 import { IoMdStar, IoMdStarHalf, IoMdStarOutline } from "react-icons/io";
 
+export const ZeroStar = () => (
+  <div className="flex">
+    <IoMdStarOutline />
+    <IoMdStarOutline />
+    <IoMdStarOutline />
+    <IoMdStarOutline />
+    <IoMdStarOutline />
+  </div>
+);
+
 export const OneStar = () => (
   <div className="flex">
     <IoMdStar />
