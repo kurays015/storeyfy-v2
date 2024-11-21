@@ -8,7 +8,6 @@ export default function PaymentSuccess({
   return (
     <main className="my-12 flex items-center justify-center text-gray-800 dark:text-gray-200 customSm:mx-4 customSm:min-h-[50vh] md:mx-0 lg:min-h-[65vh]">
       <div className="w-full max-w-lg rounded-lg border bg-white p-6 text-center shadow-lg dark:bg-gray-800 sm:p-8">
-        {/* Success Message */}
         <h1 className="mb-4 text-2xl font-extrabold text-gray-900 dark:text-gray-100 sm:text-3xl lg:text-4xl">
           Thank You for Your Purchase!
         </h1>
@@ -16,12 +15,10 @@ export default function PaymentSuccess({
           Your payment was processed successfully.
         </p>
 
-        {/* Amount Display */}
         <div className="mt-6 rounded-md bg-gray-200 p-4 text-lg font-semibold text-gray-900 shadow-md dark:bg-gray-700 dark:text-gray-100 sm:text-xl lg:text-2xl">
           Total Paid: {amount}
         </div>
 
-        {/* Call-to-Action */}
         <div className="mt-8">
           <Link
             href="/my-orders"

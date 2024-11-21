@@ -10,6 +10,7 @@ import { CartButton } from "../cart/cart-button";
 import AddToCartBtn from "../cart/add-to-cart-btn";
 import { addToCart } from "@/app/product/_actions/action";
 import { DL } from "@/data-layer";
+import Image from "next/image";
 
 export default async function DealOfTheDayCarouselContent({
   id,
@@ -38,7 +39,7 @@ export default async function DealOfTheDayCarouselContent({
       <ProductBlurDataImage
         image={image}
         title={title}
-        size="customSm:w-full md:w-2/5"
+        size="customSm:w-full md:w-2/5 max-h-96"
       />
       <div className="flex flex-1 flex-col justify-evenly customSm:gap-2">
         <Rating rating={rating} />
