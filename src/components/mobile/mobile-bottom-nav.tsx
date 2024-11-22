@@ -18,28 +18,18 @@ export default async function MobileBottomNav() {
     <div className="fixed bottom-0 left-1/2 z-10 flex w-full max-w-[500px] -translate-x-1/2 items-center border bg-white p-4 shadow-customBoxShadow dark:border-none customSm:justify-between 480px:justify-around 480px:rounded-t-lg lg:hidden">
       <MobileBurgerMenu />
 
-      <NavLinkMenu href="/" icon={<IoHomeOutline />} className="relative" />
+      <NavLinkMenu href="/" icon={<IoHomeOutline />} />
 
-      <NavLinkMenu
-        href="/my-products"
-        icon={<CiShoppingBasket />}
-        className="relative"
-      />
+      <NavLinkMenu href="/my-products" icon={<CiShoppingBasket />} />
 
       <CartButton />
 
-      <NavLinkMenu
-        href="/my-wishlist"
-        count={1}
-        icon={<FaRegHeart />}
-        className="relative"
-      />
+      <NavLinkMenu href="/my-wishlist" count={1} icon={<FaRegHeart />} />
 
       <NavLinkMenu
         href="/my-orders"
         count={orderCount}
         icon={<IoBagHandleOutline />}
-        className="relative"
       />
     </div>
   );
