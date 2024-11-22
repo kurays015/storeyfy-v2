@@ -9,7 +9,6 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { LogOut } from "lucide-react";
 import { signOut } from "next-auth/react";
-import { CgProfile } from "react-icons/cg";
 import { CiShoppingBasket } from "react-icons/ci";
 import { IoBagHandleOutline } from "react-icons/io5";
 import NavLinkMenu from "@/components/nav-link-menu";
@@ -35,21 +34,12 @@ export default function AccountDropdownContent() {
       </DropdownMenuGroup>
       <DropdownMenuSeparator />
 
-      <DropdownMenuLabel>My Account</DropdownMenuLabel>
-      <DropdownMenuSeparator />
       <DropdownMenuGroup>
-        <NavLinkMenu href="/my-profile">
-          <DropdownMenuItem className="cursor-pointer">
-            <CgProfile className="mr-2 h-4 w-4" />
-            <span>Profile</span>
-          </DropdownMenuItem>
-        </NavLinkMenu>
         <DropdownMenuItem onClick={() => signOut()} className="cursor-pointer">
           <LogOut className="mr-2 h-4 w-4" />
           <span>Log out</span>
         </DropdownMenuItem>
       </DropdownMenuGroup>
-      <DropdownMenuSeparator />
     </DropdownMenuContent>
   );
 }

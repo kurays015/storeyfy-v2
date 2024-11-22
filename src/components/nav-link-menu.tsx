@@ -15,14 +15,16 @@ export default function NavLinkMenu({
   count,
   children,
 }: NavLinkMenuProps) {
-  if (children) return children;
-
   return (
     <Link href={href}>
-      <div className="relative customSm:text-2xl customSm:text-black lg:text-3xl lg:dark:text-white">
-        {!!count && <Count count={count} />}
-        {icon}
-      </div>
+      {children ? (
+        children
+      ) : (
+        <div className="relative customSm:text-2xl customSm:text-black lg:text-3xl lg:dark:text-white">
+          {!!count && <Count count={count} />}
+          {icon}
+        </div>
+      )}
     </Link>
   );
 }
