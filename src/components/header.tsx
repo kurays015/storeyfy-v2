@@ -41,12 +41,7 @@ export default async function Header() {
           <SearchInput />
           <ul className="flex items-center gap-5 text-3xl customSm:hidden lg:flex">
             {session?.user && <AccountDropdown />}
-            <NavLinkMenu
-              href="/my-wishlist"
-              count={1}
-              icon={<FaRegHeart />}
-              className="relative"
-            />
+            <NavLinkMenu href="/my-wishlist" count={1} icon={<FaRegHeart />} />
             <CartButton />
           </ul>
         </div>

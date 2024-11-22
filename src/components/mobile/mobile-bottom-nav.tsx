@@ -1,6 +1,7 @@
 import { IoBagHandleOutline } from "react-icons/io5";
 import { IoHomeOutline } from "react-icons/io5";
 import { FaRegHeart } from "react-icons/fa";
+import { CgProfile } from "react-icons/cg";
 import { CiShoppingBasket } from "react-icons/ci";
 import MobileBurgerMenu from "@/components/mobile/mobile-burger-menu";
 import NavLinkMenu from "@/components/nav-link-menu";
@@ -19,6 +20,8 @@ export default async function MobileBottomNav() {
       <MobileBurgerMenu />
 
       <NavLinkMenu href="/" icon={<IoHomeOutline />} />
+
+      <NavLinkMenu href="/my-profile" icon={<CgProfile />} />
 
       <NavLinkMenu href="/my-products" icon={<CiShoppingBasket />} />
 
