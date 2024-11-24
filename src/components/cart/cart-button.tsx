@@ -7,7 +7,6 @@ import { DL } from "@/data-layer";
 
 export async function CartButton({ isInTheCart }: { isInTheCart?: boolean }) {
   const session = await DL.mutations.getSession();
-
   const cartItems = await DL.query.getUserCartItems(session?.user.id);
 
   return (
@@ -27,7 +26,7 @@ export async function CartButton({ isInTheCart }: { isInTheCart?: boolean }) {
           )}
         </Button>
       </SheetTrigger>
-      <CartContent cartItems={cartItems} />
+      <CartContent />
     </Sheet>
   );
 }

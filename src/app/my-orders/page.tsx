@@ -3,6 +3,7 @@ import { columns } from "@/app/my-orders/columns";
 import { DL } from "@/data-layer";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import HeaderTitle from "@/components/header-title";
 
 export default async function MyOrdersPage() {
   const session = await DL.mutations.getSession();
@@ -16,6 +17,7 @@ export default async function MyOrdersPage() {
     status: "pending",
     orderId: order.id,
     orderDate: order.createdAt,
+    quantity: order.quantity,
   }));
 
   if (!orders.length || !orders)
@@ -34,9 +36,9 @@ export default async function MyOrdersPage() {
     <main
       className={`mb-24 mt-12 gap-2 xl:container customSm:min-h-[37vh] customSm:px-4 md:mx-auto md:max-w-3xl lg:min-h-[60vh] lg:max-w-7xl ${!orders.length && "flex items-center justify-center"} `}
     >
-      <h1 className="text-2xl font-bold text-slate-800 dark:text-muted-foreground">
+      <HeaderTitle className="text-2xl font-bold text-slate-800 dark:text-muted-foreground">
         My Orders
-      </h1>
+      </HeaderTitle>
       <ReusableTable data={orders} columns={columns} />
     </main>
   );

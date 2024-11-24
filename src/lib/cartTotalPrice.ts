@@ -1,13 +1,15 @@
 import getDiscountValue from "./getDiscountValue";
-import { CartItems, Quantity } from "@/types";
+import { CartItems, OrderArrays, Quantity } from "@/types";
 import { formatCurrency } from "@/lib/currencyFormatter";
 
 export function cartTotalPrice(cartItems: CartItems[], quantity: Quantity) {
   const totalPrice = cartItems
     .reduce((total, item) => {
-      const itemQuantity = quantity[item.id] ?? 1;
+      const itemQuantity = quantity[item.product.id] ?? 1;
+
       const availableStockQuantity =
         itemQuantity <= item.product.stock ? itemQuantity : item.product.stock;
+
       const totalResult =
         total +
         getDiscountValue(

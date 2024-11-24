@@ -9,9 +9,6 @@ import { DL } from "@/data-layer";
 
 export default async function MobileBottomNav() {
   const session = await DL.mutations.getSession();
-
-  if (!session) return;
-
   const orderCount = await DL.query.getUserOrdersCount(session?.user.id);
 
   return (

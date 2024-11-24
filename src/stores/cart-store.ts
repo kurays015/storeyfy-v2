@@ -2,7 +2,7 @@ import { Quantity } from "@/types";
 import { create } from "zustand";
 
 type State = {
-  quantities: Quantity;
+  cartQuantities: Quantity;
 };
 
 type Actions = {
@@ -12,13 +12,12 @@ type Actions = {
 type CartStore = State & Actions;
 
 export const useCartStore = create<CartStore>((set) => ({
-  quantities: {},
+  cartQuantities: {},
+
   updateQuantity: (id: string, quantity: number) =>
     set((state) => {
-      // if (quantity < 1) return {};
-
       return {
-        quantities: { ...state.quantities, [id]: quantity ?? 1 },
+        cartQuantities: { ...state.cartQuantities, [id]: quantity },
       };
     }),
 }));

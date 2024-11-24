@@ -2,6 +2,7 @@
 
 import { DL } from "@/data-layer";
 import { revalidatePath } from "next/cache";
+import db from "@/lib/db";
 
 export async function addToCart(
   productId: string,
@@ -27,7 +28,7 @@ export async function addToCart(
 }
 
 export async function deleteItemToCart(
-  productId: string,
+  id: string,
   title: string,
   formData: FormData,
 ) {
@@ -35,7 +36,11 @@ export async function deleteItemToCart(
 
   if (!session) return;
 
-  await DL.mutations.deleteCartItem(productId);
+  const deletedItem = await DL.mutations.deleteCartItem(id);
 
-  revalidatePath(`/product/${title}/${productId}`);
+  if (!deletedItem) {
+    throw new Error("Error deleting cart item");
+  }
+
+  revalidatePath(`/product/${title}/${id}`);
 }

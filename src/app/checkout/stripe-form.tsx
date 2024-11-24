@@ -10,18 +10,47 @@ import { Button } from "@/components/ui/button";
 import { formatCurrency } from "@/lib/currencyFormatter";
 import getDiscountValue from "@/lib/getDiscountValue";
 import { Loader2 } from "lucide-react";
-import createOrder from "./_actions/action";
-import { ProductProps } from "@/types";
-import convertToCents from "@/lib/convertToCents";
+import { OrderArrays, Orders, Quantity } from "@/types";
+import { useCartStore } from "@/stores/cart-store";
+import { useSession } from "next-auth/react";
+import createOrder from "@/app/checkout/_actions/action";
 
-export default function StripeForm({ price, discount, id }: ProductProps) {
+export function calculateTotalPrice(
+  orderArray: OrderArrays[],
+  quantity: Quantity,
+) {
+  const totalPrice = orderArray
+    .reduce((total, item) => {
+      const itemQuantity = quantity[item.id] ?? 1;
+      const discountedPrice = getDiscountValue(
+        item.discount,
+        parseFloat(item.price),
+      );
+
+      const itemTotal = discountedPrice * itemQuantity;
+
+      return total + itemTotal;
+    }, 0)
+    .toFixed(2);
+
+  return formatCurrency(parseFloat(totalPrice));
+}
+
+export default function StripeForm({
+  ordersArray,
+}: {
+  ordersArray: OrderArrays[];
+}) {
+  const session = useSession();
   const stripe = useStripe();
   const elements = useElements();
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string>();
   const [email, setEmail] = useState<string>();
+  const quantities = useCartStore((state) => state.cartQuantities);
+  const totalAmount = calculateTotalPrice(ordersArray, quantities);
 
-  async function handleSubmit(e: FormEvent) {
+  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
     if (!stripe || !elements || !email) return;
@@ -36,19 +65,21 @@ export default function StripeForm({ price, discount, id }: ProductProps) {
       return;
     }
 
-    const orders = await createOrder(
-      id,
-      convertToCents(getDiscountValue(discount, parseFloat(price))),
-    );
+    //will pass this to create order server action as argument
+    const userOrder: Orders[] = ordersArray.map((item) => ({
+      productId: item.id,
+      userId: session.data?.user.id ?? "",
+      quantity: quantities[item.id] ?? 1,
+    }));
 
-    if (!orders) return;
+    const order = await createOrder(userOrder);
+
+    if (!order?.success) return;
 
     const { error } = await stripe.confirmPayment({
       elements,
       confirmParams: {
-        return_url: `${process.env.NODE_ENV === "production" ? `${process.env.NEXT_PUBLIC_VERCEL_URL}` : "http://localhost:3000"}/payment-success?amount=${formatCurrency(
-          getDiscountValue(discount, parseFloat(price)),
-        )}`,
+        return_url: `${process.env.NODE_ENV === "production" ? `${process.env.NEXT_PUBLIC_VERCEL_URL}` : "http://localhost:3000"}/payment-success?amount=${totalAmount}`,
       },
     });
 
@@ -72,7 +103,7 @@ export default function StripeForm({ price, discount, id }: ProductProps) {
     <form onSubmit={handleSubmit}>
       <div>
         <div>
-          <HeaderTitle className="mb-2">Checkout</HeaderTitle>
+          <HeaderTitle className="mb-2 dark:text-black">Checkout</HeaderTitle>
           {errorMessage && <p className="text-destructive">{errorMessage}</p>}
         </div>
         <div>
@@ -94,7 +125,7 @@ export default function StripeForm({ price, discount, id }: ProductProps) {
                 Purchasing <Loader2 className="ml-1 w-5 animate-spin" />{" "}
               </>
             ) : (
-              `Purchase - ${formatCurrency(getDiscountValue(discount, parseFloat(price)))}`
+              `Purchase - ${totalAmount}`
             )}
           </Button>
         </footer>

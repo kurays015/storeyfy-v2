@@ -60,6 +60,12 @@ export const columns: ColumnDef<ProductTableColumn>[] = [
       </div>
     ),
   },
+
+  {
+    accessorKey: "title",
+    header: () => <div>Title</div>,
+    cell: ({ row }) => <div>{row.getValue("title")}</div>,
+  },
   {
     accessorKey: "image",
     header: () => {
@@ -78,16 +84,20 @@ export const columns: ColumnDef<ProductTableColumn>[] = [
     ),
   },
   {
-    accessorKey: "title",
-    header: () => <div>Title</div>,
-    cell: ({ row }) => <div>{row.getValue("title")}</div>,
+    accessorKey: "quantity",
+    header: () => {
+      return <div>Qty</div>;
+    },
+    cell: ({ row }) => <div className="ml-2">{row.getValue("quantity")}</div>,
   },
   {
     accessorKey: "category",
     header: () => {
       return <div>Category</div>;
     },
-    cell: ({ row }) => <div>{row.getValue("category")}</div>,
+    cell: ({ row }) => (
+      <div className="text-center">{row.getValue("category")}</div>
+    ),
   },
   {
     accessorKey: "subCategory",

@@ -3,13 +3,14 @@ import { SingleProductPageParamsProps } from "@/types";
 import { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { CiHeart } from "react-icons/ci";
-import { CartButton } from "@/components/cart/cart-button";
 import Price from "@/components/products/price";
 import Rating from "@/components/products/rating";
-import { Button } from "@/components/ui/button";
-import AddToCartForm from "@/components/cart/add-to-cart-form";
 import NotFound from "@/components/not-found";
+import { CiHeart } from "react-icons/ci";
+import { Button } from "@/components/ui/button";
+import { CartButton } from "@/components/cart/cart-button";
+import AddToCartForm from "@/components/cart/add-to-cart-form";
+import CartQuantityInput from "@/components/cart/cart-quantity-input";
 
 export async function generateMetadata({
   params,
@@ -37,7 +38,6 @@ export default async function SingleProductPage({
 
   return (
     <div className="space-y-8">
-      {/* Product Details Section */}
       <div className="relative flex flex-col gap-6 rounded-lg border p-6 shadow-md md:flex-row">
         <div className="">
           <Image
@@ -86,6 +86,9 @@ export default async function SingleProductPage({
               {product.sellerName}
             </Link>
           </p>
+
+          <CartQuantityInput id={product.id} stock={product.stock} />
+
           <div className="my-3">
             <Button
               className="w-full bg-black text-white hover:opacity-90 dark:bg-white dark:text-black"
@@ -100,8 +103,8 @@ export default async function SingleProductPage({
               className="w-full bg-blue-500 text-white hover:bg-blue-600 dark:bg-blue-600 dark:text-white dark:hover:bg-blue-500"
               asChild
             >
-              <Link href={`/product/purchase/${product.id}`}>Buy now</Link>
-            </Button>
+              <Link href={`/checkout?id=${product.id}`}>Buy now</Link>
+            </Button>{" "}
             {isInTheCart && session ? (
               <CartButton isInTheCart={isInTheCart} />
             ) : (
@@ -111,7 +114,6 @@ export default async function SingleProductPage({
         </div>
       </div>
 
-      {/* Description Section */}
       <div className="rounded-lg border p-6 shadow-md">
         <h2 className="text-xl font-semibold">Description</h2>
         <p className="mt-2 text-sm">{product.description}</p>

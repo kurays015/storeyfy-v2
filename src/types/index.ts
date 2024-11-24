@@ -34,6 +34,13 @@ export type ZSafeParseSuccessProps = {
   stock: number;
 };
 
+export type CartItems = {
+  id: string;
+  userId: string;
+  productId: string;
+  product: CartItemProps;
+};
+
 export type CartItemProps = Pick<
   ProductProps,
   | "title"
@@ -43,15 +50,10 @@ export type CartItemProps = Pick<
   | "discount"
   | "category"
   | "subCategory"
+  | "id"
 >;
 
-export type CartItems = {
-  id: string;
-  userId: string;
-  quantity: number | null;
-  productId: string;
-  product: CartItemProps;
-};
+export type OrderArrays = CartItemProps;
 
 export type CartContentProps = {
   cartItems: CartItems[];
@@ -113,7 +115,6 @@ export type Quantity = { [id: string]: number };
 
 export type CartQuantityInputProps = {
   id: string;
-  quantity: number | null;
   stock: number;
 };
 
@@ -126,3 +127,9 @@ export type ProductTableColumn = Pick<
   ProductProps,
   "id" | "title" | "description" | "category" | "subCategory" | "price"
 >;
+
+export type Orders = {
+  productId: string;
+  userId: string;
+  quantity: number;
+};

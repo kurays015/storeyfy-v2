@@ -1,24 +1,54 @@
 "use client";
 
 import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 import { useCartStore } from "@/stores/cart-store";
 import { CartQuantityInputProps } from "@/types";
 
 export default function CartQuantityInput({
   id,
-  quantity,
   stock,
 }: CartQuantityInputProps) {
-  const cartItemQuantity = useCartStore((state) => state.quantities[id]);
+  const cartItemQuantity = useCartStore(
+    (state) => state.cartQuantities[id] ?? 1,
+  );
   const updateQuantity = useCartStore((state) => state.updateQuantity);
-  const currentQuantity = cartItemQuantity > stock ? stock : cartItemQuantity;
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = Number(e.target.value);
+    // Only allow numeric input
+    if (/^\d*$/.test(e.target.value)) {
+      const qty = value > stock ? stock : value;
+      updateQuantity(id, qty);
+    }
+  };
+
+  const handleIncrement = () => {
+    if (cartItemQuantity < stock) {
+      updateQuantity(id, cartItemQuantity + 1);
+    }
+  };
+
+  const handleDecrement = () => {
+    if (cartItemQuantity > 1) {
+      updateQuantity(id, cartItemQuantity - 1);
+    }
+  };
 
   return (
-    <Input
-      type="number"
-      value={currentQuantity ?? quantity}
-      onChange={(e) => updateQuantity(id, Number(e.target.value))}
-      className="w-16 rounded-md border border-gray-300 text-center"
-    />
+    <div className="flex items-center">
+      <Button className="rounded-none" onClick={handleDecrement}>
+        -
+      </Button>
+      <Input
+        type="text"
+        value={cartItemQuantity}
+        onChange={handleChange}
+        className="w-10 rounded-none border-gray-300 text-center ring-0 focus-visible:ring-0 focus-visible:ring-offset-0"
+      />
+      <Button className="rounded-none" onClick={handleIncrement}>
+        +
+      </Button>
+    </div>
   );
 }

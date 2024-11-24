@@ -1,17 +1,21 @@
 import "server-only";
 import db from "@/lib/db";
-import { ZSafeParseSuccessProps } from "@/types";
+import { Orders, ZSafeParseSuccessProps } from "@/types";
 import { SafeParseSuccess } from "zod";
 import { getServerSession } from "next-auth";
 import { authConfig } from "@/lib/auth";
 
 export const DL = {
   query: {
-    getUserOrdersCount: async (userId: string | undefined) => {
-      if (!userId) {
-        throw new Error("user id is required");
-      }
+    getCartItemsCount: async (userId: string | undefined) => {
+      return await db.cartItems.count({
+        where: {
+          userId: userId,
+        },
+      });
+    },
 
+    getUserOrdersCount: async (userId: string | undefined) => {
       return await db.order.count({
         where: {
           userId: userId,
@@ -98,6 +102,7 @@ export const DL = {
         include: {
           product: {
             select: {
+              id: true,
               title: true,
               image: true,
               price: true,
@@ -209,18 +214,11 @@ export const DL = {
         },
       });
     },
-    createOrders: async (productId: string, userId: string, price: number) => {
-      if (!userId) {
-        throw new Error("user id is required");
-      }
 
-      return await db.order.create({
-        data: {
-          price,
-          productId,
-          userId: userId,
-        },
-      });
+    createOrders: async (orderData: Orders[]) => {
+      return await db.$transaction(
+        orderData.map((order) => db.order.create({ data: order })),
+      );
     },
 
     deleteProduct: async (id: string) => {
@@ -236,7 +234,6 @@ export const DL = {
         data: {
           userId: userId,
           productId: productId,
-          quantity: 1,
         },
         include: {
           product: {
