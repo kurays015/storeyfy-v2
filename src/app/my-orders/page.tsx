@@ -12,17 +12,19 @@ export default async function MyOrdersPage() {
 
   const orders = await (
     await DL.query.findUserOrders(session.user.id)
-  ).map((order) => ({
-    ...order.product,
-    status: "pending",
-    orderId: order.id,
-    orderDate: order.createdAt,
-    quantity: order.quantity,
-  }));
+  )
+    // .filter((order) => order.product.stock !== 0)
+    .map((order) => ({
+      ...order.product,
+      status: "pending",
+      orderId: order.id,
+      orderDate: order.createdAt,
+      quantity: order.quantity,
+    }));
 
   if (!orders.length || !orders)
     return (
-      <div className="flex flex-col items-center justify-center text-center customSm:min-h-[55vh] lg:min-h-[75vh]">
+      <div className="flex flex-col items-center justify-center text-center customSm:min-h-[60vh] lg:min-h-[75vh]">
         <p className="mb-2 dark:text-muted-foreground">
           No order placed yet...
         </p>

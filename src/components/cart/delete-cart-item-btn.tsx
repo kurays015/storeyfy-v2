@@ -10,7 +10,7 @@ export default function DeleteCartItemBtn() {
       loadingText=""
       variant="unstyled"
       isLoading={pending}
-      className="absolute -right-4 -top-4 text-red-600"
+      className="absolute right-1 top-0 text-red-600"
     >
       <MdDelete />
     </SubmitButton>

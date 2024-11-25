@@ -216,9 +216,41 @@ export const DL = {
     },
 
     createOrders: async (orderData: Orders[]) => {
-      return await db.$transaction(
-        orderData.map((order) => db.order.create({ data: order })),
-      );
+      return await db.$transaction(async (tx) => {
+        const orders = orderData.map(async (order) => {
+          const product = await DL.query.getSingleProduct(order.productId);
+
+          if (!product) {
+            throw new Error("No product found");
+          }
+
+          if (product.stock === 0) return;
+
+          const existingOrders = await tx.order.findFirst({
+            where: {
+              userId: order.userId,
+              productId: order.productId,
+            },
+          });
+
+          if (existingOrders) {
+            return await tx.order.update({
+              where: {
+                id: existingOrders.id,
+              },
+              data: {
+                quantity: existingOrders.quantity + order.quantity,
+              },
+            });
+          }
+
+          return tx.order.create({
+            data: order,
+          });
+        });
+
+        return await Promise.all(orders);
+      });
     },
 
     deleteProduct: async (id: string) => {

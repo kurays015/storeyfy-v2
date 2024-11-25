@@ -7,34 +7,12 @@ import {
 } from "@stripe/react-stripe-js";
 import HeaderTitle from "@/components/header-title";
 import { Button } from "@/components/ui/button";
-import { formatCurrency } from "@/lib/currencyFormatter";
-import getDiscountValue from "@/lib/getDiscountValue";
 import { Loader2 } from "lucide-react";
-import { OrderArrays, Orders, Quantity } from "@/types";
+import { OrderArrays, Orders } from "@/types";
 import { useCartStore } from "@/stores/cart-store";
 import { useSession } from "next-auth/react";
 import createOrder from "@/app/checkout/_actions/action";
-
-export function calculateTotalPrice(
-  orderArray: OrderArrays[],
-  quantity: Quantity,
-) {
-  const totalPrice = orderArray
-    .reduce((total, item) => {
-      const itemQuantity = quantity[item.id] ?? 1;
-      const discountedPrice = getDiscountValue(
-        item.discount,
-        parseFloat(item.price),
-      );
-
-      const itemTotal = discountedPrice * itemQuantity;
-
-      return total + itemTotal;
-    }, 0)
-    .toFixed(2);
-
-  return formatCurrency(parseFloat(totalPrice));
-}
+import { calculateGrandTotal } from "@/lib/calculateGrandTotal";
 
 export default function StripeForm({
   ordersArray,
@@ -48,7 +26,8 @@ export default function StripeForm({
   const [errorMessage, setErrorMessage] = useState<string>();
   const [email, setEmail] = useState<string>();
   const quantities = useCartStore((state) => state.cartQuantities);
-  const totalAmount = calculateTotalPrice(ordersArray, quantities);
+  const totalAmount = calculateGrandTotal(ordersArray, quantities);
+  const isOutofStock = ordersArray.every((item) => item.stock === 0);
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -118,7 +97,7 @@ export default function StripeForm({
           <Button
             className="mt-4 w-full bg-black dark:bg-blue-500 dark:text-white dark:hover:bg-blue-600"
             size="lg"
-            disabled={!stripe || !elements || isLoading}
+            disabled={!stripe || !elements || isLoading || isOutofStock}
           >
             {isLoading ? (
               <>

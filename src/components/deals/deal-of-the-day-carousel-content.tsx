@@ -6,11 +6,12 @@ import SaleCountDown from "@/components/products/sale-count-down";
 import { CarouselItem } from "@/components/ui/carousel";
 import { Button } from "@/components/ui/button";
 import ProductBlurDataImage from "@/components/products/product-blur-data-image";
-import { CartButton } from "../cart/cart-button";
-import AddToCartBtn from "../cart/add-to-cart-btn";
+import { CartButton } from "@/components/cart/cart-button";
+import AddToCartBtn from "@/components/cart/add-to-cart-btn";
 import { addToCart } from "@/app/product/_actions/action";
 import { DL } from "@/data-layer";
 import Link from "next/link";
+import CartQuantityInput from "@/components/cart/cart-quantity-input";
 
 export default async function DealOfTheDayCarouselContent({
   id,
@@ -57,12 +58,14 @@ export default async function DealOfTheDayCarouselContent({
           </del>
         </div>
         {/* //here */}
+        <CartQuantityInput id={id} stock={stock} />
         <div className="my-4 flex gap-4">
           <Button
+            disabled={stock === 0}
             className="w-full bg-blue-500 text-white hover:bg-blue-600 dark:bg-blue-600 dark:text-white dark:hover:bg-blue-500"
             asChild
           >
-            <Link href={`/product/purchase/${id}`}>Buy Now</Link>
+            <Link href={`/checkout?id=${id}`}>Buy Now</Link>
           </Button>
           {isInTheCart && session ? (
             <CartButton isInTheCart={isInTheCart} />

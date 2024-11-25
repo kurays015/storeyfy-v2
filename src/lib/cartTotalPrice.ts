@@ -1,5 +1,5 @@
 import getDiscountValue from "./getDiscountValue";
-import { CartItems, OrderArrays, Quantity } from "@/types";
+import { CartItems, Quantity } from "@/types";
 import { formatCurrency } from "@/lib/currencyFormatter";
 
 export function cartTotalPrice(cartItems: CartItems[], quantity: Quantity) {

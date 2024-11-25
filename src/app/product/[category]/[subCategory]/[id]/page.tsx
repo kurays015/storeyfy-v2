@@ -55,7 +55,11 @@ export default async function SingleProductPage({
             <p
               className={`text-sm font-medium ${product.stock > 3 ? "text-green-600" : "text-red-600"}`}
             >
-              {product.stock > 3 ? "In stock" : "Almost out of stock"}
+              {product.stock > 3
+                ? "In stock"
+                : product.stock === 0
+                  ? "Out of stock"
+                  : "Almost out of stock"}
             </p>
             <p className="text-sm">
               Stock:{" "}
@@ -99,12 +103,17 @@ export default async function SingleProductPage({
             </Button>
           </div>
           <div className="flex items-center gap-4 xl:mt-0">
-            <Button
-              className="w-full bg-blue-500 text-white hover:bg-blue-600 dark:bg-blue-600 dark:text-white dark:hover:bg-blue-500"
-              asChild
+            <Link
+              href={`/checkout?id=${product.id}`}
+              className={`${product.stock === 0 ? "pointer-events-none" : ""} w-full`}
             >
-              <Link href={`/checkout?id=${product.id}`}>Buy now</Link>
-            </Button>{" "}
+              <Button
+                disabled={product.stock === 0}
+                className="w-full bg-blue-500 text-white hover:bg-blue-600 dark:bg-blue-600 dark:text-white dark:hover:bg-blue-500"
+              >
+                Buy now
+              </Button>{" "}
+            </Link>
             {isInTheCart && session ? (
               <CartButton isInTheCart={isInTheCart} />
             ) : (

@@ -6,9 +6,11 @@ import { DL } from "@/data-layer";
 export default async function CartAndCheckoutBtn({
   href,
   children,
+  isOutOfStock,
 }: {
   href: string;
   children: ReactNode;
+  isOutOfStock?: boolean;
 }) {
   const session = await DL.mutations.getSession();
   const cartCount = await DL.query.getCartItemsCount(session?.user.id);
@@ -17,8 +19,13 @@ export default async function CartAndCheckoutBtn({
 
   return (
     <div className="my-4 customSm:flex customSm:justify-end">
-      <Button asChild>
-        <Link href={href}>{children}</Link>
+      <Button disabled={isOutOfStock}>
+        <Link
+          href={href}
+          className={`${isOutOfStock ? "pointer-events-none" : ""}`}
+        >
+          {children}
+        </Link>
       </Button>
     </div>
   );

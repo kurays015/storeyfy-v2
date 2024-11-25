@@ -37,16 +37,25 @@ export default function CartQuantityInput({
 
   return (
     <div className="flex items-center">
-      <Button className="rounded-none" onClick={handleDecrement}>
+      <Button
+        className="rounded-none"
+        onClick={handleDecrement}
+        disabled={stock === 0}
+      >
         -
       </Button>
       <Input
+        disabled={stock === 0}
         type="text"
         value={cartItemQuantity}
         onChange={handleChange}
         className="w-10 rounded-none border-gray-300 text-center ring-0 focus-visible:ring-0 focus-visible:ring-offset-0"
       />
-      <Button className="rounded-none" onClick={handleIncrement}>
+      <Button
+        className="rounded-none"
+        onClick={handleIncrement}
+        disabled={stock === 0}
+      >
         +
       </Button>
     </div>

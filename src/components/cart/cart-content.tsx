@@ -7,10 +7,14 @@ import {
 import Cart from "@/components/cart/cart";
 import { DL } from "@/data-layer";
 import CartAndCheckoutBtn from "@/components/cart/cart-or-checkout-btn";
+import CartTotal from "./cart-total";
 
 export default async function CartContent() {
   const session = await DL.mutations.getSession();
-  const cartCount = await DL.query.getCartItemsCount(session?.user.id);
+  const [cartCount, cartItems] = await Promise.all([
+    DL.query.getCartItemsCount(session?.user.id),
+    DL.query.getUserCartItems(session?.user.id),
+  ]);
 
   return (
     <SheetContent className="overflow-auto p-3">
@@ -25,6 +29,8 @@ export default async function CartContent() {
             <SheetDescription>Enjoy shopping!</SheetDescription>
           </SheetHeader>
           <Cart />
+          <CartTotal cartItems={cartItems} />
+
           <CartAndCheckoutBtn href="/cart">Go to cart</CartAndCheckoutBtn>
         </>
       )}

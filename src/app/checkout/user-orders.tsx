@@ -1,21 +1,17 @@
 "use client";
 
+import { calculateGrandTotal } from "@/lib/calculateGrandTotal";
 import { formatCurrency } from "@/lib/currencyFormatter";
 import getDiscountValue from "@/lib/getDiscountValue";
 import { useCartStore } from "@/stores/cart-store";
-import { CartItems, OrderArrays } from "@/types";
+import { OrderArrays } from "@/types";
 import Image from "next/image";
-import { calculateTotalPrice } from "@/app/checkout/stripe-form";
 
 type UserOrdersProps = {
   ordersArray: OrderArrays[];
-  cartItems: CartItems[];
 };
 
-export default function UserOrders({
-  ordersArray,
-  cartItems,
-}: UserOrdersProps) {
+export default function UserOrders({ ordersArray }: UserOrdersProps) {
   const quantities = useCartStore((state) => state.cartQuantities);
 
   return (
@@ -24,54 +20,67 @@ export default function UserOrders({
         Orders
       </h1>
       <div className="space-y-6">
-        {ordersArray.map((item) => (
-          <div
-            key={item.id}
-            className="flex flex-col space-y-4 border-b pb-4 dark:border-slate-600 sm:flex-row sm:items-center sm:space-x-6 sm:space-y-0"
-          >
-            <Image
-              src={item.image}
-              alt={item.title}
-              width={80}
-              height={80}
-              className="rounded-md object-cover"
-            />
+        {ordersArray
+          .filter((item) => item.stock !== 0)
+          .map((item) => (
+            <div
+              key={item.id}
+              className="flex flex-col space-y-4 border-b pb-4 dark:border-slate-600 sm:flex-row sm:items-center sm:space-x-6 sm:space-y-0"
+            >
+              <Image
+                src={item.image}
+                alt={item.title}
+                width={80}
+                height={80}
+                className="rounded-md object-cover"
+              />
 
-            <div className="flex-1">
-              <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
-                {item.title}
-              </h2>
-              <p className="text-sm text-gray-600 dark:text-gray-300">
-                {item.category} / {item.subCategory}
-              </p>
-              <p className="mt-1 text-sm text-gray-900 dark:text-gray-100">
-                <span className="font-bold">Price: </span>
-                {formatCurrency(
-                  getDiscountValue(item.discount, parseFloat(item.price)),
-                )}
-              </p>
-              {item.discount !== 0 && (
-                <p className="mt-1 text-sm text-green-600 dark:text-green-400">
-                  Discount: {item.discount}%
+              <div className="flex-1">
+                <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
+                  {item.title}
+                </h2>
+                <p className="text-sm text-gray-600 dark:text-gray-300">
+                  {item.category} / {item.subCategory}
                 </p>
-              )}
-            </div>
+                <p className="mt-1 text-sm text-gray-900 dark:text-gray-100">
+                  <span className="font-bold">Price: </span>
+                  {formatCurrency(
+                    getDiscountValue(item.discount, parseFloat(item.price)),
+                  )}
+                </p>
+                {item.discount !== 0 && (
+                  <p className="mt-1 text-sm text-green-600 dark:text-green-400">
+                    Discount: {item.discount}%
+                  </p>
+                )}
+              </div>
 
-            <div className="text-right">
-              <p className="text-lg font-bold text-gray-600 dark:text-gray-300">
-                Qty:{" "}
-                <span className="text-gray-800 dark:text-gray-100">
-                  {quantities[item.id] || 1}
-                </span>
-              </p>
+              <div className="text-right">
+                <p className="text-lg font-bold text-gray-600 dark:text-gray-300">
+                  Qty:{" "}
+                  <span className="text-gray-800 dark:text-gray-100">
+                    {quantities[item.id] || 1}
+                  </span>
+                </p>
+              </div>
             </div>
+          ))}
+        {/* .length === 0 && (
+          <div
+            className="relative rounded border border-red-500 bg-red-100 px-4 py-3 text-red-700"
+            role="alert"
+          >
+            <strong className="font-bold">Out of stock! </strong>
+            <span className="block sm:inline">
+              Your cart items is all out of stock...
+            </span>
           </div>
-        ))}
+        )} */}
       </div>
       <div className="mt-4 flex items-center justify-between dark:text-white">
         <h2 className="text-lg font-bold">Grand Total:</h2>
         <p className="text-lg font-bold">
-          {calculateTotalPrice(ordersArray, quantities)}
+          {calculateGrandTotal(ordersArray, quantities)}
         </p>
       </div>
     </div>
