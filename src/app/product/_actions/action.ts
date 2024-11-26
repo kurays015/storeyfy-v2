@@ -2,7 +2,6 @@
 
 import { DL } from "@/data-layer";
 import { revalidatePath } from "next/cache";
-import db from "@/lib/db";
 
 export async function addToCart(
   productId: string,

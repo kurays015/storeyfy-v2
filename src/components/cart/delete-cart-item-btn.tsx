@@ -1,7 +1,7 @@
 "use client";
 import { MdDelete } from "react-icons/md";
 import { useFormStatus } from "react-dom";
-import { SubmitButton } from "../submit-btn";
+import { SubmitButton } from "@/components/submit-btn";
 
 export default function DeleteCartItemBtn() {
   const { pending } = useFormStatus();

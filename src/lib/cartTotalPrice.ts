@@ -1,4 +1,4 @@
-import getDiscountValue from "./getDiscountValue";
+import getDiscountValue from "@/lib/getDiscountValue";
 import { CartItems, Quantity } from "@/types";
 import { formatCurrency } from "@/lib/currencyFormatter";
 

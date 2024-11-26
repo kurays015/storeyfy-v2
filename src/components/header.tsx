@@ -6,7 +6,7 @@ import { DarkModeToggle } from "@/components/dark-mode-toggle";
 import ProfileAvatar from "@/components/profile-avatar";
 import LoginButton from "@/components/login-btn";
 import SearchInput from "@/components/search-input";
-import NavLinkMenu from "./nav-link-menu";
+import NavLinkMenu from "@/components/nav-link-menu";
 import { CartButton } from "@/components/cart/cart-button";
 import { DL } from "@/data-layer";
 

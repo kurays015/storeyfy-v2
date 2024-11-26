@@ -4,7 +4,7 @@ import { FaRegHeart } from "react-icons/fa";
 import { CiShoppingBasket } from "react-icons/ci";
 import MobileBurgerMenu from "@/components/mobile/mobile-burger-menu";
 import NavLinkMenu from "@/components/nav-link-menu";
-import { CartButton } from "../cart/cart-button";
+import { CartButton } from "@/components/cart/cart-button";
 import { DL } from "@/data-layer";
 
 export default async function MobileBottomNav() {
