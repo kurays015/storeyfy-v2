@@ -6,12 +6,11 @@ import SaleCountDown from "@/components/products/sale-count-down";
 import { CarouselItem } from "@/components/ui/carousel";
 import { Button } from "@/components/ui/button";
 import ProductBlurDataImage from "@/components/products/product-blur-data-image";
-import { CartButton } from "@/components/cart/cart-button";
-import AddToCartBtn from "@/components/cart/add-to-cart-btn";
 import { addToCart } from "@/app/product/_actions/action";
 import { DL } from "@/data-layer";
 import Link from "next/link";
-import CartQuantityInput from "@/components/cart/cart-quantity-input";
+import CartQuantityInput from "@/components/cart-and-wishlist/cart/cart-quantity-input";
+import SaveToDBAction from "@/app/product/save-to-db-action";
 
 export default async function DealOfTheDayCarouselContent({
   id,
@@ -23,6 +22,7 @@ export default async function DealOfTheDayCarouselContent({
   category,
   rating,
   stock,
+  subCategory,
 }: ProductProps) {
   const session = await DL.mutations.getSession();
 
@@ -30,7 +30,6 @@ export default async function DealOfTheDayCarouselContent({
     id,
     session?.user.id,
   );
-  const isInTheCart = isAlreadyInTheCart !== null;
 
   return (
     <CarouselItem
@@ -44,9 +43,11 @@ export default async function DealOfTheDayCarouselContent({
       />
       <div className="flex flex-1 flex-col justify-evenly customSm:gap-2">
         <Rating rating={rating} />
-        <h3 className="truncate text-lg font-bold customSm:text-base">
-          {title}
-        </h3>
+        <Link href={`/product/${category}/${subCategory}/${id}`}>
+          <h3 className="truncate text-lg font-bold customSm:text-base">
+            {title}
+          </h3>
+        </Link>
         <p className="font-medium uppercase text-red-500">{category}</p>
         <p className="text-sm">{description}</p>
         <div className="flex items-center gap-3">
@@ -67,13 +68,12 @@ export default async function DealOfTheDayCarouselContent({
           >
             <Link href={`/checkout?id=${id}`}>Buy Now</Link>
           </Button>
-          {isInTheCart && session ? (
-            <CartButton isInTheCart={isInTheCart} />
-          ) : (
-            <form className="w-full" action={addToCart.bind(null, id, title)}>
-              <AddToCartBtn />
-            </form>
-          )}
+          <SaveToDBAction
+            isAlreadySaved={isAlreadyInTheCart !== null}
+            buttonText="Add to Cart"
+            savedText="Show Cart"
+            serverAction={addToCart.bind(null, id, title)}
+          />
         </div>
         {/* //here */}
         <div className="flex items-center justify-between text-sm font-medium uppercase customSm:text-xs">

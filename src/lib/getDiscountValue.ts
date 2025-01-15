@@ -1,6 +1,6 @@
 export default function getDiscountValue(
   discount: number | null,
-  price: number
+  price: number,
 ) {
   const validDiscount = discount && discount > 0 ? Math.min(discount, 100) : 0;
 
@@ -9,5 +9,5 @@ export default function getDiscountValue(
 
   const discountedPrice = price - discountAmount;
 
-  return Math.max(discountedPrice, 0);
+  return Math.floor(discountedPrice * 100) / 100;
 }

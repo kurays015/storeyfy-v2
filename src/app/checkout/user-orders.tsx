@@ -1,5 +1,6 @@
 "use client";
 
+import Price from "@/components/products/price";
 import { calculateGrandTotal } from "@/lib/calculateGrandTotal";
 import { formatCurrency } from "@/lib/currencyFormatter";
 import getDiscountValue from "@/lib/getDiscountValue";
@@ -42,12 +43,7 @@ export default function UserOrders({ ordersArray }: UserOrdersProps) {
                 <p className="text-sm text-gray-600 dark:text-gray-300">
                   {item.category} / {item.subCategory}
                 </p>
-                <p className="mt-1 text-sm text-gray-900 dark:text-gray-100">
-                  <span className="font-bold">Price: </span>
-                  {formatCurrency(
-                    getDiscountValue(item.discount, parseFloat(item.price)),
-                  )}
-                </p>
+                <Price price={item.price} discount={item.discount} />
                 {item.discount !== 0 && (
                   <p className="mt-1 text-sm text-green-600 dark:text-green-400">
                     Discount: {item.discount}%
@@ -65,17 +61,6 @@ export default function UserOrders({ ordersArray }: UserOrdersProps) {
               </div>
             </div>
           ))}
-        {/* .length === 0 && (
-          <div
-            className="relative rounded border border-red-500 bg-red-100 px-4 py-3 text-red-700"
-            role="alert"
-          >
-            <strong className="font-bold">Out of stock! </strong>
-            <span className="block sm:inline">
-              Your cart items is all out of stock...
-            </span>
-          </div>
-        )} */}
       </div>
       <div className="mt-4 flex items-center justify-between dark:text-white">
         <h2 className="text-lg font-bold">Grand Total:</h2>

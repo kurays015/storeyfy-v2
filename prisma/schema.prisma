@@ -24,6 +24,7 @@ model User {
   order           Order[]
   product         Product[]
   sessions        Session[]
+  wishList        WishList[]
 }
 
 model Account {
@@ -83,8 +84,17 @@ model Order {
   userId    String
   productId String
   quantity  Int
+  total     Float
   product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model WishList {
+  id        String  @id @default(uuid()) 
+  userId    String
+  productId String
+  product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+  user      User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model Product {
@@ -106,6 +116,7 @@ model Product {
   cartItems   CartItems[] 
   orders      Order[]
   user        User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  wishList    WishList[]
 }
 
 model CartItems {

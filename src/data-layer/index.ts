@@ -15,6 +15,14 @@ export const DL = {
       });
     },
 
+    getWishListItemsCount: async (userId: string | undefined) => {
+      return await db.wishList.count({
+        where: {
+          userId: userId,
+        },
+      });
+    },
+
     getUserOrdersCount: async (userId: string | undefined) => {
       return await db.order.count({
         where: {
@@ -66,6 +74,18 @@ export const DL = {
       });
     },
 
+    isAlreadyInTheWishList: async (
+      productId: string,
+      userId: string | undefined,
+    ) => {
+      return await db.wishList.findFirst({
+        where: {
+          userId: userId,
+          productId: productId,
+        },
+      });
+    },
+
     getProductByCategory: async (category: string) => {
       return db.product.findMany({
         where: {
@@ -96,6 +116,28 @@ export const DL = {
 
     getUserCartItems: async (userId: string | undefined) => {
       return await db.cartItems.findMany({
+        where: {
+          userId: userId,
+        },
+        include: {
+          product: {
+            select: {
+              id: true,
+              title: true,
+              image: true,
+              price: true,
+              discount: true,
+              stock: true,
+              subCategory: true,
+              category: true,
+            },
+          },
+        },
+      });
+    },
+
+    getUserWishListItems: async (userId: string | undefined) => {
+      return await db.wishList.findMany({
         where: {
           userId: userId,
         },
@@ -240,6 +282,7 @@ export const DL = {
               },
               data: {
                 quantity: existingOrders.quantity + order.quantity,
+                total: order.total * (existingOrders.quantity + 1),
               },
             });
           }
@@ -263,6 +306,26 @@ export const DL = {
 
     createCartItems: async (userId: string, productId: string) => {
       return await db.cartItems.create({
+        data: {
+          userId: userId,
+          productId: productId,
+        },
+        include: {
+          product: {
+            select: {
+              title: true,
+              image: true,
+              price: true,
+              discount: true,
+              stock: true,
+            },
+          },
+        },
+      });
+    },
+
+    createWishListItems: async (userId: string, productId: string) => {
+      return await db.wishList.create({
         data: {
           userId: userId,
           productId: productId,

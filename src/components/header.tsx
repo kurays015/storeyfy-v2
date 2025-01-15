@@ -1,14 +1,12 @@
 import Link from "next/link";
-import { FaRegHeart } from "react-icons/fa";
 import { FaFacebook, FaTwitter, FaInstagram } from "react-icons/fa";
 import AccountDropdown from "@/components/account-dropdown";
 import { DarkModeToggle } from "@/components/dark-mode-toggle";
 import ProfileAvatar from "@/components/profile-avatar";
 import LoginButton from "@/components/login-btn";
 import SearchInput from "@/components/search-input";
-import NavLinkMenu from "@/components/nav-link-menu";
-import { CartButton } from "@/components/cart/cart-button";
 import { DL } from "@/data-layer";
+import SaveToDBButton from "@/app/product/save-to-db-button";
 
 export default async function Header() {
   const session = await DL.mutations.getSession();
@@ -41,8 +39,8 @@ export default async function Header() {
           <SearchInput />
           <ul className="flex items-center gap-5 text-3xl customSm:hidden lg:flex">
             {session?.user && <AccountDropdown />}
-            <NavLinkMenu href="/my-wishlist" count={1} icon={<FaRegHeart />} />
-            <CartButton />
+            <SaveToDBButton savedText="Show Wishlist" />
+            <SaveToDBButton savedText="Show Cart" />
           </ul>
         </div>
       </div>

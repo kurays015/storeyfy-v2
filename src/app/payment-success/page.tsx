@@ -1,4 +1,10 @@
+import { Metadata } from "next";
 import Link from "next/link";
+
+export const metadata: Metadata = {
+  title: "Payment Success",
+  description: "payment success page",
+};
 
 export default function PaymentSuccess({
   searchParams: { amount },

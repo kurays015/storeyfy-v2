@@ -43,3 +43,26 @@ export async function deleteItemToCart(
 
   revalidatePath(`/product/${title}/${id}`);
 }
+
+export async function addToWishList(
+  productId: string,
+  title: string,
+  formData: FormData,
+) {
+  const session = await DL.mutations.getSession();
+
+  if (!session) return;
+
+  const isAlreadyInTheWishList = await DL.query.isAlreadyInTheWishList(
+    productId,
+    session.user.id,
+  );
+
+  if (isAlreadyInTheWishList || isAlreadyInTheWishList !== null) {
+    return { message: "Product is already in the wish list!" };
+  }
+
+  await DL.mutations.createWishListItems(session.user.id, productId);
+
+  revalidatePath(`/product/${title}/${productId}`);
+}

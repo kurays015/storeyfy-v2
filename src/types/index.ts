@@ -125,11 +125,29 @@ export type CartFormProps = {
 
 export type ProductTableColumn = Pick<
   ProductProps,
-  "id" | "title" | "description" | "category" | "subCategory" | "price"
+  | "id"
+  | "title"
+  | "description"
+  | "category"
+  | "subCategory"
+  | "price"
+  | "discount"
 >;
 
 export type Orders = {
   productId: string;
   userId: string;
   quantity: number;
+  total: number;
+};
+
+export type ServerAction = (
+  formData: FormData,
+) => Promise<{ message: string } | undefined>;
+
+export type SaveToDBButtonProps = {
+  isAlreadySaved?: boolean;
+  buttonText: string;
+  savedText: string;
+  serverAction: ServerAction;
 };

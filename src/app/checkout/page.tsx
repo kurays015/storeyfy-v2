@@ -6,6 +6,12 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import Stripe from "stripe";
 import CheckoutForm from "@/app/checkout/checkout-form";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Checkout",
+  description: "checkout page",
+};
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string);
 export default async function CheckoutPage({
@@ -65,6 +71,21 @@ export default async function CheckoutPage({
       </div>
     );
   }
+
+  if (ordersArray.every((item) => item.stock === 0))
+    return (
+      <div className="customSm:min-h-[60vh] lg:min-h-[75vh]">
+        <div
+          className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded border border-red-500 bg-red-100 px-4 py-3 text-red-700"
+          role="alert"
+        >
+          <strong className="font-bold">Out of stock! </strong>
+          <span className="block sm:inline">
+            Product is all out of stock...
+          </span>
+        </div>
+      </div>
+    );
 
   const paymentIntent = await stripe.paymentIntents.create({
     amount: 5000,

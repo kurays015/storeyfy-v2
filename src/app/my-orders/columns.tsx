@@ -17,6 +17,7 @@ import { ProductTableColumn } from "@/types";
 import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
 import deleteOrder from "@/app/my-orders/_actions/action";
+import getDiscountValue from "@/lib/getDiscountValue";
 
 export const columns: ColumnDef<ProductTableColumn>[] = [
   // {
@@ -106,22 +107,67 @@ export const columns: ColumnDef<ProductTableColumn>[] = [
     },
     cell: ({ row }) => <div>{row.getValue("subCategory")}</div>,
   },
+  // {
+  //   accessorKey: "price",
+  //   header: ({ column }) => (
+  //     <Button
+  //       className="px-0"
+  //       variant="ghost"
+  //       onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+  //     >
+  //       Price
+  //       <ArrowUpDown className="ml-2 h-4 w-4" />
+  //     </Button>
+  //   ),
+  //   cell: ({ row }) => {
+  //     // const price = parseFloat(row.getValue("price"));
+  //     // const discount = parseFloat(row.getValue("discount"));
+
+  //     return (
+  //       <div className="font-medium">
+  //         {formatCurrency(row.getValue("price"))}
+  //       </div>
+  //     );
+  //   },
+  // },
   {
-    accessorKey: "price",
+    accessorKey: "total",
     header: ({ column }) => (
       <Button
         className="px-0"
         variant="ghost"
         onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
       >
-        Price
+        Total Price
         <ArrowUpDown className="ml-2 h-4 w-4" />
       </Button>
     ),
     cell: ({ row }) => {
-      const price = parseFloat(row.getValue("price"));
-
-      return <div className="font-medium">{formatCurrency(price)}</div>;
+      return (
+        <div className="text-center font-medium">
+          {formatCurrency(parseFloat(row.getValue("total")))}
+        </div>
+      );
+    },
+  },
+  {
+    accessorKey: "discount",
+    header: ({ column }) => (
+      <Button
+        className="px-0"
+        variant="ghost"
+        onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+      >
+        Discount
+        <ArrowUpDown className="ml-2 h-4 w-4" />
+      </Button>
+    ),
+    cell: ({ row }) => {
+      return (
+        <div className="text-center font-medium">
+          {row.getValue("discount")}%
+        </div>
+      );
     },
   },
   {
@@ -142,10 +188,6 @@ export const columns: ColumnDef<ProductTableColumn>[] = [
       //the Product[] data
       const product = row.original;
 
-      async function handleDelete(e: React.MouseEvent) {
-        deleteOrder(row.getValue("orderId"));
-      }
-
       return (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
@@ -160,7 +202,11 @@ export const columns: ColumnDef<ProductTableColumn>[] = [
             >
               <DropdownMenuItem>View product</DropdownMenuItem>
             </Link>
-            <DropdownMenuItem onClick={handleDelete}>Delete</DropdownMenuItem>
+            <DropdownMenuItem
+              onClick={() => deleteOrder(row.getValue("orderId"))}
+            >
+              Delete
+            </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       );

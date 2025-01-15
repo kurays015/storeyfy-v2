@@ -1,6 +1,12 @@
 import SideBar from "@/components/side-bar";
 import { BreadCrumbs } from "@/components/breadcrumbs";
 import { ReactNode } from "react";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "All Products By Category",
+  description: "all products by category page",
+};
 
 export default function ProductByCategoryLayout({
   children,

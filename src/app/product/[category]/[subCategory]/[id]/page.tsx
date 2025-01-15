@@ -1,40 +1,32 @@
 import { DL } from "@/data-layer";
 import { SingleProductPageParamsProps } from "@/types";
-import { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+
+//components
 import Price from "@/components/products/price";
 import Rating from "@/components/products/rating";
 import NotFound from "@/components/not-found";
-import { CiHeart } from "react-icons/ci";
 import { Button } from "@/components/ui/button";
-import { CartButton } from "@/components/cart/cart-button";
-import AddToCartForm from "@/components/cart/add-to-cart-form";
-import CartQuantityInput from "@/components/cart/cart-quantity-input";
+import CartQuantityInput from "@/components/cart-and-wishlist/cart/cart-quantity-input";
 
-export async function generateMetadata({
-  params,
-}: SingleProductPageParamsProps): Promise<Metadata> {
-  const product = await DL.query.getSingleProduct(params.id);
-
-  return {
-    title: product?.title,
-  };
-}
+//server action
+import { addToCart, addToWishList } from "@/app/product/_actions/action";
+import SaveToDBAction from "@/app/product/save-to-db-action";
 
 export default async function SingleProductPage({
   params,
 }: SingleProductPageParamsProps) {
   const session = await DL.mutations.getSession();
 
-  const [product, isAlreadyInTheCart] = await Promise.all([
-    DL.query.getSingleProduct(params.id),
-    DL.query.isAlreadyInTheCart(params.id, session?.user.id),
-  ]);
+  const [product, isAlreadyInTheCart, isAlreadyInTheWishList] =
+    await Promise.all([
+      DL.query.getSingleProduct(params.id),
+      DL.query.isAlreadyInTheCart(params.id, session?.user.id),
+      DL.query.isAlreadyInTheWishList(params.id, session?.user.id),
+    ]);
 
   if (!product) return <NotFound />;
-
-  const isInTheCart = isAlreadyInTheCart !== null;
 
   return (
     <div className="space-y-8">
@@ -45,7 +37,7 @@ export default async function SingleProductPage({
             height={500}
             src={product.image}
             alt={product.title}
-            className="w-full rounded-lg object-contain md:max-h-[400px]"
+            className="w-full max-w-[600px] rounded-lg object-contain md:max-h-[400px]"
           />
         </div>
         <div className="flex flex-1 flex-col gap-2 md:w-1/2 lg:justify-evenly">
@@ -94,13 +86,12 @@ export default async function SingleProductPage({
           <CartQuantityInput id={product.id} stock={product.stock} />
 
           <div className="my-3">
-            <Button
-              className="w-full bg-black text-white hover:opacity-90 dark:bg-white dark:text-black"
-              variant="unstyled"
-            >
-              Add to Wishlist
-              <CiHeart className="ml-1 text-3xl" />
-            </Button>
+            <SaveToDBAction
+              isAlreadySaved={isAlreadyInTheWishList !== null}
+              buttonText="Add to Wishlist"
+              savedText="Show Wishlist"
+              serverAction={addToWishList.bind(null, product.id, product.title)}
+            />
           </div>
           <div className="flex items-center gap-4 xl:mt-0">
             <Link
@@ -112,13 +103,14 @@ export default async function SingleProductPage({
                 className="w-full bg-blue-500 text-white hover:bg-blue-600 dark:bg-blue-600 dark:text-white dark:hover:bg-blue-500"
               >
                 Buy now
-              </Button>{" "}
+              </Button>
             </Link>
-            {isInTheCart && session ? (
-              <CartButton isInTheCart={isInTheCart} />
-            ) : (
-              <AddToCartForm id={product.id} title={product.title} />
-            )}
+            <SaveToDBAction
+              isAlreadySaved={isAlreadyInTheCart !== null}
+              buttonText="Add to Cart"
+              savedText="Show Cart"
+              serverAction={addToCart.bind(null, product.id, product.title)}
+            />
           </div>
         </div>
       </div>

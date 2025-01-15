@@ -4,6 +4,12 @@ import { DL } from "@/data-layer";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import HeaderTitle from "@/components/header-title";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "My orders",
+  description: "my orders page",
+};
 
 export default async function MyOrdersPage() {
   const session = await DL.mutations.getSession();
@@ -12,15 +18,14 @@ export default async function MyOrdersPage() {
 
   const orders = await (
     await DL.query.findUserOrders(session.user.id)
-  )
-    // .filter((order) => order.product.stock !== 0)
-    .map((order) => ({
-      ...order.product,
-      status: "pending",
-      orderId: order.id,
-      orderDate: order.createdAt,
-      quantity: order.quantity,
-    }));
+  ).map((order) => ({
+    ...order.product,
+    status: "pending",
+    orderId: order.id,
+    orderDate: order.createdAt,
+    quantity: order.quantity,
+    total: order.total,
+  }));
 
   if (!orders.length || !orders)
     return (

@@ -2,6 +2,23 @@ import { Suspense } from "react";
 import ProductCardGridSkeleton from "@/components/skeletons/product-card-grid-skeleton";
 import HeaderTitle from "@/components/header-title";
 import SearchResultContent from "@/components/products/suspense-contents/search-result-content";
+import { Metadata } from "next";
+import { DL } from "@/data-layer";
+
+export async function generateMetadata({
+  searchParams,
+}: {
+  searchParams: { query: string };
+}): Promise<Metadata> {
+  const result = await DL.query.getSearchResult(searchParams?.query);
+
+  if (!result.length) return { title: "Product not found" };
+
+  return {
+    title: `Search results for ${searchParams?.query}`,
+    description: `Search results for ${searchParams?.query}`,
+  };
+}
 
 export default function ProductBySearch({
   searchParams: { query },

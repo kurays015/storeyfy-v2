@@ -8,6 +8,7 @@ import HeaderTitle from "@/components/header-title";
 
 export const metadata: Metadata = {
   title: "My Products",
+  description: "my products page",
 };
 
 export default async function MyProductPage() {

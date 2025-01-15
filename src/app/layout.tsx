@@ -13,6 +13,7 @@ import { siteMetadata } from "@/config/siteMetadata";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(siteMetadata.url),
   title: {
     default: siteMetadata.title,
     template: `%s | ${siteMetadata.title}`,
@@ -20,9 +21,15 @@ export const metadata: Metadata = {
   creator: siteMetadata.creator,
   description: siteMetadata.description,
   openGraph: {
-    title: siteMetadata.title,
+    title: {
+      default: siteMetadata.title,
+      template: `%s | ${siteMetadata.title}`,
+    },
+    type: "website",
     description: siteMetadata.description,
-    images: siteMetadata.image,
+    url: siteMetadata.url,
+    siteName: siteMetadata.title,
+    locale: siteMetadata.locale,
   },
 };
 

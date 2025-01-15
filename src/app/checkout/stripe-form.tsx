@@ -13,6 +13,7 @@ import { useCartStore } from "@/stores/cart-store";
 import { useSession } from "next-auth/react";
 import createOrder from "@/app/checkout/_actions/action";
 import { calculateGrandTotal } from "@/lib/calculateGrandTotal";
+import getDiscountValue from "@/lib/getDiscountValue";
 
 export default function StripeForm({
   ordersArray,
@@ -49,6 +50,7 @@ export default function StripeForm({
       productId: item.id,
       userId: session.data?.user.id ?? "",
       quantity: quantities[item.id] ?? 1,
+      total: getDiscountValue(item.discount, parseFloat(item.price)),
     }));
 
     const order = await createOrder(userOrder);

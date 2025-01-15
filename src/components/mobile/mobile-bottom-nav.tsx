@@ -1,11 +1,10 @@
 import { IoBagHandleOutline } from "react-icons/io5";
 import { IoHomeOutline } from "react-icons/io5";
-import { FaRegHeart } from "react-icons/fa";
 import { CiShoppingBasket } from "react-icons/ci";
 import MobileBurgerMenu from "@/components/mobile/mobile-burger-menu";
 import NavLinkMenu from "@/components/nav-link-menu";
-import { CartButton } from "@/components/cart/cart-button";
 import { DL } from "@/data-layer";
+import SaveToDBButton from "@/app/product/save-to-db-button";
 
 export default async function MobileBottomNav() {
   const session = await DL.mutations.getSession();
@@ -21,9 +20,9 @@ export default async function MobileBottomNav() {
 
       <NavLinkMenu href="/my-products" icon={<CiShoppingBasket />} />
 
-      <CartButton />
+      <SaveToDBButton savedText="Show Wishlist" />
 
-      <NavLinkMenu href="/my-wishlist" count={1} icon={<FaRegHeart />} />
+      <SaveToDBButton savedText="Show Cart" />
 
       <NavLinkMenu
         href="/my-orders"
