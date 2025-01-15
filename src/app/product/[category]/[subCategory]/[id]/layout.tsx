@@ -17,6 +17,7 @@ export async function generateMetadata({
   if (!product) return { title: "Product not found" };
 
   return {
+    metadataBase: new URL(siteMetadata.url),
     title: product.title,
     description: product.description,
     openGraph: {
