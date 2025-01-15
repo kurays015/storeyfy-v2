@@ -9,7 +9,6 @@ import MobileBottomNav from "@/components/mobile/mobile-bottom-nav";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
 import { siteMetadata } from "@/config/siteMetadata";
-import ogImage from "@/app/opengraph-image.png";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -33,7 +32,7 @@ export const metadata: Metadata = {
     locale: siteMetadata.locale,
     images: [
       {
-        url: ogImage.src,
+        url: "/opengraph-image.png",
         width: 1200,
         height: 630,
       },
