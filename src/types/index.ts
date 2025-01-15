@@ -86,6 +86,7 @@ export type SingleProductPageParamsProps = {
     id: string;
     title: string;
     category: string;
+    subCategory: string;
   };
 };
 

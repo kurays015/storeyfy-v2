@@ -23,7 +23,7 @@ export async function generateMetadata({
       title: product.title,
       description: product.description,
       type: "website",
-      url: siteMetadata.url,
+      url: `${siteMetadata.url}/product/${params.category}/${params.subCategory}/${params.id}`,
       siteName: siteMetadata.title,
       locale: siteMetadata.locale,
       images: [
