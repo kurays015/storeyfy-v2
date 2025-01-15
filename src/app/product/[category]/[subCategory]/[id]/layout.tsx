@@ -7,6 +7,7 @@ import {
 import { BreadCrumbs } from "@/components/breadcrumbs";
 import { Metadata } from "next";
 import { DL } from "@/data-layer";
+import { siteMetadata } from "@/config/siteMetadata";
 
 export async function generateMetadata({
   params,
@@ -16,8 +17,23 @@ export async function generateMetadata({
   if (!product) return { title: "Product not found" };
 
   return {
-    title: product?.title,
-    description: product?.description,
+    title: product.title,
+    description: product.description,
+    openGraph: {
+      title: product.title,
+      description: product.description,
+      type: "website",
+      url: siteMetadata.url,
+      siteName: siteMetadata.title,
+      locale: siteMetadata.locale,
+      images: [
+        {
+          url: product.image,
+          width: 1200,
+          height: 630,
+        },
+      ],
+    },
   };
 }
 

@@ -30,6 +30,13 @@ export const metadata: Metadata = {
     url: siteMetadata.url,
     siteName: siteMetadata.title,
     locale: siteMetadata.locale,
+    images: [
+      {
+        url: "/opengraph-image.png",
+        width: 1200,
+        height: 630,
+      },
+    ],
   },
 };
 
