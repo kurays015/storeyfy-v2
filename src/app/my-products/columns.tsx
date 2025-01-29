@@ -118,7 +118,9 @@ export const columns: ColumnDef<ProductTableColumn>[] = [
             >
               <DropdownMenuItem>View</DropdownMenuItem>
             </Link>
-            <DropdownMenuItem>Edit</DropdownMenuItem>
+            <Link href={`/edit/${product.id}`}>
+              <DropdownMenuItem>Edit</DropdownMenuItem>
+            </Link>
             <DropdownMenuItem onClick={handleDelete}>Delete</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>

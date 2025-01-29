@@ -1,6 +1,6 @@
 import "server-only";
 import db from "@/lib/db";
-import { Orders, ZSafeParseSuccessProps } from "@/types";
+import { Orders, UpdatedFields, ZSafeParseSuccessProps } from "@/types";
 import { SafeParseSuccess } from "zod";
 import { getServerSession } from "next-auth";
 import { authConfig } from "@/lib/auth";
@@ -249,6 +249,44 @@ export const DL = {
   },
 
   mutations: {
+    editProduct: async (
+      updatedFields: UpdatedFields,
+      secure_url: string | undefined,
+      id: string,
+    ) => {
+      return await db.product.update({
+        where: {
+          id,
+        },
+        data: {
+          ...updatedFields,
+          image: secure_url,
+        },
+      });
+    },
+
+    addProduct: async (
+      parsedData: SafeParseSuccess<ZSafeParseSuccessProps>,
+      secure_url: string,
+    ) => {
+      return await db.product.create({
+        data: {
+          sellerName: parsedData.data.sellerName,
+          userId: parsedData.data.userId,
+          title: parsedData.data.title,
+          category: parsedData.data.category,
+          subCategory: parsedData.data.subCategory,
+          condition: parsedData.data.condition,
+          price: parsedData.data.price,
+          description: parsedData.data.description,
+          discount: parsedData.data.discount ? parsedData.data.discount : 0,
+          stock: parsedData.data.stock,
+          image: secure_url,
+          rating: 0,
+        },
+      });
+    },
+
     deleteOrder: async (id: string) => {
       return await db.order.delete({
         where: {
@@ -348,28 +386,6 @@ export const DL = {
       return await db.cartItems.delete({
         where: {
           id: id,
-        },
-      });
-    },
-
-    addProduct: async (
-      parsedData: SafeParseSuccess<ZSafeParseSuccessProps>,
-      secure_url: string,
-    ) => {
-      return await db.product.create({
-        data: {
-          sellerName: parsedData.data.sellerName,
-          userId: parsedData.data.userId,
-          title: parsedData.data.title,
-          category: parsedData.data.category,
-          subCategory: parsedData.data.subCategory,
-          condition: parsedData.data.condition,
-          price: parsedData.data.price,
-          description: parsedData.data.description,
-          discount: parsedData.data.discount ? parsedData.data.discount : 0,
-          stock: parsedData.data.stock,
-          image: secure_url,
-          rating: 0,
         },
       });
     },

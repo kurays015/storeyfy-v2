@@ -119,3 +119,35 @@ export const productSchema = z.object({
     .min(1, { message: "Must not be empty" }),
   rating: RatingSchema,
 });
+
+const nonEmptyString = (message?: string) =>
+  z.string().refine((str) => str.trim() !== "", {
+    message,
+  });
+
+export const editProductSchema = z.object({
+  title: nonEmptyString("Title is required").optional(),
+  description: nonEmptyString("Description is required").optional(),
+  category: z.string().optional(),
+  subCategory: z.string().optional(),
+  condition: nonEmptyString("Condition is required").optional(),
+  price: nonEmptyString("Price is required").optional(),
+  discount: z.coerce.number().int().or(z.literal("")),
+  stock: z.coerce.number({ invalid_type_error: "Stock is required" }).int(),
+  image:
+    typeof window === "undefined"
+      ? z.any().refine((file) => acceptedFiles(file?.type), {
+          message: ".jpg, .jpeg, .png and .webp files are accepted.",
+        })
+      : z
+          .any()
+          .refine((file) => file?.length === 1, {
+            message: "Image is required.",
+          })
+          .refine((file) => acceptedFiles(file[0]?.type), {
+            message: ".jpg, .jpeg, .png and .webp format are accepted.",
+          })
+          .refine((file) => file[0]?.size <= MAX_FILE_SIZE, {
+            message: "Max Image size is 10MB.",
+          }),
+});

@@ -33,7 +33,7 @@ export default async function MyProductPage() {
   return (
     <div className="mb-24 mt-12 gap-2 xl:container customSm:min-h-[37vh] customSm:px-4 md:mx-auto md:max-w-3xl lg:min-h-[60vh] lg:max-w-7xl">
       <div className="flex items-center justify-between">
-        <HeaderTitle className="text-2xl font-bold text-slate-800 dark:text-muted-foreground">
+        <HeaderTitle className="text-2xl font-bold text-slate-800 dark:text-white">
           My Products
         </HeaderTitle>
         <Button asChild>

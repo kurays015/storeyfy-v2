@@ -20,6 +20,7 @@ export type ProductProps = {
 };
 
 export type ZSafeParseSuccessProps = {
+  id?: string;
   userId: string;
   title: string;
   description: string;
@@ -152,3 +153,18 @@ export type SaveToDBButtonProps = {
   savedText: string;
   serverAction: ServerAction;
 };
+
+export type EditProduct = Pick<
+  ProductProps,
+  | "title"
+  | "description"
+  | "category"
+  | "subCategory"
+  | "condition"
+  | "price"
+  | "discount"
+  | "stock"
+  | "image"
+>;
+
+export type UpdatedFields = Partial<EditProduct>;

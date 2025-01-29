@@ -29,6 +29,10 @@ export async function addProduct(formData: FormData) {
     }
     const uploadRes = await cloudinaryUpload(parsedData.data.image, userName);
 
+    if (!uploadRes?.secure_url) {
+      throw new Error("Image upload failed");
+    }
+
     // Save product data to database
     await DL.mutations.addProduct(parsedData, uploadRes.secure_url);
   } catch (error) {

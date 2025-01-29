@@ -7,9 +7,13 @@ cloudinary.config({
 });
 
 export default async function cloudinaryUpload(
-  image: File,
+  image: File | undefined,
   userName: string | undefined,
 ) {
+  if (!image) {
+    return null;
+  }
+
   const arrayBuffer = await image.arrayBuffer();
   const buffer = new Uint8Array(arrayBuffer);
 
